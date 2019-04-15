@@ -81,4 +81,40 @@ $dot_task->fill($reqArray);
 $dot_task->save();
 }
 
+
+public function deleteTask(Request $request)
+{
+    $reqID=$request->id;
+    $task = Dot_task::find($reqID);
+    $task->delete();
+   
+}
+
+public function getCompanyUsersAndDots(Request $request)
+{
+ 
+
+    $companyId=$request->input('companyId');
+    $company = Company::find($companyId);
+    $users=$company->users()->get();
+
+       $allUsers='';
+    foreach ($users as $user) {
+
+        $allUsers=$allUsers.'<option value="'.$user->id.'">'.$user->real_name.' '.$user->real_lastname.'</option>';
+          
+    }
+    $myArray['allUsers'] = $allUsers;
+
+ $companydots=$company->dots()->get();
+
+ $allDots='';
+ foreach ( $companydots as  $companydot) {
+    $allDots=$allDots.'<option value="'.$companydot->id.'">'.$companydot->name.'</option>';
+}
+  $myArray['allDots'] =$allDots;
+  
+    header("Content-type: application/json; charset=utf-8");
+    echo json_encode($myArray);
+}
 }

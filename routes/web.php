@@ -25,6 +25,8 @@ Route::POST('/taskContent','AjaxController@taskContent');//получает со
 Route::POST('/edit/Task','AjaxController@editTask');//редактирует задачу
 Route::POST('/get/responsibles','AjaxController@getCompanyUsers');//отдает ответственного
 Route::POST('/push/task/new','AjaxController@pushNewTask');//постит новую задачу в текущую точку
+Route::POST('/delete/task','AjaxController@deleteTask');//Удаляет задачу
+Route::POST('/get/responsibles/and/dots','AjaxController@getCompanyUsersAndDots');// контроллер возвращает два селектора: пользователи компании и список всех точек
 
 
 

@@ -1,15 +1,55 @@
 
+/**
+ * добавляет задачу с главной страницы отличается тем, что выводит селектором список всех точек
+ * @param {[type]} companyid [description]
+ * @param {[type]} userid    [description]
+ */
+function addTaskFromCompanyIndex(companyId, userId) {
+    $('#mainModalLabel').html( 
+          '<div class="form-group">'+
+            '<input type="text" class="form-control w-100" id="newTaskName" placeholder="Заголовок" value="" rows="5" >'+
+            '</div>'
+            );
+    $('#mainModalBody').html( 
+    '<div class="form-group">'+
+        '<label for="newTaskProblem"><b>В чем проблема</b></label>'+
+        '<textarea type="text" class="form-control" id="newTaskProblem" rows="4">'+
+      '</textarea></div>'+
+      '<div class="form-group">'+
+        '<label for="newTaskDescription"><b>Как исправить</b></label>'+
+        '<textarea type="text" class="form-control" id="newTaskDescription" rows="4">'+
+      '</textarea></div>'+
+      '<div class="form-group">'+
+        '<label for="newTaskDeadline"><b>Крайний срок</b></label>'+
+        '<input type="date" class="form-control w-50" id="newTaskDeadline" value="" rows="5" >'+
+        '<input type="hidden" id="newTaskCompanyId" value="'+ companyId +'">'+
+        '<input type="hidden" id="newTaskAuthorId" value="'+ userId +'">'+
+        '</div>'
+     );
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/get/responsibles/and/dots', {_token : token, companyId : companyId, userId : userId}, function( result ){
+         data= JSON.parse(result);
+      $('#mainModalBody').append( '<select class="custom-select" id="newTaskResponsibleId"> <option selected>Ответственный</option>'+ data.allUsers + '</select>');
+      $('#mainModalBody').append( '<label for="newTaskDotId" class="mt-2"><b>Точка задачи</b></label><select class="custom-select" id="newTaskDotId">'+ data.allDots + '</select>');
+    });
+      $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewTask()" class="btn btn-success" >Добавить задачу</button> ' );
+
+}
+
+
 
 /**
  * Удаляет задачу
  * @param  {[type]} id [description]
  * @return {[type]}    [description]
  */
-function delTask(id)
+function delTask(id, idForController)
 {
     if (confirm("Вы уверены, то хотите удалить задачу?")) 
     {
         $('#'+id).attr('class', 'card  bg-light bg-primary mb-2 d-none w-100');
+         var token = $('meta[name="csrf-token"]').attr('content');
+        $.post('/delete/task', {_token : token, id : idForController});
     } 
     else
     {

@@ -103,7 +103,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
     <div class="col-sm">
       <button type="button" href="#" onClick="addTask({{ $company->id }}, {{ $dot->id }}, {{ $user->id }})" class="btn btn-success" data-toggle="modal" data-target="#mainModal">Добавить задачу</button>
     </div>
-    <div class="col-sm"><h2>Точечные идеи</h2></div>
+    <div class="col-sm"><h2>Все задачи</h2></div>
     <div class="col-sm"></div>
   </div>
 </div>
@@ -129,7 +129,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
                   <div class="toast-header"><strong class="mr-auto"><a href="#" onclick = "showTask({{ $task1->id }})" data-toggle="modal" data-target="#mainModal">{{ $task1->name }}</a></strong>
                     <a href="#" onclick = "editTask({{ $task1->id }})" data-toggle="modal" data-target="#mainModal"><small class="text-secondary"> (ред.)<!--  &#9998; --> </small> </a>
                     <script async="" src="{{ asset('js/main.js') }}"></script>
-                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task1->id }}')" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task1->id }}', {{ $task1->id }})" data-dismiss="toast" aria-label="Close">
                       <span aria-hidden="true" class="f">&times; </span>
                     </button>
                   </div>
@@ -164,7 +164,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
                   <div class="toast-header"><strong class="mr-auto"><a href="#" onclick = "showTask({{ $task2->id }})" data-toggle="modal" data-target="#mainModal">{{ $task2->name }}</a></strong>
                     <a href="#" onclick = "editTask({{ $task2->id }})" data-toggle="modal" data-target="#mainModal"><small class="text-secondary"> (ред.)<!--  &#9998; --> </small> </a>
                     <script async="" src="{{ asset('js/main.js') }}"></script>
-                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task2->id }}')" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task2->id }}', {{ $task2->id }})" data-dismiss="toast" aria-label="Close">
                       <span aria-hidden="true" class="f">&times; </span>
                     </button>
                   </div>
@@ -199,7 +199,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
                   <div class="toast-header"><strong class="mr-auto"><a href="#" onclick = "showTask({{ $task3->id }})" data-toggle="modal" data-target="#mainModal">{{ $task3->name }}</a></strong>
                     <a href="#" onclick = "editTask({{ $task3->id }})" data-toggle="modal" data-target="#mainModal"><small class="text-secondary"> (ред.)<!--  &#9998; --> </small> </a>
                     <script async="" src="{{ asset('js/main.js') }}"></script>
-                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task3->id }}')" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task3->id }}', {{ $task3->id }})" data-dismiss="toast" aria-label="Close">
                       <span aria-hidden="true" class="f">&times; </span>
                     </button>
                   </div>
@@ -233,7 +233,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
                   <div class="toast-header"><strong class="mr-auto"><a href="#" onclick = "showTask({{ $task4->id }})" data-toggle="modal" data-target="#mainModal">{{ $task4->name }}</a></strong>
                     <a href="#" onclick = "editTask({{ $task4->id }})" data-toggle="modal" data-target="#mainModal"><small class="text-secondary"> (ред.)<!--  &#9998; --> </small> </a>
                     <script async="" src="{{ asset('js/main.js') }}"></script>
-                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task4->id }}')" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task4->id }}', {{ $task4->id }})" data-dismiss="toast" aria-label="Close">
                       <span aria-hidden="true" class="f">&times; </span>
                     </button>
                   </div>
@@ -272,7 +272,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
                   <div class="toast-header"><strong class="mr-auto"><a href="#" onclick = "showTask({{ $task5->id }})" data-toggle="modal" data-target="#mainModal">{{ $task5->name }}</a></strong>
                     <a href="#" onclick = "editTask({{ $task5->id }})" data-toggle="modal" data-target="#mainModal"><small class="text-secondary"> (ред.)<!--  &#9998; --> </small> </a>
                     <script async="" src="{{ asset('js/main.js') }}"></script>
-                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task5->id }}')" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" onClick="delTask('task{{ $task5->id }}', {{ $task5->id }})" data-dismiss="toast" aria-label="Close">
                       <span aria-hidden="true" class="f">&times; </span>
                     </button>
                   </div>
