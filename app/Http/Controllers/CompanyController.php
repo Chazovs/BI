@@ -94,7 +94,7 @@ public function __construct()
     $user = User::find($userID);
     $dot=Dot::find($dotId);
     $company=Company::find($id);
-    $child=$company->dots->where('parent_id','=', $dotId);
+    $childs=$company->dots->where('parent_id','=', $dotId);
    
 //выбираем задачи по статусам
     $tasks_status1=DB::table('dot_tasks')->where([
@@ -129,7 +129,7 @@ public function __construct()
     return view('dotIndex', compact($company, $dot))->with([
         'company'=>$company,
         'dot'=>$dot,
-        'child'=>$child,
+        'childs'=>$childs,
         'tasks_status1'=>$tasks_status1,
         'tasks_status2'=>$tasks_status2,
         'tasks_status3'=>$tasks_status3,

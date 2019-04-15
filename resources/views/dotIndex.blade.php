@@ -75,14 +75,14 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
 </div>
 
   <div class="row">
-     @if (count($child) > 0)      
-    @foreach($child as $dot)
+     @if (count($childs) > 0)      
+    @foreach($childs as $child)
     <div class="col-md-4">
      <div class="card mb-4 shadow-sm h-100">
     <h6 class="card-header" ><img src="https://static.tildacdn.com/tild3532-6130-4437-b966-653766626265/1.jpg" class="rounded-circle" alt="" height="40" width="40" align="cover-container">
-      <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$dot->id]) }}">{{ $dot->name }}</a></h6>
+      <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$child->id]) }}">{{ $child->name }}</a></h6>
     <div class="card-body">
-      <p class="card-text">{{ $dot->description_short }}</p>
+      <p class="card-text">{{ $child->description_short }}</p>
     </div>
   </div>
     </div>

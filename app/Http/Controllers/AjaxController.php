@@ -77,8 +77,8 @@ $this->validate($request, [
 'responsible_id' => 'required',
     ]);
 $dot_task = new Dot_task;
-dump ($dot_task);
 $dot_task->fill($reqArray);
+$dot_task->save();
 }
 
 }
