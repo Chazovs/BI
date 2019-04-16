@@ -170,7 +170,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title w-100" id="mainModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" id='closeModalButton' aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

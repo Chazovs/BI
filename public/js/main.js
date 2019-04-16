@@ -1,4 +1,12 @@
 
+ /**
+  * Перезагружает страницу
+  * @return {[type]}          [description]
+  */
+ function reloadPage() {
+ location.reload();
+ }
+
 /**
  * добавляет задачу с главной страницы отличается тем, что выводит селектором список всех точек
  * @param {[type]} companyid [description]
@@ -10,6 +18,7 @@ function addTaskFromCompanyIndex(companyId, userId) {
             '<input type="text" class="form-control w-100" id="newTaskName" placeholder="Заголовок" value="" rows="5" >'+
             '</div>'
             );
+    $('#closeModalButton').attr('onClick', 'reloadPage()');
     $('#mainModalBody').html( 
     '<div class="form-group">'+
         '<label for="newTaskProblem"><b>В чем проблема</b></label>'+
@@ -130,6 +139,7 @@ function editTask(id){
                     type: "POST",
                     success: function( data ) {
                         data= JSON.parse(data);
+    $('#closeModalButton').attr('onClick', 'reloadPage()');
     $('#mainModalLabel').html( 
           
           '<div class="form-group">'+
@@ -209,12 +219,13 @@ function submitChanges(taskid) {
 }
 
 /**
- * Отображает форму добавления новой задачи
+ * Отображает форму добавления новой задачи на странице точек
  * @param {[type]} companyId id компании, для которой ставится задача
  * @param {[type]} userid пользователя, который ставит задачу
  * @param {[type]} dotId  айдишник точки, для которой ставится задача
  */
 function addTask(companyId, dotId, userId) {
+   $('#closeModalButton').attr('onClick', 'reloadPage()');
    $('#mainModalLabel').html( 
           '<div class="form-group">'+
             '<input type="text" class="form-control w-100" id="newTaskName" placeholder="Заголовок" value="" rows="5" >'+
@@ -273,22 +284,15 @@ function postNewTask() {
      $('#mainModalLabel').html( 
           
           '<div class="form-group">'+
-            '<input type="text" class="form-control w-100" id="taskEditedName" placeholder="Заголовок" value="" rows="5" >'+
+            '<h5>Новая идея</h5>'+
             '</div>'
             );
     $('#mainModalBody').html( 
-    '<div class="form-group">'+
-        '<label for="taskEditedProblem"><b>Что не так</b></label>'+
-        '<textarea type="text" class="form-control" id="ideaEditedProblem" rows="4">'+
-      '</textarea></div>'+
+   
       '<div class="form-group">'+
-        '<label for="taskEditedDescription"><b>Как исправить</b></label>'+
+        '<label for="taskEditedDescription"><b>Что можно исправить/улучшить?</b></label>'+
         '<textarea type="text" class="form-control" id="ideaEditedDescription" rows="4">'+
-      '</textarea></div>'+
-      '<div class="form-group">'+
-        '<label for="taskEditedDeadline"><b>Крайний срок</b></label>'+
-        '<input type="date" class="form-control w-50" id="ideaEditedDeadline" value="" rows="5" >'+
-        '</div>'
+      '</textarea></div>'
      );
-    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewIdea()" class="btn btn-success" >Добавить задачу</button> ' );
+    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewIdea()" class="btn btn-success" >Отправить идею</button> ' );
  }
