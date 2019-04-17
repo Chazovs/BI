@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
 
+protected $fillable = [
+        'name', 'admin_id', 'description', 'city', 'logo', 'adress', 'phone', 'site',
+    ];
 
 //у компании может быть много пользователей
 public function users()

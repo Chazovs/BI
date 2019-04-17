@@ -13,6 +13,7 @@
 
 Route::get('/', 'IndexController@index');
 Route::get('/registerCompany', 'HomeController@registerCompany')->name('registerCompany');
+Route::POST('/registerCompany/push', 'HomeController@pushRegisterCompany');
 Route::get('/company/{id}/edit', 'IndexController@editCompany')->name('editCompany');
 Route::get('/company/{id}/dot/{dotId}', 'CompanyController@dotIndex')->name('dotIndex');
 Route::get('/profile/{id}/edit/', 'HomeController@editProfile')->name('editProfile');
@@ -27,8 +28,6 @@ Route::POST('/get/responsibles','AjaxController@getCompanyUsers');//отдает
 Route::POST('/push/task/new','AjaxController@pushNewTask');//постит новую задачу в текущую точку
 Route::POST('/delete/task','AjaxController@deleteTask');//Удаляет задачу
 Route::POST('/get/responsibles/and/dots','AjaxController@getCompanyUsersAndDots');// контроллер возвращает два селектора: пользователи компании и список всех точек
-
-
 
 Auth::routes();
 

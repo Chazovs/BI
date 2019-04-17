@@ -16,66 +16,61 @@
          
         </div>
 </div>
-
-
-  
-
   <div class="row">
-    
-
     <div class="col-md-8 order-md-2 mb-4">
-      <h4 class="mb-3">Регистрация</h4>
-        <form class="needs-validation" novalidate>
-          
+      
+        <form class="needs-validation" validate action="{{ url('/registerCompany/push') }}" method="POST">
              <label for="name">Наименование компании</label>
-             <input type="text" class="form-control" id="name" placeholder="" value="" required>
+             <input type="text" class="form-control" name="name" id="name" placeholder="" value="" required>
+             {{ csrf_field() }}
               <div class="invalid-feedback">
               Valid first name is required.
         </div>
-          
         <div class="mb-3">
         <label for="logo">Выбирите логотип Вашей компании</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <input type="file" class="form-control-file" name="logo" id="logo">
         </div>
-
-
         <div class="mb-3">
           <label for="adress">Электронная почта</label>
-          <input type="adress" class="form-control" id="adress" placeholder="you@example.com">
+          <input type="email" class="form-control" name="companyEmail" id="companyEmail" required placeholder="you@email.com">
           <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
+            Введите пожалуйста корректный адрес электронной почты
           </div>
         </div>
-
         <div class="mb-3">
-          <label for="description_short">Краткое описание деятельности компании</label>
-          <textarea type="text" class="form-control" id="description_short" placeholder="Компания по производству металообрабатывающих станков" required></textarea> 
+          <label for="description">Чем занимается компания? (этот текст увидят все пользователи сайта)</label>
+          <textarea type="text" class="form-control" name="description" id="description" placeholder="" required></textarea> 
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
         </div>
-
-        
-            <label for="phone">Введите номер телефона </label>
-            <input type="text" class="form-control" id="phone" placeholder="" value="" required>
+         <div class="mb-3">
+            <label for="phone">Телефон компании (будет указан в карточке) </label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" required>
             <div class="invalid-feedback">
-              
          </div>
-       
-        
-      
-            <label for="adress">Введите адрес вашей компании </label>
-            <input type="text" class="form-control" id="adress" placeholder="" value="" required>
+       </div>
+        <div class="mb-3">
+            <label for="adress">Адрес компании (будет указан в карточке)</label>
+            <input type="text" class="form-control" id="adress" name="adress" placeholder="" value="" required>
             <div class="invalid-feedback">
-              
          </div>
-        
+       </div>
+       <div class="mb-3">
+            <label for="site">Сайт (будет указан в карточке)</label>
+            <input type="text" class="form-control" id="site" name="site" placeholder="" value="" required>
+            <div class="invalid-feedback">
+         </div>
+       </div>
+       <div class="mb-3">
+            <label for="city">Город (будет указан в карточке)</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="" value="" required>
+            <div class="invalid-feedback">
+         </div>
+       </div>
          <button type="submit"  class="btn btn-success mt-4">Отправить</button>
-     
      </form>
-   
   </div>
-
   <div class="col-md-4 order-md-2 mb-4">
       <div class="card">
         <img src="/img/default/donate.jpg" alt="Card image">
@@ -92,7 +87,6 @@
       </div>
     </div>
 </div>
- </div>
-
+</div>
 </main>
 @endsection

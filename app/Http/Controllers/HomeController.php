@@ -26,7 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
     $userID = Auth::user()->id;
     $user = User::find($userID);
     $companies=$user->companies()->paginate(1);
@@ -165,5 +164,15 @@ public function registerCompany()
  {
   return view('registerCompany');
  }
+
+public function pushRegisterCompany(Request $request)
+{
+dump($request);
+$reqArray = $request->all();
+dump($reqArray);
+$dot_task = new Company;
+$dot_task->fill($reqArray);
+$dot_task->save();
+}
 
 }
