@@ -7,7 +7,9 @@
     <meta name="description" content="Buisness intersections - инструмент для системного анализа точек контакта между бизнесом и людьми">
 <!-- csfr Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Buisness intersections | личный кабинет</title>
+  <title>Buisness intersections | личный кабинет</title>
+  <script src="{{ asset('/js/ckeditor/ckeditor.js') }}"
+type="text/javascript" charset="utf-8" ></script>
       <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>

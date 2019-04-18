@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 use App\Company;
 use Auth;
@@ -167,12 +169,41 @@ public function registerCompany()
 
 public function pushRegisterCompany(Request $request)
 {
-dump($request);
+
+/*$this->validate($request, [
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);*/
+        dump($request);
+       /* $path = $request['logo']->store('public/img');*/
 $reqArray = $request->all();
-dump($reqArray);
+/*$file=$request->file('logo')->store('logo');
+$file=Storage::size($file);*/
+
+if($request->hasFile('logo'))
+        {
+            
+            // Get user avatar image request
+            $image = $request->file('logo');
+            $extension = $image->getClientOriginalExtension();
+
+            // Resize image user avatar
+            $size = \Config::get('image.avatar_size');
+            $avatar = Image::make($image)->fit($size)->encode($extension);
+
+            // Save user avatar image
+            $path = "/logo.' . $extension";
+           
+            Storage::disk('local')->put($path, $avatar);
+           $reqArray['logo'] = $path;
+           
+
+        }
+
+
+
 $dot_task = new Company;
 $dot_task->fill($reqArray);
 $dot_task->save();
-}
 
+}
 }

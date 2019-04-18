@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-md-8 order-md-2 mb-4">
       
-        <form class="needs-validation" validate action="{{ url('/registerCompany/push') }}" method="POST">
+        <form class="needs-validation" validate action="{{ url('/registerCompany/push') }}" method="POST" enctype="multipart/form-data" name="registerNewCompany">
              <label for="name">Наименование компании</label>
              <input type="text" class="form-control" name="name" id="name" placeholder="" value="" required>
              {{ csrf_field() }}
@@ -47,6 +47,7 @@
          <div class="mb-3">
             <label for="phone">Телефон компании (будет указан в карточке) </label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" required>
+             <input type="hidden" id="admin_id" name="admin_id" value="{{ Auth::user()->id }}" >
             <div class="invalid-feedback">
          </div>
        </div>
@@ -88,5 +89,8 @@
     </div>
 </div>
 </div>
+<script>
+        var editor = CKEDITOR.replace( 'description' );
+</script>
 </main>
 @endsection
