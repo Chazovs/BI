@@ -7,6 +7,53 @@
  location.reload();
  }
 
+function addDotFromCompanyIndex(companyId, userId) {
+   $('#mainModalLabel').html( 
+          '<div class="form-group">'+
+            '<input type="text" class="form-control w-100" id="newDotName" placeholder="Заголовок" value="" rows="5" >'+
+            '</div>'
+            );
+    $('#closeModalButton').attr('onClick', 'reloadPage()');
+    $('#mainModalBody').html( 
+    '<div class="form-group">'+
+        '<label for="newTaskProblem"><b>Опишите, как работает точка сейчас</b></label>'+
+        '<textarea type="text" class="form-control" id="newDotDescriptionShort" rows="4">'+
+      '</textarea></div>'+
+      '<div class="form-group">'+
+        '<label for="newTaskDescription"><b>Как должна работать точка</b></label>'+
+        '<textarea type="text" class="form-control" id="newDotDescriptionFull" rows="4">'+
+      '</textarea></div>'+
+      '<div class="mb-3">'+
+        '<label for="logo">Выбирите логотип точки</label>'+
+        '<input type="file" class="form-control-file" name="logo" id="dotLogo">'+
+        '</div>'+
+      '<div class="form-group">'+
+        '<input type="hidden" id="newDotCompanyId" value="'+ companyId +'">'+
+        '</div>'
+     );
+     $('#mainModalFooter').html( '<button type="button" href="#" onClick="postDot()" class="btn btn-success" >Добавить точку</button> ' );
+}
+
+
+/**
+ * Добавляет новую точку
+ * @return {[type]} [description]
+ */
+function postDot() {
+    var name = $('#newDotName').val();
+    var parent_id = "0";
+    var description_short = $('#newDotDescriptionShort').val();
+    var description_full = $('#newDotDescriptionFull').val();
+    var company_id = $('#newDotCompanyId').val();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/push/dot/new', {_token : token, name : name, parent_id : parent_id, description_short : description_short, description_full : description_full, logo : dotLogo}, function( result ){
+    $('#mainModalBody').html( 'Задача добавлена' + result);
+    $('#mainModalLabel').html(' ');
+    });
+}
+
+
+
 /**
  * добавляет задачу с главной страницы отличается тем, что выводит селектором список всех точек
  * @param {[type]} companyid [description]

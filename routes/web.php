@@ -28,6 +28,8 @@ Route::POST('/get/responsibles','AjaxController@getCompanyUsers');//отдает
 Route::POST('/push/task/new','AjaxController@pushNewTask');//постит новую задачу в текущую точку
 Route::POST('/delete/task','AjaxController@deleteTask');//Удаляет задачу
 Route::POST('/get/responsibles/and/dots','AjaxController@getCompanyUsersAndDots');// контроллер возвращает два селектора: пользователи компании и список всех точек
+Route::POST('/push/dot/new','AjaxController@pushNewDotFromIndex');//Создает новую точку с главной
+
 
 Auth::routes();
 

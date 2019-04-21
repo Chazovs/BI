@@ -90,6 +90,11 @@ public function deleteTask(Request $request)
    
 }
 
+/**
+ * Возвращает всех пользователей и все точки компании
+ * @param  Request $request [description]
+ * @return [type]           [description]
+ */
 public function getCompanyUsersAndDots(Request $request)
 {
  
@@ -116,5 +121,10 @@ public function getCompanyUsersAndDots(Request $request)
   
     header("Content-type: application/json; charset=utf-8");
     echo json_encode($myArray);
+}
+
+public function pushNewDotFromIndex(Request $request)
+{
+    # добавляет новую точку
 }
 }

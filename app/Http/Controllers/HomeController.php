@@ -1,14 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Http\Request;
+use Image;
 use App\Company;
 use Auth;
 use App\User;
 use DB;
+
 class HomeController extends Controller
 {
     /**
@@ -167,43 +167,28 @@ public function registerCompany()
   return view('registerCompany');
  }
 
+
+/**
+ * Регистрирует новую компанию
+ * @param  Request $request список полей новой компании
+ * @return [type]       возвращает страницу мои компании
+ */
 public function pushRegisterCompany(Request $request)
 {
 
-/*$this->validate($request, [
+$this->validate($request, [
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);*/
-        dump($request);
-       /* $path = $request['logo']->store('public/img');*/
+        ]);
+      
+$path = public_path()."\companies\logo\\";   
+$img = Image::make($request->file('logo'))->heighten(100)->encode('png');
+$img->save($path . str_random(10) . str_random(10) . ".png");
 $reqArray = $request->all();
-/*$file=$request->file('logo')->store('logo');
-$file=Storage::size($file);*/
-
-if($request->hasFile('logo'))
-        {
-            
-            // Get user avatar image request
-            $image = $request->file('logo');
-            $extension = $image->getClientOriginalExtension();
-
-            // Resize image user avatar
-            $size = \Config::get('image.avatar_size');
-            $avatar = Image::make($image)->fit($size)->encode($extension);
-
-            // Save user avatar image
-            $path = "/logo.' . $extension";
-           
-            Storage::disk('local')->put($path, $avatar);
-           $reqArray['logo'] = $path;
-           
-
-        }
-
-
-
-$dot_task = new Company;
-$dot_task->fill($reqArray);
-$dot_task->save();
-
+$reqArray['logo'] = "companies\logo\\".$img->basename;
+$newCompany = new Company;
+$newCompany->fill($reqArray);
+$newCompany->save();
+User::find($newCompany->admin_id)->companies()->attach($newCompany->id);
+return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert', 'Ваша компания добавлена!Спасибо за участие в проекте!');
 }
 }
