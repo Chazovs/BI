@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Dot extends Model
 {
 
+    protected $fillable = [
+        'name', 'parent_id', 'logo', 'description_full', 'description_short', 'author', 'company_id', 'chart_id',
+    ];
+
 	//у нескольких точек может быть одна компания
    public function company()
     {

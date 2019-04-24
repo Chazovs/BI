@@ -29,11 +29,18 @@
       <!-- карточка 1 -->
           <div class="card ">
             <div class="card-header">
-    <h6>Описание точки</h6>
+    <h6>Как сейчас</h6>
             </div>
             <div class="card-body">
     
-              <p class="card-text">{{ $dot->description_full }}</p>
+              {!! $dot->description_short !!}
+            </div>
+            <div class="card-header">
+    <h6>Как должно быть</h6>
+            </div>
+            <div class="card-body">
+    
+              {!! $dot->description_full !!}
             </div>
           </div>
             <br>
@@ -65,7 +72,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-success">Добавить точку</button>
+      <button type="button" class="btn btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, {{ $dot->id }})"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
     </div>
     <div class="col-sm"><h2>Дочерние точки</h2></div>
     <div class="col-sm"></div>
@@ -79,10 +86,10 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
     @foreach($childs as $child)
     <div class="col-md-4">
      <div class="card mb-4 shadow-sm h-100">
-    <h6 class="card-header" ><img src="https://static.tildacdn.com/tild3532-6130-4437-b966-653766626265/1.jpg" class="rounded-circle" alt="" height="40" width="40" align="cover-container">
+    <h6 class="card-header" ><img src="{{ $child->logo }}" class="rounded-circle" alt="" height="40" width="40" align="cover-container">
       <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$child->id]) }}">{{ $child->name }}</a></h6>
     <div class="card-body">
-      <p class="card-text">{{ $child->description_short }}</p>
+      <p class="card-text">{!! $child->description_short !!}</p>
     </div>
   </div>
     </div>

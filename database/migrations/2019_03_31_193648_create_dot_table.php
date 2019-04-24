@@ -20,8 +20,9 @@ class CreateDotTable extends Migration
             $table->string('logo')->default('/img/default/dot.png');
             $table->text('description_full', 4000);//не больше 4000 символов
             $table->string('description_short');
+            $table->string('author');
             $table->integer('company_id');
-            $table->integer('chart_id');
+            $table->integer('chart_id')->default('0');
             $table->timestamps();
         });
     }

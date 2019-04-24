@@ -39,7 +39,7 @@
 <div class="pt-5 container">
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }})"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
+      <button type="button" class="btn btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, 0)"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
     </div>
     <div class="col-sm"><h3>Главные точки</h3></div>
     <div class="col-sm"></div>
@@ -51,12 +51,12 @@
     <div class="row">
  @if (count($mainDots) > 0)      
 @foreach($mainDots as $dot)  
-<div class="col-md-4">
-  <div class="card mb-4 shadow-sm h-100">
-    <h6 class="card-header" ><img src="https://static.tildacdn.com/tild3532-6130-4437-b966-653766626265/1.jpg" class="rounded-circle" alt="" height="40" width="40" align="cover-container">
+<div class="col-md-4 mt-2">
+  <div class="card shadow-sm h-100">
+    <h6 class="card-header" ><img src="{{ $dot->logo }}" class="mr-2 rounded-circle" alt="" height="40" width="40" align="cover-container">
       <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$dot->id]) }}">{{ $dot->name }}</a></h6>
     <div class="card-body">
-      <p class="card-text">{{ $dot->description_short }}</p>
+      <p class="card-text">{!! $dot->description_short !!}</p>
     </div>
   </div>
 </div>

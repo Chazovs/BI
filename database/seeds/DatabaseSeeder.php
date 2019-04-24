@@ -90,6 +90,7 @@ DB::table('dots')->insert([
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '1',
             ]);
 
@@ -99,6 +100,7 @@ DB::table('dots')->insert([
             'description_short' => 'Делится на горячие и холодные звонки',
             'company_id' => '1',
             'chart_id' => '2',
+            'author' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             ]);
@@ -110,6 +112,7 @@ DB::table('dots')->insert([
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'company_id' => '2',
+            'author' => '1',
             'chart_id' => '3',
             ]);
 
@@ -121,6 +124,7 @@ DB::table('dots')->insert([
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '1',
             'parent_id'=>'1',
             ]);
@@ -130,6 +134,7 @@ DB::table('dots')->insert([
             'description_full' => 'Нужно сделать дополнительный канбан по юзерам, а не по точкам. Это нужно вынести в конкретную задачу. А так это будет самая нагруженная точка. Надо будет разбить ее на дочерние',
             'description_short' => 'Все, что с касается функционала сайта bi.ru.net',
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '2',
             'parent_id'=>'1',
             'created_at' => date('Y-m-d H:i:s'),
@@ -141,6 +146,7 @@ DB::table('dots')->insert([
             'description_full' => 'Нужно разработать скрипты, определиться с базой и много еще всего',
             'description_short' => 'Все, что касается звонком людям, не проявлявшим интерес',
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '1',
             'parent_id'=>'2',
             'created_at' => date('Y-m-d H:i:s'),
@@ -156,6 +162,7 @@ DB::table('dots')->insert([
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '1',
             'parent_id'=>'4',
             ]);
@@ -167,6 +174,7 @@ DB::table('dots')->insert([
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'company_id' => '1',
+            'author' => '1',
             'chart_id' => '1',
             'parent_id'=>'4',
             ]);

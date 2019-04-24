@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dot_task;
+use App\Dot;
 use App\Company;
 
 class AjaxController extends Controller
@@ -125,6 +126,20 @@ public function getCompanyUsersAndDots(Request $request)
 
 public function pushNewDotFromIndex(Request $request)
 {
-    # добавляет новую точку
+  $reqArray = $request->all();
+ 
+/*$this->validate($request, [
+'name' => 'required',
+'problem' => 'required|max:2000',
+'description' => 'required|max:2000',
+'company_id' => 'required',
+'author_id' => 'required',
+'dot_id' => 'required',
+'responsible_id' => 'required',
+    ]);*/
+
+$dot = new Dot;
+$dot->fill($reqArray);
+$dot->save();
 }
 }
