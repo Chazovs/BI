@@ -137,7 +137,7 @@ type="text/javascript" charset="utf-8" ></script>
             </a>
           </li>
          <li class="nav-item text-center">
-            <a class="btn btn-outline-dark btn-sm mt-4 w-75" href="#" data-toggle="modal" data-target="#mainModal" onclick = "newIdea()">
+            <a class="btn btn-outline-dark btn-sm mt-4 w-75" href="#" data-toggle="modal" data-target="#mainModal" onclick = "newIdea({{ Auth::user()->id }})">
           Идея разработчикам
             </a>
           </li>

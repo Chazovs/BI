@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Dot_task;
 use App\Dot;
 use App\Company;
+use App\Proposal;
 
 class AjaxController extends Controller
 {
@@ -142,4 +143,29 @@ $dot = new Dot;
 $dot->fill($reqArray);
 $dot->save();
 }
+
+public function pushNewIdea(Request $request)
+{
+    $reqArray = $request->all();
+    $proposal = new Proposal;
+    $proposal->fill($reqArray);
+    $proposal->save();
+}
+
+
+/**
+ * изменяет статус задачи
+ * @param  Request $request [description]
+ * @return [type]           [description]
+ */
+public function changeTaskStatus(Request $request)
+{
+   $reqArray = $request->all();
+   $newStatus=Dot_task::find($reqArray['id']);
+   $newStatus->status=$reqArray['status'];
+   $newStatus->save();
+   /*->update($reqArray['status']);*/
+
+}
+
 }

@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Эта таблица содержит идеи пользователей по поводу других компаний
+ */
 class AddIdeasUsersTable extends Migration
 {
     /**

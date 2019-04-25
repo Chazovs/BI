@@ -25,30 +25,30 @@ function addDotFromCompanyIndex(companyId, userId, parentId) {
       '</textarea></div>'+
       '<div class="mb-3">'+
         '<label for="logo">Выбирите логотип точки</label><br>'+
-'<img src="../img/dotlogo/dot1.png" alt="1" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(1)">'+
-'<img src="../img/dotlogo/dot2.png" alt="2" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(2)">'+
-'<img src="../img/dotlogo/dot3.png" alt="3" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(3)">'+
-'<img src="../img/dotlogo/dot4.png" alt="4" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(4)">'+
-'<img src="../img/dotlogo/dot5.png" alt="5" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(5)">'+
-'<img src="../img/dotlogo/dot6.png" alt="6" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(6)">'+
-'<img src="../img/dotlogo/dot7.png" alt="7" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(7)">'+
-'<img src="../img/dotlogo/dot8.png" alt="8" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(8)">'+
-'<img src="../img/dotlogo/dot9.png" alt="9" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(9)">'+
-'<img src="../img/dotlogo/dot10.png" alt="10" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(10)">'+
-'<img src="../img/dotlogo/dot11.png" alt="11" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(11)">'+
-'<img src="../img/dotlogo/dot12.png" alt="12" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(12)">'+
-'<img src="../img/dotlogo/dot13.png" alt="13" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(13)">'+
-'<img src="../img/dotlogo/dot14.png" alt="14" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(14)">'+
-'<img src="../img/dotlogo/dot15.png" alt="15" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(15)">'+
-'<img src="../img/dotlogo/dot16.png" alt="16" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(16)">'+
-'<img src="../img/dotlogo/dot17.png" alt="17" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(17)">'+
-'<img src="../img/dotlogo/dot18.png" alt="18" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(18)">'+
-'<img src="../img/dotlogo/dot19.png" alt="19" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(19)">'+
-'<img src="../img/dotlogo/dot20.png" alt="20" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(20)">'+
-'<img src="../img/dotlogo/dot21.png" alt="21" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(21)">'+
-'<img src="../img/dotlogo/dot22.png" alt="22" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(22)">'+
-'<img src="../img/dotlogo/dot23.png" alt="23" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(23)">'+
-'<img src="../img/dotlogo/dot24.png" alt="24" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(24)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot1.png" alt="1" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(1)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot2.png" alt="2" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(2)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot3.png" alt="3" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(3)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot4.png" alt="4" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(4)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot5.png" alt="5" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(5)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot6.png" alt="6" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(6)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot7.png" alt="7" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(7)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot8.png" alt="8" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(8)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot9.png" alt="9" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(9)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot10.png" alt="10" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(10)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot11.png" alt="11" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(11)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot12.png" alt="12" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(12)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot13.png" alt="13" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(13)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot14.png" alt="14" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(14)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot15.png" alt="15" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(15)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot16.png" alt="16" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(16)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot17.png" alt="17" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(17)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot18.png" alt="18" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(18)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot19.png" alt="19" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(19)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot20.png" alt="20" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(20)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot21.png" alt="21" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(21)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot22.png" alt="22" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(22)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot23.png" alt="23" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(23)">'+
+'<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot24.png" alt="24" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(24)">'+
         '</div>'+
       '<div class="form-group">'+
         '<input type="hidden" id="newDotCompanyId" value="'+ companyId +'">'+
@@ -66,7 +66,7 @@ var editor = CKEDITOR.replace( 'newDotDescriptionShort', { height: '100px' });
 
 function setDotLogo(id) {
   if($('#newDotLogo')) {$('#newDotLogo').remove();}
-  $('#mainModalBody').prepend('<img src="../img/dotlogo/dot'+ id +'.png" class="rounded mx-auto d-block" height="64" width="64" id="newDotLogo">');
+  $('#mainModalBody').prepend('<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot'+ id +'.png" class="rounded mx-auto d-block" height="64" width="64" id="newDotLogo">');
   $('#newDotlogo').val('../img/dotlogo/dot'+ id +'.png');
 
 }
@@ -161,10 +161,8 @@ function delTask(id, idForController)
  */
 function goStatus(statusid, taskid, statusidtask)
 {
-    
     if (statusid == 'status1') 
     {
-        /**/
         $fromStatusId=$('#'+statusidtask).parent().parent().parent().attr('id');
         $('#'+$fromStatusId+taskid).removeAttr('disabled');
         $('#'+statusidtask).attr('disabled', '');
@@ -173,8 +171,6 @@ function goStatus(statusid, taskid, statusidtask)
     } 
     else if (statusid == 'status2') 
     {
-        
-      
        $fromStatusId=$('#'+statusidtask).parent().parent().parent().attr('id');
        $('#'+$fromStatusId+taskid).removeAttr('disabled');
        $('#'+statusidtask).attr('disabled', '');
@@ -206,6 +202,10 @@ function goStatus(statusid, taskid, statusidtask)
         $('#'+ taskid).hide(1000, function(){ $('#'+ taskid).detach().prependTo('#status5')});
         $('#'+ taskid).show(1000);
     }
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var status=parseInt(/[0-9]+/.exec(statusid));
+    var id=parseInt(/[0-9]+/.exec(taskid));
+    $.post('/change/task/status', {_token : token, id : id, status : status});
 }
 
 
@@ -367,7 +367,7 @@ function postNewTask() {
 
 
 //вызывается при нажатии "идея разработчикам"
- function newIdea() {
+ function newIdea(userId) {
      $('#mainModalLabel').html( 
           
           '<div class="form-group">'+
@@ -379,8 +379,46 @@ function postNewTask() {
       '<div class="form-group">'+
         '<label for="taskEditedDescription"><b>Что можно исправить/улучшить?</b></label>'+
         '<textarea type="text" class="form-control" id="ideaEditedDescription" rows="4">'+
-      '</textarea></div>'
+      '</textarea>'+
+      '<input type="hidden" id="newIdeaAuthorId" value="'+ userId +'"></div>'
      );
     $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewIdea()" class="btn btn-success" >Отправить идею</button> ' );
  }
 
+/**
+ * Постит новую идею
+ * @return {[type]} возвращает строку об успешном добавлении из контроллера
+ */
+function postNewIdea() {
+    var user_id = $('#newIdeaAuthorId').val();
+    var description = $('#ideaEditedDescription').val();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/push/idea/new', {_token : token, user_id : user_id, description : description }, function( result ){
+    $('#mainModalBody').html( 'Идея добавлена ' + result);
+    $('#mainModalLabel').html(' ');
+    });
+}
+
+
+/**
+ * Добавляет новую идею для компании
+ * @param  {[type]} argument [description]
+ * @return {[type]}          [description]
+ */
+function newCompanyIdea(companyId, userId) {
+  $('#mainModalLabel').html( 
+          
+          '<div class="form-group">'+
+            '<h5>Новая идея</h5>'+
+            '</div>'
+            );
+    $('#mainModalBody').html( 
+   
+      '<div class="form-group">'+
+        '<label for="taskEditedDescription"><b>Что можно исправить/улучшить?</b></label>'+
+        '<textarea type="text" class="form-control" id="ideaEditedDescription" rows="4">'+
+      '</textarea>'+
+      '<input type="hidden" id="newIdeaAuthorId" value="'+ userId +'"></div>'
+     );
+    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewIdea()" class="btn btn-success" >Отправить идею</button> ' );
+ }

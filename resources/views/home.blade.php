@@ -33,7 +33,7 @@
               <p class="card-text">{{ $company->description }}</p>
               <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group" role="group" aria-label="Basic example">
-               <button type="button" class="btn btn-warning btn-sm" >Идея!</button>
+               <button type="button" class="btn btn-warning btn-sm" onclick="newCompanyIdea({{ $company->id }}, {{ Auth::user()->id }})" data-toggle="modal" data-target="#mainModal">Идея!</button>
                <button type="button" class="btn btn-success btn-sm" >Присоединиться</button>
              </div>
                 <small class="text-muted">9 mins</small>

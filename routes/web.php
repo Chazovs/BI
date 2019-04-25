@@ -21,7 +21,7 @@ Route::get('/profile/{id}', 'HomeController@profile')->name('profile');
 Route::get('/profile/{id}/alltasks/', 'HomeController@allTasks')->name('allTasks');
 Route::get('/about', 'HomeController@about')->name('about');
 
-//роуты для аякс запросов
+//роуты для аякс и пост запросов из js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи
 Route::POST('/edit/Task','AjaxController@editTask');//редактирует задачу
 Route::POST('/get/responsibles','AjaxController@getCompanyUsers');//отдает ответственного
@@ -29,6 +29,9 @@ Route::POST('/push/task/new','AjaxController@pushNewTask');//постит нов
 Route::POST('/delete/task','AjaxController@deleteTask');//Удаляет задачу
 Route::POST('/get/responsibles/and/dots','AjaxController@getCompanyUsersAndDots');// контроллер возвращает два селектора: пользователи компании и список всех точек
 Route::POST('/push/dot/new','AjaxController@pushNewDotFromIndex');//Создает новую точку с главной
+Route::POST('/push/idea/new','AjaxController@pushNewIdea');//Создает новую идею для разработчиков
+Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Создает новую идею для разработчиков
+
 
 
 Auth::routes();
