@@ -31,6 +31,7 @@
              <a href="{{ route('companyHome',['id'=>$company->id]) }}"> <h4>
                {{ $company->name }}</h4></a>
               <p class="card-text">{{ $company->description }}</p>
+@if($cardButton==true)
               <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group" role="group" aria-label="Basic example">
                <button type="button" class="btn btn-warning btn-sm" onclick="newCompanyIdea({{ $company->id }}, {{ Auth::user()->id }})" data-toggle="modal" data-target="#mainModal">Идея!</button>
@@ -38,6 +39,8 @@
              </div>
                 <small class="text-muted">9 mins</small>
               </div>
+@endif
+
             </div>
           </div>
         </div>

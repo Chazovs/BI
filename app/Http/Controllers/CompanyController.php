@@ -95,7 +95,10 @@ public function __construct()
     $dot=Dot::find($dotId);
     $company=Company::find($id);
     $childs=$company->dots->where('parent_id','=', $dotId);
-   
+    $companyCharts=$company->charts;
+    $dotChart=$dot->chart;
+    
+
 //выбираем задачи по статусам
     $tasks_status1=DB::table('dot_tasks')->where([
   ['status', '=', '1'],
@@ -123,9 +126,6 @@ public function __construct()
   ['company_id', '=', $id],
 ])->get();
 
-
-
-    
     return view('dotIndex', compact($company, $dot))->with([
         'company'=>$company,
         'dot'=>$dot,
@@ -136,6 +136,8 @@ public function __construct()
         'tasks_status4'=>$tasks_status4,
         'tasks_status5'=>$tasks_status5,
         'user'=>$user,
+        'companyCharts'=>$companyCharts,
+        'dotChart'=>$dotChart,
          ]);
     
 }

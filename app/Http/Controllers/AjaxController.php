@@ -7,6 +7,7 @@ use App\Dot_task;
 use App\Dot;
 use App\Company;
 use App\Proposal;
+use App\Chart;
 
 class AjaxController extends Controller
 {
@@ -166,6 +167,28 @@ public function changeTaskStatus(Request $request)
    $newStatus->save();
    /*->update($reqArray['status']);*/
 
+}
+
+public function pushChartNew(Request $request)
+{
+   $reqArray = $request->all();
+   $chart = new Chart;
+   $chart['data'] = '0';
+   $chart->fill($reqArray);
+   /*dump($chart);*/
+   $chart->save();
+}
+
+
+/**
+ * закрепляет график за точкой
+ */
+public function addСhartToDot(Request $request)
+{
+ $reqArray = $request->all();
+ $newChart=Dot::find($reqArray['id']);
+ $newChart->chart_id=$reqArray['chart_id'];
+ $newChart->save();
 }
 
 }

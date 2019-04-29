@@ -31,7 +31,8 @@ Route::POST('/get/responsibles/and/dots','AjaxController@getCompanyUsersAndDots'
 Route::POST('/push/dot/new','AjaxController@pushNewDotFromIndex');//Создает новую точку с главной
 Route::POST('/push/idea/new','AjaxController@pushNewIdea');//Создает новую идею для разработчиков
 Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Создает новую идею для разработчиков
-
+Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает новый график
+Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 
 
 Auth::routes();

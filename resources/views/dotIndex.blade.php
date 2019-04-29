@@ -1,6 +1,15 @@
 @extends('layouts.mainauth')
 @section('main')
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+  <!-- <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+    </div>
+    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+    </div>
+  </div> -->
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center  pt-3 pb-2 mb-3 border-bottom">
         <img src="{{ url($company->logo) }}" class="rounded-circle" alt="" height="40" width="40">
         <h1 class="h3">{{ $dot->name }}</h1>
@@ -19,8 +28,28 @@
 
 <div class="container col-md-9 ml-sm-auto col-lg-12 col-xl-12 px-4">
   <div class="row">
-    <div class="col-sm-8">
-      Название графика
+    <div class="col-sm-8" id='chartContainer'>
+   
+<div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-success" onclick="createChart({{ $company->id }})" data-toggle="modal" data-target="#mainModal">Создать график</button>
+ @if (count($companyCharts)>0)
+  <div class="input-group-prepend">
+    <button class="btn btn-sm btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Привязать</button>
+    <div class="dropdown-menu">
+        @foreach($companyCharts as $companyChart)
+      <a class="dropdown-item" onClick="addChartToDot({{ $companyChart->id }}, {{ $dot->id }})" href="#">{{ $companyChart->title }}</a>
+      @endforeach
+    </div>
+  </div>
+@endif
+@if ($dotChart!=null)
+<button type="button" class="btn btn-sm btn-outline-success" onclick="addChartData({{ $dotChart->id }})" data-toggle="modal" data-target="#mainModal">Добавить данные</button>
+@endif
+            <a href="" class="btn btn-sm btn-outline-secondary disabled" role="button"> Редактировать график</a>
+          </div>
+        </div>
+
      <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="450" height="200"  style="display: block; width: 200px; height: 200px;"></canvas>
     </div>
     <div class="col-sm-4">
@@ -72,7 +101,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, {{ $dot->id }})"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
+      <button type="button" class="btn btn-sm btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, {{ $dot->id }})"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
     </div>
     <div class="col-sm"><h2>Дочерние точки</h2></div>
     <div class="col-sm"></div>
@@ -108,7 +137,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <button type="button" href="#" onClick="addTask({{ $company->id }}, {{ $dot->id }}, {{ $user->id }})" class="btn btn-success" data-toggle="modal" data-target="#mainModal">Добавить задачу</button>
+      <button type="button" href="#" onClick="addTask({{ $company->id }}, {{ $dot->id }}, {{ $user->id }})" class="btn btn-success btn-sm" data-toggle="modal" data-target="#mainModal">Добавить задачу</button>
     </div>
     <div class="col-sm"><h2>Все задачи</h2></div>
     <div class="col-sm"></div>
@@ -116,7 +145,6 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
 </div>
  
 </div>
-
       <div class="table-responsive">
          <table class="table table-striped table-sm">
           <thead>
@@ -313,7 +341,91 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
           </tbody>
         </table>
       </div>
+<script src="{{ asset('js/feather.min.js') }}"></script>
+    <script src="{{ asset('js/Chart.min.js') }}"></script>
+     <!-- рыба для создания диаграмм -->
+ @if ($dot->chart_id!=0 && $dotChart!=null)
 
-    
+<script>
+      /* globals Chart:false, feather:false */
+(function () {
+  'use strict'
+  feather.replace()
+  // Graphs
+  var ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        'Привет',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Thursday',
+        'Thursday',
+        'Thursday',
+        'Thursday',
+        'Thursday',
+        'Saturday'
+      ],
+      datasets: [{
+        fill: false,
+        data: [
+          2342,
+          1345,
+          1843,
+          4003,
+          3489,
+          3489,
+          3489,
+          3489,
+          3489,
+          3489,
+          4092,
+          12034
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 2,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+       scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          },
+          scaleLabel: {
+              display: true,
+              labelString: 'Значения'
+            }
+        }]
+      },
+
+      legend: {
+        display: false
+      },
+      title: {
+            display: true,
+            text: '{{ $dotChart->title }}'
+        }
+    }
+  })
+}());
+    </script>
+    @else
+
+    <?php dump('привет мир'); ?>
+<script>
+  window.onload = function() {
+   $('#myChart').replaceWith('<div class="alert alert-secondary align-self-center mt-4" role="alert">За точкой не закреплено ни одного графика</div>');
+   };
+</script>
+    @endif
     </main>
     @endsection

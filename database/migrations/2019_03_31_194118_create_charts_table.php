@@ -15,12 +15,13 @@ class CreateChartsTable extends Migration
     {
         Schema::create('charts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')->default('line');
+            $table->string('type_chart')->default('line');
+            $table->string('type_chart_period');
             $table->string('title');
             $table->string('company_id');
-            $table->boolean('up_or_down')->default(true);// true - это возрастание. повышение или понижение показателя будет  считаться успехом
-            $table->text('desription');
-            $table->string('data');//двумерный массив значение
+            $table->string('up_or_down')->default('0');
+            $table->text('description');
+            $table->text('data');//двумерный массив значение
             $table->string('y_name');
             $table->timestamps();
         });

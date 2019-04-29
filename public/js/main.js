@@ -406,19 +406,83 @@ function postNewIdea() {
  * @return {[type]}          [description]
  */
 function newCompanyIdea(companyId, userId) {
-  $('#mainModalLabel').html( 
-          
+ $('#mainModalLabel').html( 
           '<div class="form-group">'+
-            '<h5>Новая идея</h5>'+
+            '<input type="text" class="form-control w-100" id="newIdeaName" placeholder="Заголовок" value="" rows="5" >'+
             '</div>'
             );
     $('#mainModalBody').html( 
-   
       '<div class="form-group">'+
-        '<label for="taskEditedDescription"><b>Что можно исправить/улучшить?</b></label>'+
-        '<textarea type="text" class="form-control" id="ideaEditedDescription" rows="4">'+
+      '<label for="ideaSituation"><b>Что происходит?</b></label>'+
+        '<textarea type="text" class="form-control" id="ideaSituation" rows="2">'+
+      '</textarea>'+
+      '<label for="ideaProblem"><b>Почему это нужно менять?</b></label>'+
+        '<textarea type="text" class="form-control" id="ideaProblem" rows="2">'+
+      '</textarea>'+
+        '<label for="ideaDecision"><b>Как это можно исправить?</b></label>'+
+        '<textarea type="text" class="form-control" id="ideaDecision" rows="2">'+
       '</textarea>'+
       '<input type="hidden" id="newIdeaAuthorId" value="'+ userId +'"></div>'
      );
-    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewIdea()" class="btn btn-success" >Отправить идею</button> ' );
+    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewCompanyIdea()" class="btn btn-success" >Отправить идею</button> ' );
  }
+
+
+/**
+ * Создает модальное окно для добавления графиков к компании
+ * @param  {[type]} companyId [description]
+ * @return {[type]}           [description]
+ */
+ function createChart(companyId) {
+  $('#mainModalLabel').html( 
+          '<div class="form-group">'+
+            '<input type="text" class="form-control w-100" id="newIdeaName" placeholder="Заголовок" value="" rows="5" maxlength="50">'+
+            '</div>'
+            );
+    $('#mainModalBody').html( 
+      '<div class="form-group">'+
+      '<p><label for="chartDescription"><b>Описание (до 100 символов)</b></label>'+
+        '<textarea type="text" class="form-control" id="chartDescription" rows="2" maxlength="100">'+
+      '</textarea></p>'+
+      '<p><label for="chartYAxis"><b>Что измеряем</b></label>'+
+      '<input type="text" class="form-control w-100" id="chartYAxis" placeholder="Например: чистая прибыль" value="" rows="5" maxlength="30"></p>'+
+      
+ '<p><label for="upOrDown"><b>Повышение или понижение показателя является положительной тенденцией?</b></label>'+
+'<select class="custom-select" id="upOrDown"> <option selected value="up">Повышение</option> <option value="down">Понижение</option></select></p>'+
+
+'<p><label for="typeChartPeriod"><b>Частота замера</b></label>'+
+'<select class="custom-select" id="typeChartPeriod"> <option selected value="everyMonth">Ежемесячно</option><option value="everyWeek">Еженедельно</option> <option value="everyDay">Ежедневно</option></select></p>'+
+'<input type="hidden" id="chartCompanyId" value="'+ companyId +'"></div>'+
+      '</div>'
+     );
+    $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewChart()" class="btn btn-success" >Создать график</button> ' );
+ }
+
+/**
+ * Постить новый график
+ * @return {[type]} [description]
+ */
+ function postNewChart() {
+    var title = $('#newIdeaName').val();
+    var description = $('#chartDescription').val();
+    var y_name = $('#chartYAxis').val();
+    var up_or_down = $('#upOrDown').val();
+    var type_chart_period = $('#typeChartPeriod').val();
+    var company_id = $('#chartCompanyId').val();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/push/chart/new', {_token : token, title : title, description : description, y_name : y_name, up_or_down : up_or_down, type_chart_period : type_chart_period, company_id : company_id}, function( result ){
+    $('#mainModalBody').html( 'График добавлен <br>' + result);
+    $('#mainModalLabel').html(' ');
+    });
+}
+
+/**
+ * привязывает график к точке
+ * @param {[type]} dotId [description]
+ */
+function addChartToDot(chartId, dotId) {
+  var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/add/chart/to/dot', {_token : token, chart_id : chartId, id : dotId}, function( result ){
+   location.reload();
+    }); 
+}

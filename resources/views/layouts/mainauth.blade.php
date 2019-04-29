@@ -50,7 +50,26 @@ type="text/javascript" charset="utf-8" ></script>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/companies/my') }}">BI.ru.net</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Поиск</button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Задачи</a>
+      <a class="dropdown-item" href="#">Точки</a>
+      <a class="dropdown-item" href="#">Компании</a>
+      <a class="dropdown-item" href="#">Пользователи</a>
+    </div>
+  </div>
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+</div>
+
+
+
+
+  <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
   <ul class="navbar-nav px-3">
   
         @guest
@@ -74,7 +93,6 @@ type="text/javascript" charset="utf-8" ></script>
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -94,7 +112,6 @@ type="text/javascript" charset="utf-8" ></script>
            <a class="nav-link active" href="{{ route('profile',['id'=>Auth::user()->id]) }}">
              <img src='{{ Auth::user()->avatar }}' class="rounded-circle" width="40" height="40">
 {{ Auth::user()->real_name }} {{ Auth::user()->real_lastname }}
-             
            </a>
           </li>
          </ul>
@@ -163,9 +180,7 @@ type="text/javascript" charset="utf-8" ></script>
     </script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
     </script>
-    <script src="{{ asset('js/feather.min.js') }}"></script>
-    <script src="{{ asset('js/Chart.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+
 <!-- Модальное окно, которое мы будем наполнять инфой через ajax -->
 <div class="modal" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

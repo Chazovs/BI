@@ -33,10 +33,12 @@ class HomeController extends Controller
     $companies=$user->companies()->paginate(1);
     $myC='disabled';
     $allC='';
+    $cardButton=false;
     return view('home')->with(['companies'=> $companies,
             'my_c'=> $myC,
             'allC' => $allC,
             'user' => $user,
+            'cardButton' => $cardButton,
         ]);
         
     }
@@ -47,12 +49,14 @@ class HomeController extends Controller
     $user = User::find($userID);
         $myC='';//деактивирует кнопку компании
         $allC='disabled';
+        $cardButton=true;
        $companies = Company::paginate(2);
          return view('home', compact($companies))->with([
             'companies'=> $companies,
             'user'=> $user,
             'my_c'=> $myC,
-            'allC' => $allC
+            'allC' => $allC,
+            'cardButton'=>$cardButton,
         ]);
     }
   
