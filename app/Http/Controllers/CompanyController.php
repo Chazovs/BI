@@ -97,6 +97,21 @@ public function __construct()
     $childs=$company->dots->where('parent_id','=', $dotId);
     $companyCharts=$company->charts;
     $dotChart=$dot->chart;
+    $chartData=unserialize($dotChart->data);
+    $dateData='';
+    $valueData='';
+    foreach ($chartData as $date) {
+      if ($dateData=='') {
+        $dateData='"'.$date['date'].'"';
+      } else {
+        $dateData=$dateData.', "'.$date['date'].'"';
+      }
+    }
+    foreach ($chartData as $value) {
+   $valueData=$value['value'].', '.$valueData;
+    }
+    substr($dateData, 2);
+    dump($dateData);
     
 
 //выбираем задачи по статусам
@@ -136,6 +151,8 @@ public function __construct()
         'tasks_status4'=>$tasks_status4,
         'tasks_status5'=>$tasks_status5,
         'user'=>$user,
+        'dateData'=>$dateData,
+        'valueData' =>$valueData,
         'companyCharts'=>$companyCharts,
         'dotChart'=>$dotChart,
          ]);

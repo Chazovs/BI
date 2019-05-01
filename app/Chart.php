@@ -8,7 +8,7 @@ class Chart extends Model
 {
 
 	protected $fillable = [
-        'title', 'description', 'y_name', 'up_or_down', 'type_chart_period', 'company_id', 'data',
+        'title', 'description', 'y_name', 'up_or_down', 'company_id', 'data',
     ];
 
 	//у графика может быть только одна компания

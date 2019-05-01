@@ -175,7 +175,6 @@ public function pushChartNew(Request $request)
    $chart = new Chart;
    $chart['data'] = '0';
    $chart->fill($reqArray);
-   /*dump($chart);*/
    $chart->save();
 }
 
@@ -190,5 +189,35 @@ public function addСhartToDot(Request $request)
  $newChart->chart_id=$reqArray['chart_id'];
  $newChart->save();
 }
+
+/**
+ * добавляет данные к графику
+ */
+public function addDataToChart(Request $request) 
+{
+
+  $reqArray = $request->all();
+for ($i=1; isset($reqArray["chartValueDate".$i]) && isset($reqArray["chartValue".$i]); $i++) { 
+$newData[$i] = array(
+  'date' => $reqArray["chartValueDate".$i],
+  'value' => $reqArray["chartValue".$i],
+ );
+}
+$Chart=Chart::find($reqArray['chartId']);
+
+//есть ли уже данные у chart
+if ($Chart->data=="0") {
+$allData=$newData;
+}else{
+$oldData=unserialize($Chart->data);
+/*$allData=array_replace($oldData, $newData);*/
+$allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) { return $a['date'] <=> $b['date']; }));
+}
+usort($allData, function($a, $b) { return strtotime($a["date"]) <=> strtotime($b["date"]); });
+$Chart->data=serialize($allData);
+$Chart->update();
+    return back();
+}
+
 
 }

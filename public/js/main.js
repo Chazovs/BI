@@ -399,7 +399,6 @@ function postNewIdea() {
     });
 }
 
-
 /**
  * Добавляет новую идею для компании
  * @param  {[type]} argument [description]
@@ -449,11 +448,8 @@ function newCompanyIdea(companyId, userId) {
       
  '<p><label for="upOrDown"><b>Повышение или понижение показателя является положительной тенденцией?</b></label>'+
 '<select class="custom-select" id="upOrDown"> <option selected value="up">Повышение</option> <option value="down">Понижение</option></select></p>'+
-
-'<p><label for="typeChartPeriod"><b>Частота замера</b></label>'+
-'<select class="custom-select" id="typeChartPeriod"> <option selected value="everyMonth">Ежемесячно</option><option value="everyWeek">Еженедельно</option> <option value="everyDay">Ежедневно</option></select></p>'+
-'<input type="hidden" id="chartCompanyId" value="'+ companyId +'"></div>'+
-      '</div>'
+'<input type="hidden" id="chartCompanyId" value="'+ companyId +'"></div>'
+      
      );
     $('#mainModalFooter').html( '<button type="button" href="#" onClick="postNewChart()" class="btn btn-success" >Создать график</button> ' );
  }
@@ -467,10 +463,9 @@ function newCompanyIdea(companyId, userId) {
     var description = $('#chartDescription').val();
     var y_name = $('#chartYAxis').val();
     var up_or_down = $('#upOrDown').val();
-    var type_chart_period = $('#typeChartPeriod').val();
     var company_id = $('#chartCompanyId').val();
     var token = $('meta[name="csrf-token"]').attr('content');
-    $.post('/push/chart/new', {_token : token, title : title, description : description, y_name : y_name, up_or_down : up_or_down, type_chart_period : type_chart_period, company_id : company_id}, function( result ){
+    $.post('/push/chart/new', {_token : token, title : title, description : description, y_name : y_name, up_or_down : up_or_down, company_id : company_id}, function( result ){
     $('#mainModalBody').html( 'График добавлен <br>' + result);
     $('#mainModalLabel').html(' ');
     });
@@ -485,4 +480,66 @@ function addChartToDot(chartId, dotId) {
     $.post('/add/chart/to/dot', {_token : token, chart_id : chartId, id : dotId}, function( result ){
    location.reload();
     }); 
+}
+
+/**
+ * Публикует окно добавления новых данных к графику
+ * @param {[type]} chartId [description]
+ */
+  function addChartData(chartId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $('#mainModalBody').html(
+'<form class="form-inline" method="POST" action="/add/data/to/chart" >'+
+'  <div id="formAddDataChart">'+
+'  <div class="datachart input-group mb-2 mr-sm-2" >'+
+'    <div class="input-group-prepend">'+
+'      <div class="input-group-text">дата</div>'+
+'    </div>'+
+'    <input type="date" required name="chartValueDate1" class="form-control" id="chartValueDate1">'+
+'    <input type="text" required name="chartValue1"  pattern="^[ 0-9]+$" class="form-control" id="chartValue1" placeholder="Значение">'+
+'<button type="button" onClick="addDateDataBlock(1)" id="submitToArray" class="btn btn-link">+</button> '+
+'<button type="button" onClick="delDateDataBlock()" id="delToArray" class="btn btn-link">-</button>'+
+'  </div>'+
+'  </div>'+
+'<input type="hidden" name="_token" id="_token" value="'+ token +'"></div>'+
+'<input type="hidden" name="chartId" id="chartId" value="'+ chartId +'"></div>'+
+'  <button type="submit" class="btn btn-primary mb-2">Отправить</button>'+
+'</form>'
+      );
+  }
+
+/**
+ * Добавляет блок дата-значение в форме заполения графиков. 
+ * @param {[type]} dataArrayLocalId [description]
+ */
+function addDateDataBlock(dataArrayLocalId) {
+  var length = $('div.datachart').length;
+if (length==1) {
+$('#delToArray').attr('onClick', 'delDateDataBlock()');
+}
+
+  var index =dataArrayLocalId+1;
+  $('#submitToArray').attr('onClick', 'addDateDataBlock('+ index + ')');
+  $('#formAddDataChart').append(
+'  <div class="datachart input-group mb-2 mr-sm-2" >'+
+'    <div class="input-group-prepend">'+
+'      <div class="input-group-text">дата</div>'+
+'    </div>'+
+'    <input type="date" required name="chartValueDate'+index+'" class="form-control" id="chartValueDate'+index+'" placeholder="Username">'+
+'    <input type="text" required name="chartValue'+index+'" pattern="^[ 0-9]+$" class="form-control" id="chartValue'+index+'" placeholder="Значение">'+
+'  </div>'
+);
+}
+
+/**
+ * удаляет последний блок дата-значение
+ */
+function delDateDataBlock() {
+
+
+$("div.datachart:last").remove();
+var length = $('div.datachart').length;
+if (length==1) {
+$('#delToArray').attr('onClick', ' ');
+}
 }

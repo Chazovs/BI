@@ -45,12 +45,13 @@
 @endif
 @if ($dotChart!=null)
 <button type="button" class="btn btn-sm btn-outline-success" onclick="addChartData({{ $dotChart->id }})" data-toggle="modal" data-target="#mainModal">Добавить данные</button>
+
 @endif
             <a href="" class="btn btn-sm btn-outline-secondary disabled" role="button"> Редактировать график</a>
           </div>
         </div>
 
-     <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="450" height="200"  style="display: block; width: 200px; height: 200px;"></canvas>
+     <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="450" height="200"  style="display: block; width: 200px; height: 300px;"></canvas>
     </div>
     <div class="col-sm-4">
       <div class="row">
@@ -343,6 +344,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
       </div>
 <script src="{{ asset('js/feather.min.js') }}"></script>
     <script src="{{ asset('js/Chart.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
      <!-- рыба для создания диаграмм -->
  @if ($dot->chart_id!=0 && $dotChart!=null)
 
@@ -356,45 +358,52 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
   // eslint-disable-next-line no-unused-vars
   var myChart = new Chart(ctx, {
     type: 'line',
+  
+
     data: {
       labels: [
-        'Привет',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Thursday',
-        'Thursday',
-        'Thursday',
-        'Thursday',
-        'Thursday',
-        'Saturday'
+
+  {!! $dateData !!} 
       ],
       datasets: [{
         fill: false,
         data: [
-          2342,
-          1345,
-          1843,
-          4003,
-          3489,
-          3489,
-          3489,
-          3489,
-          3489,
-          3489,
-          4092,
-          12034
+         {{ $valueData }}
         ],
-        lineTension: 0,
+        
         backgroundColor: 'transparent',
         borderColor: '#007bff',
         borderWidth: 2,
         pointBackgroundColor: '#007bff'
       }]
     },
+
     options: {
+
+
+
+
+plugins: {
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy' // is panning about the y axis neccessary for bar charts?
+              },
+              zoom: {
+                enabled: true,
+                mode: 'x',
+                sensitivity: 3
+              }
+            }
+          },
+
+
+
+
+
+
+
+
        scales: {
         yAxes: [{
           ticks: {

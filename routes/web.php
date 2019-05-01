@@ -33,6 +33,8 @@ Route::POST('/push/idea/new','AjaxController@pushNewIdea');//Создает но
 Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Создает новую идею для разработчиков
 Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает новый график
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
+Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
+
 
 
 Auth::routes();

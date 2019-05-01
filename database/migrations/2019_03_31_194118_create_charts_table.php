@@ -16,7 +16,6 @@ class CreateChartsTable extends Migration
         Schema::create('charts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type_chart')->default('line');
-            $table->string('type_chart_period');
             $table->string('title');
             $table->string('company_id');
             $table->string('up_or_down')->default('0');
