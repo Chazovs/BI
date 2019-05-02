@@ -97,9 +97,10 @@ public function __construct()
     $childs=$company->dots->where('parent_id','=', $dotId);
     $companyCharts=$company->charts;
     $dotChart=$dot->chart;
-    $chartData=unserialize($dotChart->data);
     $dateData='';
     $valueData='';
+if($dotChart->data!="0"){
+    $chartData=unserialize($dotChart->data);
     foreach ($chartData as $date) {
       if ($dateData=='') {
         $dateData='"'.$date['date'].'"';
@@ -108,10 +109,16 @@ public function __construct()
       }
     }
     foreach ($chartData as $value) {
-   $valueData=$value['value'].', '.$valueData;
+        if ($valueData=='') {
+        $valueData=$value['value'];
+      } else {
+        $valueData=$valueData.', '.$value['value'];
+      }
+  
     }
     substr($dateData, 2);
-    dump($dateData);
+   }
+  
     
 
 //выбираем задачи по статусам

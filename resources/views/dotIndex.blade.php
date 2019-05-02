@@ -379,31 +379,19 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
     },
 
     options: {
-
-
-
-
-plugins: {
-            zoom: {
-              pan: {
-                enabled: true,
-                mode: 'xy' // is panning about the y axis neccessary for bar charts?
-              },
-              zoom: {
-                enabled: true,
-                mode: 'x',
-                sensitivity: 3
-              }
-            }
-          },
-
-
-
-
-
-
-
-
+        plugins: {
+                    zoom: {
+                      pan: {
+                        enabled: true,
+                        mode: 'xy' // is panning about the y axis neccessary for bar charts?
+                      },
+                      zoom: {
+                        enabled: true,
+                        mode: 'xy',
+                        sensitivity: 3
+                      }
+                    }
+                  },
        scales: {
         yAxes: [{
           ticks: {
@@ -411,7 +399,7 @@ plugins: {
           },
           scaleLabel: {
               display: true,
-              labelString: 'Значения'
+              labelString: '{{ $dotChart->y_name }}'
             }
         }]
       },

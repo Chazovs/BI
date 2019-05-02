@@ -20,6 +20,7 @@ Route::get('/profile/{id}/edit/', 'HomeController@editProfile')->name('editProfi
 Route::get('/profile/{id}', 'HomeController@profile')->name('profile');
 Route::get('/profile/{id}/alltasks/', 'HomeController@allTasks')->name('allTasks');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/company/{id}/tree', 'HomeController@tree')->name('tree'); //показывает карту точек компании
 
 //роуты для аякс и пост запросов из js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи

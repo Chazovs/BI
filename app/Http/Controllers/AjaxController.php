@@ -214,6 +214,7 @@ $oldData=unserialize($Chart->data);
 $allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) { return $a['date'] <=> $b['date']; }));
 }
 usort($allData, function($a, $b) { return strtotime($a["date"]) <=> strtotime($b["date"]); });
+
 $Chart->data=serialize($allData);
 $Chart->update();
     return back();

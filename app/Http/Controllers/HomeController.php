@@ -60,33 +60,18 @@ class HomeController extends Controller
         ]);
     }
   
-/*public function companyHome($id) коммент
-{
-
-    //проверяем: есть ли компании с $ID, в которых зарегистрирован пользователь.
-$userID  = Auth::user()->id;
-$userModel = User::find($userID);
-$postsHasMany = $userModel->companies();
-$companies = $postsHasMany->where('id','like',$id)->count();
-
-  
-if (!$companies){
-    return view('idea');
-}
-else{
-    $company=Company::find($id);
-    return view('companyIndex', compact($company))->with([
-        'company'=>$company
-    ]);
-    }
-}*/
-
 public function idea($id)
     {
          return view('idea');
     }
 
-public function editProfile($id)
+    //показывает дерево точек компании
+    protected function tree($id)
+    {
+        return view('dottree');
+    }
+
+    public function editProfile($id)
     {
         $userID = Auth::user()->id;
         $user = User::find($userID);
