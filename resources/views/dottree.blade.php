@@ -7,7 +7,7 @@
             $(function () {
                 var jsonStructureObject = [{
                     head: '{{$companyModel->name}}',
-                    id: '{{$companyModel->id}}',
+                    id: 'company',
                     contents: '123456789012345678901234567890',
                     children: [
                      {!! $allData !!}

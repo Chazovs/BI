@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Регистрация') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -86,33 +86,32 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Подтвердите пароль') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
-<!-- <div class="form-group row">
-<div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-    <label for="avatar" class="col-md-4 control-label">Фото</label>
-    <div class="col-md-6">
-        <input id="avatar" type="file" name="avatar" enctype="multipart/form-data">
-    </div>
-</div>
+                    <div class="form-group row">
+                    <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                        <label for="avatar" class="col-md-4 control-label">Фото</label>
+                        <div class="col-md-6">
+                            <input id="avatar" type="file" name="avatar">
+                        </div>
+                    </div>
+                    @if ($errors->has('avatar'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('avatar') }}</strong>
+                        </span>
+                    @endif
+                    </div>
 
-@if ($errors->has('avatar'))
-    <span class="help-block">
-        <strong>{{ $errors->first('avatar') }}</strong>
-    </span>
-@endif
-</div>
- -->
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Зарегистрироваться') }}
                                 </button>
                             </div>
                         </div>

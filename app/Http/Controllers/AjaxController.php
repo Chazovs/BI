@@ -100,8 +100,6 @@ public function deleteTask(Request $request)
  */
 public function getCompanyUsersAndDots(Request $request)
 {
- 
-
     $companyId=$request->input('companyId');
     $company = Company::find($companyId);
     $users=$company->users()->get();
@@ -144,6 +142,7 @@ $dot = new Dot;
 $dot->fill($reqArray);
 $dot->save();
 }
+
 
 public function pushNewIdea(Request $request)
 {
@@ -220,5 +219,13 @@ $Chart->update();
     return back();
 }
 
+public function pushDotNewParent(Request $request) {
+    $reqArray = $request->all();
+    if ($reqArray['parent_id']=="company")$reqArray['parent_id']="0";
+    $childDot=Dot::find($reqArray['id']);
+    $childDot->parent_id=$reqArray['parent_id'];
+    $childDot->update();
+
+}
 
 }

@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/',  ['as' => 'auth.login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::get('/home',  'HomeController@index');
 Route::get('/registerCompany', 'HomeController@registerCompany')->name('registerCompany');
 Route::POST('/registerCompany/push', 'HomeController@pushRegisterCompany');
 Route::get('/company/{id}/edit', 'IndexController@editCompany')->name('editCompany');
@@ -22,7 +23,7 @@ Route::get('/profile/{id}/alltasks/', 'HomeController@allTasks')->name('allTasks
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/company/{id}/tree', 'HomeController@tree')->name('tree'); //показывает карту точек компании
 
-//роуты для аякс и пост запросов из js
+//роуты для аякс и пост запросов из js файлов. в основном из main.js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи
 Route::POST('/edit/Task','AjaxController@editTask');//редактирует задачу
 Route::POST('/get/responsibles','AjaxController@getCompanyUsers');//отдает ответственного
@@ -35,6 +36,10 @@ Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Созд�
 Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает новый график
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
+
+//роут из дерева точек jQuery.jHTree.js
+Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки
+
 
 
 

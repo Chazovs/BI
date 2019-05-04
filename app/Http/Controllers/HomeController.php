@@ -194,13 +194,11 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
            //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
             foreach ($allDots->where('parent_id', $parent->id) as $child)
             {
-                /*dump ($child->name);*/
-                $blockId=$child->id+$companyModel->id;
 
                 if (!isset($dataChild)) {
-                    $dataChild = "{ head: '" . $child->name . "', id: '" . $blockId . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild = "{ head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }else{
-                    $dataChild =  $dataChild.", { head: '" . $child->name . "', id: '" . $blockId . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild =  $dataChild.", { head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }
 
             }
@@ -217,18 +215,18 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
        $allData=2;
        // пока в коллекции есть точки, у которых нет отцовски[ точек
        foreach ($allDots->where('parent_id', 0) as $dot){
-           $blockId=$dot->id+$companyModel->id;
+
            if ($allData==2) {
                $allData="{
                             head:'".$dot->name."',
-                            id: '".$blockId."',
+                            id: '".$dot->id."',
                             contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
                             
                         }";
            } else {
                $allData=$allData.", {
                             head:'".$dot->name."',
-                            id: '".$blockId."',
+                            id: '".$dot->id."',
                             contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
                         }";
            }

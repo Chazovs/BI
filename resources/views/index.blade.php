@@ -43,13 +43,11 @@
 
 <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter39705265 = new Ya.Metrika({ id:39705265, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/39705265" style="position:absolute; left:-9999px;" alt="Yandex.Metrika" /></div></noscript> <!-- /Yandex.Metrika counter -->
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
-      <h3 class="masthead-brand">Cover</h3>
+
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="https://bootstrap-4.ru/docs/4.3.1/examples/cover/#">Home</a>
-        <a class="nav-link" href="https://bootstrap-4.ru/docs/4.3.1/examples/cover/#">Features</a>
         <a class="nav-link" href="<?php echo route('register'); ?>">Регистрация</a>
       </nav>
     </div>
@@ -65,7 +63,7 @@
 
   <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>Все права защищены <a href="https://getbootstrap.com/">Сергей и Александр Чазовы 2019</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>Все права защищены Сергей и Александр Чазовы 2019.</p>
     </div>
   </footer>
 </div>
