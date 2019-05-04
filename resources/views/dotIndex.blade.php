@@ -20,6 +20,7 @@
             <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$dot->parent_id]) }}" class="btn btn-sm btn-outline-success" role="button" >Родительская точка</a>
             @endif
              <a href="" class="btn btn-sm btn-outline-success" role="button" > Редактировать точку</a>
+              <a href="{{ route('tree',['id'=>$company->id]) }}" class="btn btn-sm btn-outline-success"  role="button" > Карта точек</a>
          
           </div>
           
@@ -47,7 +48,7 @@
 <button type="button" class="btn btn-sm btn-outline-success" onclick="addChartData({{ $dotChart->id }})" data-toggle="modal" data-target="#mainModal">Добавить данные</button>
 
 @endif
-            <a href="" class="btn btn-sm btn-outline-secondary disabled" role="button"> Редактировать график</a>
+
           </div>
         </div>
 

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+      <link href="{{ asset('js/orgChart/Themes/smoothness/jquery-ui-1.10.4.custom.min.css') }}" rel="stylesheet" />
+      <link href="{{ asset('js/orgChart/CSS/jHTree.css') }}" rel="stylesheet" />
+      <script src="{{ asset('js/orgChart/js/jquery-1.10.2.js')}}"></script>
+      <script src="{{ asset('js/orgChart/js/jquery-ui-1.10.4.custom.min.js')}}"></script>
+      <script src="{{ asset('js/orgChart/js/jQuery.jHTree.js') }}"></script>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Buisness intersections - инструмент для системного анализа точек контакта между бизнесом и людьми">
-<!-- csfr Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Buisness intersections | личный кабинет</title>
-  <script src="{{ asset('/js/ckeditor/ckeditor.js') }}"
-type="text/javascript" charset="utf-8" ></script>
+    <!-- csfr Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Buisness intersections | личный кабинет</title>
+    <script src="{{ asset('/js/ckeditor/ckeditor.js') }}" type="text/javascript" charset="utf-8" ></script>
       <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
@@ -24,11 +29,9 @@ type="text/javascript" charset="utf-8" ></script>
     </style>
       <!-- Custom styles for this template -->
      <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-     <style type="text/css">/* Chart.js */
-      @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+
   </head>
   <body>
-
     <script type="text/javascript" async="" src="{{ asset('js/watch.js') }}"></script>
     <script async="" src="{{ asset('js/analytics.js') }}"></script>
     <script async="" src="{{ asset('js/main.js') }}"></script>
@@ -47,7 +50,7 @@ type="text/javascript" charset="utf-8" ></script>
      <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter39705265 = new Ya.Metrika({ id:39705265, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/39705265" style="position:absolute; left:-9999px;" alt="Yandex.Metrika" /></div></noscript>
      <!-- /Yandex.Metrika counter -->
 
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/companies/my') }}">BI.ru.net</a>
 
 
@@ -171,14 +174,15 @@ type="text/javascript" charset="utf-8" ></script>
   </div>
  </div>
 
-    <script
-  src="{{ asset('js/jquery-3.4.0.js') }}"
-  integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-  crossorigin="anonymous"></script>
+
     <script>window.jQuery || document.write('<script src="{{ asset("js/jquery-slim.min.js") }}"><\/script>')
     </script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
     </script>
+
+
+
+
 
 <!-- Модальное окно, которое мы будем наполнять инфой через ajax -->
 <div class="modal" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">

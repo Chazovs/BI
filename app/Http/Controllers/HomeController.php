@@ -65,12 +65,6 @@ public function idea($id)
          return view('idea');
     }
 
-    //показывает дерево точек компании
-    protected function tree($id)
-    {
-        return view('dottree');
-    }
-
     public function editProfile($id)
     {
         $userID = Auth::user()->id;
@@ -180,4 +174,82 @@ $newCompany->save();
 User::find($newCompany->admin_id)->companies()->attach($newCompany->id);
 return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert', 'Ваша компания добавлена!Спасибо за участие в проекте!');
 }
+
+//показывает дерево точек компании
+    public function tree($id)
+    {
+        $companyModel=Company::find($id);
+        $allDots=$companyModel->dots;
+
+
+        //вызывает рекурсию, создающую дерево точек
+        /**
+         * @param $child -содержит модель отцовской точки
+         * @param $allDots - модели всех точек, относящихся к компании
+         * @param $id - айдишник компании, для которой строится карта
+         * @param $companyModel - модель компании, к которой принадлежат все точки, найденная по $id
+         */
+       function recursiveDotAdd($parent, $allDots, $id, $companyModel){
+           $dataChild=null;
+           //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
+            foreach ($allDots->where('parent_id', $parent->id) as $child)
+            {
+                /*dump ($child->name);*/
+                $blockId=$child->id+$companyModel->id;
+
+                if (!isset($dataChild)) {
+                    $dataChild = "{ head: '" . $child->name . "', id: '" . $blockId . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                }else{
+                    $dataChild =  $dataChild.", { head: '" . $child->name . "', id: '" . $blockId . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                }
+
+            }
+            if($dataChild!=null){
+               return ("children: [" . $dataChild . "]");
+            }
+
+
+        }
+
+
+
+
+       $allData=2;
+       // пока в коллекции есть точки, у которых нет отцовски[ точек
+       foreach ($allDots->where('parent_id', 0) as $dot){
+           $blockId=$dot->id+$companyModel->id;
+           if ($allData==2) {
+               $allData="{
+                            head:'".$dot->name."',
+                            id: '".$blockId."',
+                            contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
+                            
+                        }";
+           } else {
+               $allData=$allData.", {
+                            head:'".$dot->name."',
+                            id: '".$blockId."',
+                            contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
+                        }";
+           }
+           }
+
+
+
+        return view('dottree')->with([
+            'companyModel'=> $companyModel,
+            'allData'=>$allData,
+
+        ]);
+    }
 }
+
+
+
+
+
+
+
+
+
+

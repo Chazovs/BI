@@ -14,6 +14,7 @@
          <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-success">Редактировать компанию</button>
+              <a href="{{ route('tree',['id'=>$company->id]) }}" class="btn btn-sm btn-outline-success"  role="button" > Карта точек</a>
           </div>
         </div>
       </div>      
