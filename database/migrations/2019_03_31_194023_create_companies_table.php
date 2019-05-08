@@ -18,8 +18,10 @@ class CreateCompaniesTable extends Migration
             $table->integer('admin_id');
             $table->string('name');
             $table->text('description');
+            $table->string('slogan')->default('');
             $table->string('city')->default('');
             $table->string('logo')->default('');
+            $table->string('front_image')->default('/img/main/9.png');
             $table->string('adress')->default('');
             $table->string('phone')->default('');
             $table->string('site')->default('');

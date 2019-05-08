@@ -543,3 +543,10 @@ if (length==1) {
 $('#delToArray').attr('onClick', ' ');
 }
 }
+
+function newUserRequest(companyId,userId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/add/new/user/request/to/company', {_token : token, company_id : companyId, user_id : userId}, function( result ){
+       document.write(result);
+    });
+}

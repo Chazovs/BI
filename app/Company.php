@@ -8,8 +8,15 @@ class Company extends Model
 {
 
 protected $fillable = [
-        'name', 'admin_id', 'description', 'city', 'logo', 'adress', 'phone', 'site',
+        'name', 'admin_id', 'description', 'city', 'logo', 'adress', 'phone', 'site', 'front_image', 'slogan',
     ];
+
+//у компании может быть много заявок от пользователей на участие в компании
+    public function rqusers()
+    {
+        return $this->belongsToMany('App\User', 'rqcompanies_rqusers', company_id, user_id);
+    }
+
 
 //у компании может быть много пользователей
 public function users()

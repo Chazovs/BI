@@ -43,14 +43,14 @@ class HomeController extends Controller
         
     }
 
-    public function all()
+ public function all()
     {
-      $userID = Auth::user()->id;
-    $user = User::find($userID);
+        $userID = Auth::user()->id;
+        $user = User::find($userID);
         $myC='';//деактивирует кнопку компании
         $allC='disabled';
         $cardButton=true;
-       $companies = Company::paginate(2);
+        $companies = Company::paginate(2);
          return view('home', compact($companies))->with([
             'companies'=> $companies,
             'user'=> $user,
@@ -161,12 +161,22 @@ public function pushRegisterCompany(Request $request)
 
 $this->validate($request, [
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'front_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8048',
         ]);
-      
+$reqArray = $request->all();
+if(isset($request['front_image'])){
+    $frontImage = Image::make($request->file('front_image'))->heighten(225)->crop(348, 225)->encode('png')->fill(public_path().'/img/main/shadow.png');
+    $frontImagePath=url("/companies/front/");
+    $frontImage->save($frontImagePath . str_random(20). ".png");
+    $reqArray['front_image'] = "/companies/front/".$frontImage->basename;
+}else{
+    $rundomImage=rand ( 1, 10);
+    $reqArray['front_image']=url("/img/main/".$rundomImage.".png");
+}
+
 $path = public_path()."\companies\logo\\";   
 $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
 $img->save($path . str_random(10) . str_random(10) . ".png");
-$reqArray = $request->all();
 $reqArray['logo'] = "companies\logo\\".$img->basename;
 $newCompany = new Company;
 $newCompany->fill($reqArray);
@@ -175,7 +185,9 @@ User::find($newCompany->admin_id)->companies()->attach($newCompany->id);
 return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert', 'Ваша компания добавлена!Спасибо за участие в проекте!');
 }
 
-//показывает дерево точек компании
+
+
+//показывает дерево точек компании, принимает айдишник компании, для которой строится дерево
     public function tree($id)
     {
         $companyModel=Company::find($id);
@@ -194,24 +206,16 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
            //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
             foreach ($allDots->where('parent_id', $parent->id) as $child)
             {
-
                 if (!isset($dataChild)) {
                     $dataChild = "{ head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }else{
                     $dataChild =  $dataChild.", { head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }
-
             }
             if($dataChild!=null){
                return ("children: [" . $dataChild . "]");
             }
-
-
         }
-
-
-
-
        $allData=2;
        // пока в коллекции есть точки, у которых нет отцовски[ точек
        foreach ($allDots->where('parent_id', 0) as $dot){
@@ -231,13 +235,9 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
                         }";
            }
            }
-
-
-
         return view('dottree')->with([
             'companyModel'=> $companyModel,
             'allData'=>$allData,
-
         ]);
     }
 }

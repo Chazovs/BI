@@ -418,7 +418,7 @@ echo count($tasks_status1)+count($tasks_status2)+count($tasks_status3)+count($ta
     </script>
     @else
 
-    <?php dump('привет мир'); ?>
+
 <script>
   window.onload = function() {
    $('#myChart').replaceWith('<div class="alert alert-secondary align-self-center mt-4" role="alert">За точкой не закреплено ни одного графика</div>');

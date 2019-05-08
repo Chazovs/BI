@@ -51,7 +51,8 @@
      <!-- /Yandex.Metrika counter -->
 
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/companies/my') }}">BI.ru.net</a>
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" style="padding-top: 5px; padding-bottom: 5px;" href="{{ url('/companies/my') }}"><img class="mt-0 mr-0 mb-0 pb-0" src="{{ asset('img/main/bi-auth-top.png') }}" alt="" width="32" height="32">
+            </a>
 
 
 

@@ -36,6 +36,7 @@ Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Созд�
 Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает новый график
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
+Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequestToCompany');//Отправляет новый запрос от пользователя на добавление в компанию
 
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки

@@ -96,28 +96,37 @@ public function __construct()
     $company=Company::find($id);
     $childs=$company->dots->where('parent_id','=', $dotId);
     $companyCharts=$company->charts;
-    $dotChart=$dot->chart;
-    $dateData='';
-    $valueData='';
-if($dotChart->data!="0"){
-    $chartData=unserialize($dotChart->data);
-    foreach ($chartData as $date) {
-      if ($dateData=='') {
-        $dateData='"'.$date['date'].'"';
-      } else {
-        $dateData=$dateData.', "'.$date['date'].'"';
-      }
+
+    if (isset($dot->chart)) {
+        $dotChart = $dot->chart;
+
+        $dateData = '';
+        $valueData = '';
+        if ($dotChart->data != "0") {
+            $chartData = unserialize($dotChart->data);
+            foreach ($chartData as $date) {
+                if ($dateData == '') {
+                    $dateData = '"' . $date['date'] . '"';
+                } else {
+                    $dateData = $dateData . ', "' . $date['date'] . '"';
+                }
+            }
+            foreach ($chartData as $value) {
+                if ($valueData == '') {
+                    $valueData = $value['value'];
+                } else {
+                    $valueData = $valueData . ', ' . $value['value'];
+                }
+
+            }
+            substr($dateData, 2);
+        }
     }
-    foreach ($chartData as $value) {
-        if ($valueData=='') {
-        $valueData=$value['value'];
-      } else {
-        $valueData=$valueData.', '.$value['value'];
-      }
-  
+     else{
+     $dateData="";
+     $valueData="";
+     $dotChart="";
     }
-    substr($dateData, 2);
-   }
   
     
 

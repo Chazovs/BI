@@ -8,6 +8,7 @@ use App\Dot;
 use App\Company;
 use App\Proposal;
 use App\Chart;
+use App\User;
 
 class AjaxController extends Controller
 {
@@ -219,6 +220,10 @@ $Chart->update();
     return back();
 }
 
+    /**
+     * меняет родителя у точки
+     * @param Request $request
+     */
 public function pushDotNewParent(Request $request) {
     $reqArray = $request->all();
     if ($reqArray['parent_id']=="company")$reqArray['parent_id']="0";
@@ -228,4 +233,17 @@ public function pushDotNewParent(Request $request) {
 
 }
 
+    /**
+     * Отправляет новую заявку на участие в компании
+     * @param Request $request
+     */
+public function addNewUserRequestToCompany(Request $request)
+{
+    $reqArray = $request->all();
+    $User=User::find($reqArray['user_id']);
+    dump($User->company);
+   /* dump($User->rqcompanies()->attach(1));*/
+
+
+}
 }

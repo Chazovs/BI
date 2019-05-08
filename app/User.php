@@ -37,6 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+//пользователь может подать заявку на участие в нескольких компаниях
+    public function rqcompanies()
+    {
+        return $this->belongsToMany('App\Company', 'rqcompanies_rqusers', user_id, company_id);
+    }
+
+    //пользователь может состоять в нескольких компаниях
     public function companies()
     {
         return $this->belongsToMany('App\Company', 'companies_users');

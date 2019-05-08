@@ -6,7 +6,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 <div class="container">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center  pt-3 pb-2 mb-3 border-bottom">
-   <img src="https://static.tildacdn.com/tild3532-6130-4437-b966-653766626265/1.jpg" class="rounded-circle" alt="" height="40" width="40">
+
       <h1 class="h4">Регистрация компании на BI</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
@@ -20,15 +20,19 @@
     <div class="col-md-8 order-md-2 mb-4">
       
         <form class="needs-validation" validate action="{{ url('/registerCompany/push') }}" method="POST" enctype="multipart/form-data" name="registerNewCompany">
-             <label for="name">Наименование компании</label>
+             <label for="name">Название</label>
              <input type="text" class="form-control" name="name" id="name" placeholder="" value="" required>
              {{ csrf_field() }}
               <div class="invalid-feedback">
               Valid first name is required.
         </div>
         <div class="mb-3">
-        <label for="logo">Выбирите логотип Вашей компании</label>
+        <label for="logo">Логотип</label>
         <input type="file" class="form-control-file" name="logo" id="logo">
+        </div>
+            <div class="mb-3">
+            <label for="front_image">Обложка (рекомендуемый размер 348 на 225 пикселей)</label>
+            <input type="file" class="form-control-file" name="front_image" id="front_image">
         </div>
         <div class="mb-3">
           <label for="adress">Электронная почта</label>
@@ -44,15 +48,21 @@
             Please enter your shipping address.
           </div>
         </div>
+            <div class="mb-3">
+                <label for="slogan">Интересный факт или слоган</label>
+                <input type="text" class="form-control" id="slogan" name="slogan" placeholder="Например: Рост в 2019 году 300%" value="">
+                <div class="invalid-feedback">
+                </div>
+            </div>
          <div class="mb-3">
-            <label for="phone">Телефон компании (будет указан в карточке) </label>
+            <label for="phone">Телефон (будет указан в карточке) </label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" required>
              <input type="hidden" id="admin_id" name="admin_id" value="{{ Auth::user()->id }}" >
             <div class="invalid-feedback">
          </div>
        </div>
         <div class="mb-3">
-            <label for="adress">Адрес компании (будет указан в карточке)</label>
+            <label for="adress">Адрес (будет указан в карточке)</label>
             <input type="text" class="form-control" id="adress" name="adress" placeholder="" value="" required>
             <div class="invalid-feedback">
          </div>
