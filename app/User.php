@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,7 +41,7 @@ class User extends Authenticatable
 //пользователь может подать заявку на участие в нескольких компаниях
     public function rqcompanies()
     {
-        return $this->belongsToMany('App\Company', 'rqcompanies_rqusers', user_id, company_id);
+        return $this->belongsToMany('App\Company', 'rqcompany_rquser', 'user_id', 'company_id');
     }
 
     //пользователь может состоять в нескольких компаниях

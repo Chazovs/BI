@@ -240,10 +240,8 @@ public function pushDotNewParent(Request $request) {
 public function addNewUserRequestToCompany(Request $request)
 {
     $reqArray = $request->all();
-    $User=User::find($reqArray['user_id']);
-    dump($User->company);
-   /* dump($User->rqcompanies()->attach(1));*/
-
+    $UserModel=User::find($reqArray['user_id']);
+    $UserModel->rqcompanies()->attach($reqArray['company_id']);
 
 }
 }

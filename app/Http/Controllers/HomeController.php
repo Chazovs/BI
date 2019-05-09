@@ -240,6 +240,17 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
             'allData'=>$allData,
         ]);
     }
+
+    /**
+     * показывает страницу со всеми пользователями
+     */
+    public function usersAll(){
+$users=User::paginate(20);
+
+        return view('allUsers')->with([
+            'users'=> $users,
+        ]);
+    }
 }
 
 

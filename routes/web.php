@@ -23,6 +23,14 @@ Route::get('/profile/{id}/alltasks/', 'HomeController@allTasks')->name('allTasks
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/company/{id}/tree', 'HomeController@tree')->name('tree'); //показывает карту точек компании
 
+//недостаточно прав
+Route::get('/error', function (){return view("error");})->name('error');
+
+//роуты на контроллер администратора компании
+Route::get('/company/{id}/user/request', 'CompanyAdminController@userRequest')->name('userRequest'); //показывает запросы на добавление
+Route::POST('/company/{id}/accept/user/request','CompanyAdminController@acceptUserRequest');//принимает запрос на участие в команде компании
+
+
 //роуты для аякс и пост запросов из js файлов. в основном из main.js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи
 Route::POST('/edit/Task','AjaxController@editTask');//редактирует задачу
@@ -41,13 +49,10 @@ Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequest
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки
 
-
-
-
 Auth::routes();
 
 Route::get('/companies/my', 'HomeController@index')->name('home');
 Route::get('/companies/{id}/idea', 'HomeController@idea')->name('idea');
 Route::get('/companies/all', 'HomeController@all')->name('allCompanies');
 Route::get('/companies/{id}', 'CompanyController@companyHome')->name('companyHome');
-
+Route::get('/users/all', 'HomeController@usersAll')->name('usersAll');

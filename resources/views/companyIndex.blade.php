@@ -5,6 +5,9 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center  pt-3 pb-2 mb-3 border-bottom">
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
+              @if($user->id==$company->admin_id)
+                  <a href="{{ route('userRequest',['id'=>$company->id]) }}" role="button" class="btn btn-sm btn-outline-success">Заявки {{count($company->rqusers)}}</a>
+              @endif
             <button type="button" class="btn btn-sm btn-outline-success">Сотрудники</button>
             <button type="button" class="btn btn-sm btn-outline-success">Графики</button>
             <button type="button" class="btn btn-sm btn-outline-success">Идеи клиентов</button>
@@ -33,7 +36,7 @@
 <div class="pt-5 container">
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-success" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, 0)"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
+      <button type="button" class="btn btn-success btn-sm" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, 0)"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>
     </div>
     <div class="col-sm"><h3>Главные точки</h3></div>
     <div class="col-sm"></div>
@@ -69,7 +72,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-     <button type="button" href="#" onClick="addTaskFromCompanyIndex({{ $company->id }}, {{ $user->id }})" class="btn btn-success" data-toggle="modal" data-target="#mainModal">Добавить задачу</button>
+     <button type="button" href="#" onClick="addTaskFromCompanyIndex({{ $company->id }}, {{ $user->id }})" class="btn btn-success btn-sm" data-toggle="modal" data-target="#mainModal">Добавить задачу</button>
     </div>
     <div class="col-auto"><h2>Мои задачи в компании</h2></div>
     <div class="col-sm"></div>

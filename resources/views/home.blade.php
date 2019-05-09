@@ -46,10 +46,13 @@
 @if($cardButton==true)
               <div class="d-flex justify-content-between align-items-center">
                   @if (count(($company->users->where('id',Auth::user()->id)))==0)
-
                       <div class="btn-group" role="group" aria-label="Basic example">
                           <button type="button" class="btn btn-warning btn-sm" onclick="newCompanyIdea({{ $company->id }}, {{ Auth::user()->id }})" data-toggle="modal" data-target="#mainModal">Идея!</button>
-                          <button type="button" class="btn btn-success btn-sm" onclick="newUserRequest({{ $company->id }}, {{Auth::user()->id}})">Присоединиться</button>
+                          @if (count(Auth::user()->rqcompanies()->where('company_id', $company->id)->get())==0)
+                          <button id="requestCompany{{ $company->id }}" type="button" class="btn btn-success btn-sm" onclick="newUserRequest({{ $company->id }}, {{Auth::user()->id}})">Присоединиться</button>
+                          @else
+                              <a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка принята</a>
+                          @endif
                       </div>
                       <small class="text-muted">9 mins</small>
                   @else

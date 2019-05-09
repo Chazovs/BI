@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Company extends Model
 {
 
@@ -14,7 +15,7 @@ protected $fillable = [
 //у компании может быть много заявок от пользователей на участие в компании
     public function rqusers()
     {
-        return $this->belongsToMany('App\User', 'rqcompanies_rqusers', company_id, user_id);
+        return $this->belongsToMany('App\User', 'rqcompany_rquser', 'company_id', 'user_id');
     }
 
 

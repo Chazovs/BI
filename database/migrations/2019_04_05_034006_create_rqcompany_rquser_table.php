@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRqcompaniesRqusersTable extends Migration
+class CreateRqcompanyRquserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRqcompaniesRqusersTable extends Migration
      */
     public function up()
     {
-        Schema::create('rqcompanies_rqusers', function (Blueprint $table) {
-            $table->integer('company_id')->unsigned()->index();
-            $table->integer('user_id')->unsigned()->index();
-            //связь многие ко многим
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::create('rqcompany_rquser', function (Blueprint $table) {
+            $table->unsignedInteger('company_id')->index();
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->unsignedInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateRqcompaniesRqusersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rqcompanies_rqusers');
+        Schema::dropIfExists('rqcompany_rquser');
     }
 }

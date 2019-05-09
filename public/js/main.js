@@ -535,8 +535,6 @@ $('#delToArray').attr('onClick', 'delDateDataBlock()');
  * удаляет последний блок дата-значение
  */
 function delDateDataBlock() {
-
-
 $("div.datachart:last").remove();
 var length = $('div.datachart').length;
 if (length==1) {
@@ -544,9 +542,26 @@ $('#delToArray').attr('onClick', ' ');
 }
 }
 
-function newUserRequest(companyId,userId) {
+ /**
+  * отправляет запрос на добавление нового пользователя в компанию
+  * @param companyId
+  * @param userId
+  */
+ function newUserRequest(companyId,userId) {
     var token = $('meta[name="csrf-token"]').attr('content');
     $.post('/add/new/user/request/to/company', {_token : token, company_id : companyId, user_id : userId}, function( result ){
-       document.write(result);
+        $("#requestCompany"+companyId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка принята</a>');
+   });
+}
+
+ /**
+  * принимает запрос  на принятие в команду
+  * @param companyId
+  * @param userId
+  */
+ function acceptRequest(companyId, userId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.post('/company/'+companyId+'/accept/user/request', {_token : token, company_id : companyId, user_id : userId}, function( result ){
+        $("#acceptRequest"+userId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button">Принят в команду</a>');
     });
 }
