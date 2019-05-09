@@ -12,6 +12,14 @@ protected $fillable = [
         'name', 'admin_id', 'description', 'city', 'logo', 'adress', 'phone', 'site', 'front_image', 'slogan',
     ];
 
+
+//у компании может быть много приглашенных сотрудников
+    public function inusers()
+    {
+        return $this->belongsToMany('App\User', 'incompany_inuser', 'company_id', 'user_id');
+    }
+
+
 //у компании может быть много заявок от пользователей на участие в компании
     public function rqusers()
     {

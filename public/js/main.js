@@ -550,7 +550,7 @@ $('#delToArray').attr('onClick', ' ');
  function newUserRequest(companyId,userId) {
     var token = $('meta[name="csrf-token"]').attr('content');
     $.post('/add/new/user/request/to/company', {_token : token, company_id : companyId, user_id : userId}, function( result ){
-        $("#requestCompany"+companyId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка принята</a>');
+        $("#requestCompany"+companyId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка отправлена</a>');
    });
 }
 
@@ -564,4 +564,26 @@ $('#delToArray').attr('onClick', ' ');
     $.post('/company/'+companyId+'/accept/user/request', {_token : token, company_id : companyId, user_id : userId}, function( result ){
         $("#acceptRequest"+userId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button">Принят в команду</a>');
     });
+}
+
+ /**
+  * Отправляет пользователю приглашение в компанию
+  * @param userId
+  */
+ function companyInvitation(userId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var companyId = $('#yourCompany').val();
+    $.post('/company/invitation', {_token : token, company_id : companyId, user_id : userId}, function( result ){
+        $("#companyInvitation"+userId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button">Приглашение отправлено</a>');
+
+
+    });
+}
+
+ /**
+  * меняет компанию для приглашения
+  * @param companyId
+  */
+ function eventCompanySelected(companyId) {
+     window.location.href = "/users/all?selectedCompany="+companyId;
 }

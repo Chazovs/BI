@@ -45,6 +45,8 @@ Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает н
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
 Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequestToCompany');//Отправляет новый запрос от пользователя на добавление в компанию
+Route::POST('/company/invitation', 'HomeController@companyInvitation'); //Отправляет пользователю приглашение в компанию
+
 
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки
@@ -55,4 +57,5 @@ Route::get('/companies/my', 'HomeController@index')->name('home');
 Route::get('/companies/{id}/idea', 'HomeController@idea')->name('idea');
 Route::get('/companies/all', 'HomeController@all')->name('allCompanies');
 Route::get('/companies/{id}', 'CompanyController@companyHome')->name('companyHome');
-Route::get('/users/all', 'HomeController@usersAll')->name('usersAll');
+Route::get('/users/all', 'HomeController@usersAll')->name('usersAll');// показывает всех пользователей, зарегистрированных на портале
+Route::get('/my/companies/invitation', 'HomeController@myCompaniesInvitation')->name('myInvitation');// показывает пользователю все компании, которые его пригласили

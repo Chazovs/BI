@@ -185,15 +185,16 @@ User::find($newCompany->admin_id)->companies()->attach($newCompany->id);
 return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert', 'Ваша компания добавлена!Спасибо за участие в проекте!');
 }
 
-
-
-//показывает дерево точек компании, принимает айдишник компании, для которой строится дерево
+    /**
+     * показывает дерево точек компании, принимает айдишник компании, для которой строится дерево.
+     * Содержит рекурсивную функцию recursiveDotAdd
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function tree($id)
     {
         $companyModel=Company::find($id);
         $allDots=$companyModel->dots;
-
-
         //вызывает рекурсию, создающую дерево точек
         /**
          * @param $child -содержит модель отцовской точки
@@ -244,12 +245,38 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
     /**
      * показывает страницу со всеми пользователями
      */
-    public function usersAll(){
-$users=User::paginate(20);
-
+    public function usersAll(Request $request){
+        $users=User::paginate(20);
+        $reqArray=$request->all();
+        if(array_key_exists('selectedCompany', $reqArray)==false){
+        $selectedCompany=Auth::user()->companies()->where('admin_id', Auth::user()->id)->first();
+        }else{
+            $selectedCompany=Company::find($reqArray['selectedCompany']);
+        }
         return view('allUsers')->with([
             'users'=> $users,
+            'selectedCompany'=> $selectedCompany,
         ]);
+    }
+
+    /**
+     * создает связь многие ко многим  в таблице приглашений от компаний.
+     * фиксирует в БД приглашение пользователю от компании
+     * @param Request $request
+     */
+    public function companyInvitation(Request $request){
+$reqArray=$request->all();
+$user=User::find($reqArray['user_id']);
+$user->incompanies()->attach($reqArray['company_id']);
+    }
+
+
+    /**
+     * показывает пользователю список пригласивших его компаний
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function myCompaniesInvitation(){
+        return view('companiesInvitation');
     }
 }
 

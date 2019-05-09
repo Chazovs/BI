@@ -38,6 +38,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+//пользователь может может иметь приглашения от разных компаний
+    public function incompanies()
+    {
+        return $this->belongsToMany('App\Company', 'incompany_inuser', 'user_id', 'company_id');
+    }
+
 //пользователь может подать заявку на участие в нескольких компаниях
     public function rqcompanies()
     {

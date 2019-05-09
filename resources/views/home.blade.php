@@ -51,7 +51,7 @@
                           @if (count(Auth::user()->rqcompanies()->where('company_id', $company->id)->get())==0)
                           <button id="requestCompany{{ $company->id }}" type="button" class="btn btn-success btn-sm" onclick="newUserRequest({{ $company->id }}, {{Auth::user()->id}})">Присоединиться</button>
                           @else
-                              <a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка принята</a>
+                              <a class="btn btn-sm btn-outline-success disabled" role="button"> Заявка отправлена</a>
                           @endif
                       </div>
                       <small class="text-muted">9 mins</small>
