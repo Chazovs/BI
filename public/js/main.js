@@ -575,8 +575,6 @@ $('#delToArray').attr('onClick', ' ');
     var companyId = $('#yourCompany').val();
     $.post('/company/invitation', {_token : token, company_id : companyId, user_id : userId}, function( result ){
         $("#companyInvitation"+userId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button">Приглашение отправлено</a>');
-
-
     });
 }
 
@@ -586,4 +584,51 @@ $('#delToArray').attr('onClick', ' ');
   */
  function eventCompanySelected(companyId) {
      window.location.href = "/users/all?selectedCompany="+companyId;
+}
+
+ /**
+  * принимаем приглашение от компании
+  * @param companyId
+  */
+ function acceptInvitation(companyId) {
+     var token = $('meta[name="csrf-token"]').attr('content');
+     $.post('/company/invitation/accept', {_token : token, company_id : companyId}, function( result ){
+         $("#acceptInvitation"+companyId).replaceWith('<a class="btn btn-sm btn-outline-success disabled" role="button">Приглашение принято</a>');
+     });
+}
+
+ /**
+  * показывает в модальном окне подробную инфу по идеи
+  */
+ function getIdea(ideaId) {
+     $.ajax({
+         url : "/get/idea/body",
+         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+         data: {
+             "id": ideaId
+         },
+         datatype: 'JSON',
+         type: "POST",
+         success: function( data ) {
+             data= JSON.parse(data);
+             $('#mainModalBody').html( '<strong>Ситуация:</strong><br>'
+                 +data.situation +
+                 '<br><strong>Проблема:</strong><br>'
+                 + data.problem +
+                 '<br><p> <b>Решение</b><br> '
+                 + data.decision +
+                 '<br><br> <b>Дата создания:</b> '
+                 + data.created_at +
+                 '</p>');
+             $('#mainModalFooter').html( data.edit_button );
+             $('#mainModalLabel').html( data.name );
+         }
+     });
+
+
+
+
+
+
+
 }

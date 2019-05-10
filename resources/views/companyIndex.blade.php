@@ -8,9 +8,8 @@
               @if($user->id==$company->admin_id)
                   <a href="{{ route('userRequest',['id'=>$company->id]) }}" role="button" class="btn btn-sm btn-outline-success">Заявки {{count($company->rqusers)}}</a>
               @endif
-            <button type="button" class="btn btn-sm btn-outline-success">Сотрудники</button>
-            <button type="button" class="btn btn-sm btn-outline-success">Графики</button>
-            <button type="button" class="btn btn-sm btn-outline-success">Идеи клиентов</button>
+                  <a href="{{route('companyUsers', ['companyId'=>$company->id])}}" class="btn btn-sm btn-outline-success" role="button">Сотрудники {{count($company->users)}}</a>
+                  <a href="{{route('idea', ['companyId'=>$company->id])}}" class="btn btn-sm btn-outline-success" role="button">Идеи сообщества {{count($company->ideas)}}</a>
             <a href="" class="btn btn-sm btn-outline-secondary disabled" role="button"> Цепочки точек</a>
           </div>
         </div>

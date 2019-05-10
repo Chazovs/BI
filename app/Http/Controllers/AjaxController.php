@@ -9,6 +9,8 @@ use App\Company;
 use App\Proposal;
 use App\Chart;
 use App\User;
+use App\Idea;
+use Auth;
 
 class AjaxController extends Controller
 {
@@ -244,4 +246,42 @@ public function addNewUserRequestToCompany(Request $request)
     $UserModel->rqcompanies()->attach($reqArray['company_id']);
 
 }
+
+    /**
+     * создает связь многие ко многим  в таблице приглашений от компаний.
+     * фиксирует в БД приглашение пользователю от компании
+     * @param Request $request
+     */
+    public function companyInvitation(Request $request){
+        $reqArray=$request->all();
+        $user=User::find($reqArray['user_id']);
+        $user->incompanies()->attach($reqArray['company_id']);
+    }
+
+
+    /**
+     * принимаем приглашение в компанию, добавляет приглашенного пользователя в компанию
+     */
+public function companyInvitationAccept(Request $request){
+    $reqArray=$request->all();
+    Auth::user()->incompanies()->detach($reqArray['company_id']);
+    Auth::user()->companies()->attach($reqArray['company_id']);
+}
+
+    /**
+     * отдает информацию об идеи сообщества для модального окна
+     * @param Request $request
+     */
+public function getIdeaBody(Request $request){
+    $reqArray=$request->all();
+    $idea=Idea::find($reqArray['id']);
+    $ideaArray ["name"] = $idea->name;
+    $ideaArray ["problem"] = $idea->problem;
+    $ideaArray ["situation"] = $idea->situation;
+    $ideaArray ["decision"] = $idea->decision;
+    $ideaArray ["created_at"] = $idea->created_at->format('d.m.Y H:i');
+    header("Content-type: application/json; charset=utf-8");
+    echo json_encode($ideaArray);
+}
+
 }

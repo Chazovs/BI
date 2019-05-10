@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Idea;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Image;
@@ -59,11 +60,6 @@ class HomeController extends Controller
             'cardButton'=>$cardButton,
         ]);
     }
-  
-public function idea($id)
-    {
-         return view('idea');
-    }
 
     public function editProfile($id)
     {
@@ -76,8 +72,8 @@ public function idea($id)
 
 public function profile($id)
     {
-        $userID = Auth::user()->id;
-        $user = User::find($userID);
+        /*$userID = Auth::user()->id;*/
+        $user = User::find($id);
   return view('profile')->with([
             'user'=> $user, 
         ]);
@@ -259,17 +255,6 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
         ]);
     }
 
-    /**
-     * создает связь многие ко многим  в таблице приглашений от компаний.
-     * фиксирует в БД приглашение пользователю от компании
-     * @param Request $request
-     */
-    public function companyInvitation(Request $request){
-$reqArray=$request->all();
-$user=User::find($reqArray['user_id']);
-$user->incompanies()->attach($reqArray['company_id']);
-    }
-
 
     /**
      * показывает пользователю список пригласивших его компаний
@@ -277,6 +262,48 @@ $user->incompanies()->attach($reqArray['company_id']);
      */
     public function myCompaniesInvitation(){
         return view('companiesInvitation');
+    }
+
+
+    /**
+     * показываем всех пользователей  компании
+     * @param $companyId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function companyUsers($companyId){
+        $company = Company::find($companyId);
+        $users=$company->users()->paginate(20);
+        return view('companyUsers')->with([
+            'users'=> $users,
+        ]);
+    }
+
+    /**
+     * показывает список идей, предложенных сообществом для конкретной компании
+     * @param $companyId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function idea($companyId)
+    {
+        $company = Company::find($companyId);
+        $ideas=$company->ideas()->paginate(2);
+         return view('idea')->with([
+             'ideas'=> $ideas,
+         ]);
+    }
+
+    public function pushEditProfile(Request $request, $userId){
+$reqArray=$request->all();
+$user=User::find($userId);
+
+        if(isset($request['avatar'])){
+            $avatar = Image::make($reqArray['avatar'])->heighten(100)->crop(100, 100)->encode('png');
+            $avatarPath=public_path()."/users/photo/";
+            $avatar->save($avatarPath. str_random(20). ".png");
+            $reqArray['avatar'] = "/users/photo/".$avatar->basename;
+        }
+        $user->update($reqArray);
+        return back();
     }
 }
 

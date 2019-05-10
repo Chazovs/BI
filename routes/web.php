@@ -17,7 +17,8 @@ Route::get('/registerCompany', 'HomeController@registerCompany')->name('register
 Route::POST('/registerCompany/push', 'HomeController@pushRegisterCompany');
 Route::get('/company/{id}/edit', 'IndexController@editCompany')->name('editCompany');
 Route::get('/company/{id}/dot/{dotId}', 'CompanyController@dotIndex')->name('dotIndex');
-Route::get('/profile/{id}/edit/', 'HomeController@editProfile')->name('editProfile');
+Route::get('/profile/{id}/edit/', 'HomeController@editProfile')->name('editProfile');//отдает страницу редактирования профайла
+Route::POST('/profile/{userId}/edit/push', 'HomeController@pushEditProfile')->name('profileEditPush');//вносит новые данные о пользователе в БД
 Route::get('/profile/{id}', 'HomeController@profile')->name('profile');
 Route::get('/profile/{id}/alltasks/', 'HomeController@allTasks')->name('allTasks');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -45,8 +46,9 @@ Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает н
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
 Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequestToCompany');//Отправляет новый запрос от пользователя на добавление в компанию
-Route::POST('/company/invitation', 'HomeController@companyInvitation'); //Отправляет пользователю приглашение в компанию
-
+Route::POST('/company/invitation', 'AjaxController@companyInvitation'); //Отправляет пользователю приглашение в компанию
+Route::POST('/company/invitation/accept', 'AjaxController@companyInvitationAccept'); //принимает приглашение от компании
+Route::POST('/get/idea/body', 'AjaxController@getIdeaBody'); //отдает информацию для модального окна
 
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки
@@ -54,8 +56,9 @@ Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меня
 Auth::routes();
 
 Route::get('/companies/my', 'HomeController@index')->name('home');
-Route::get('/companies/{id}/idea', 'HomeController@idea')->name('idea');
-Route::get('/companies/all', 'HomeController@all')->name('allCompanies');
+Route::get('/companies/{companyId}/idea', 'HomeController@idea')->name('idea');//показывает все идеи, предложенные для конкретной компании
+Route::get('/companies/all', 'HomeController@all')->name('allCompanies');//все компании, зареганные на Bi
 Route::get('/companies/{id}', 'CompanyController@companyHome')->name('companyHome');
 Route::get('/users/all', 'HomeController@usersAll')->name('usersAll');// показывает всех пользователей, зарегистрированных на портале
 Route::get('/my/companies/invitation', 'HomeController@myCompaniesInvitation')->name('myInvitation');// показывает пользователю все компании, которые его пригласили
+Route::get('/company/{companyId}/users', 'HomeController@companyUsers')->name('companyUsers');//показываем всех сотрудников компании

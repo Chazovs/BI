@@ -16,6 +16,12 @@ class CreateUsersTable extends Migration
             $table->string('name', 120);
             $table->string('real_name', 120);
             $table->string('real_lastname', 200);
+            $table->string('hh', 200)->default('');;
+            $table->string('about', 300)->default('');;
+            $table->string('profession', 100)->default('');;
+            $table->string('experience', 100)->default('');;
+            $table->string('city', 100)->default('');
+            $table->string('look_for_work', 1)->default('N');
             $table->string('global_permission')->default('user');//companyAdmin user superAdmin
             $table->string('theme')->default('default');
             $table->string('email')->unique();

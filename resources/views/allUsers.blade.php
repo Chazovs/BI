@@ -5,7 +5,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Заявка</th>
+                <th>Пользователь</th>
                 <th class="input-group-sm">
                     @if(count(Auth::user()->companies->where('admin_id', Auth::user()->id))>0)
                     <select class="custom-select input-group-sm" id="yourCompany" onchange="eventCompanySelected(this.options [this.selectedIndex].value)">
@@ -26,7 +26,7 @@
             @foreach($users as $user)
             <tr>
                 <th scope="row"><?php $i++ ?> {{$i}}</th>
-                <td><img src="{{url($user->avatar)}}" alt="фото" height="32" width="32"> {{$user->real_name}} {{$user->real_lastname}} ({{$user->name}})</td>
+                <td><a href="{{route('profile', ['id'=>$user->id])}}"> <img src="{{url($user->avatar)}}" alt="фото" height="32" width="32"> {{$user->real_name}} {{$user->real_lastname}} ({{$user->name}})</a></td>
                 {{--если количество компаний, в которых авторизованный пользователь является админом больше 0--}}
                 @if(count(Auth::user()->companies->where('admin_id', Auth::user()->id))>0)
                     {{--если пользователь еще не состоит в выбранной компании--}}

@@ -4,15 +4,71 @@
 
 
 <div class="jumbotron">
-  <h1 class="display-3">Привет, {{$user->real_name}}!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for
-                  calling extra attention to featured content or information.</p>
+  <h1 class="display-4"><img src="{{url($user->avatar)}}" alt="фото" height="64" width="64"> {{$user->real_name}} {{$user->real_lastname}}
+  @if(Auth::user()->id==$user->id)
+      (это вы)
+  @endif
+
+  </h1>
+    @if($user->about!="")
+        <p class="lead">"{{$user->about}}"</p>
+    @endif
+
   <hr class="my-2">
-  <p>It uses utility classes for typography and
-     spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#!" role="button">Some action</a>
+    <p>
+        <strong>Профессия:</strong>
+        @if($user->profession=="")
+            не указана
+        @else
+         {{$user->profession}}
+            @if($user->experience!="")
+                (Опыт работы {{$user->experience}})
+            @endif
+        @endif
+
+    </p>
+  <p>
+      <strong>В поисках работы:</strong>
+      @if($user->look_for_work=="N")
+          нет
+      @elseif($user->look_for_work!="N")
+          да
+      @endif
+
   </p>
+    <p>
+        <strong>Ссылка на резюме hh.ru:</strong>
+        @if($user->hh=="")
+            не указана
+        @else
+            <a href="{{$user->hh}}">{{$user->hh}}</a>
+        @endif
+
+    </p>
+    <p>
+        <strong>Город:</strong>
+        @if($user->city=="")
+            не указан
+        @else
+            {{$user->city}}
+        @endif
+
+    </p>
+    <p>
+        @if(count($user->companies)>0)
+            <strong>Состоит в командах компаний:</strong>
+            @foreach($user->companies as $company)
+                <a href="{{route('companyHome', ['id'=>$company->id])}}"> {{$company->name}}
+                    @if($company->admin_id==$user->id)
+                        (админ)
+                    @endif
+                </a>
+            @endforeach
+        @endif
+
+    </p>
+
+
 </div>
 
 
