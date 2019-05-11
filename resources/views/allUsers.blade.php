@@ -6,6 +6,8 @@
             <tr>
                 <th>#</th>
                 <th>Пользователь</th>
+                <th>Профессия</th>
+                <th>Город</th>
                 <th class="input-group-sm">
                     @if(count(Auth::user()->companies->where('admin_id', Auth::user()->id))>0)
                     <select class="custom-select input-group-sm" id="yourCompany" onchange="eventCompanySelected(this.options [this.selectedIndex].value)">
@@ -26,7 +28,29 @@
             @foreach($users as $user)
             <tr>
                 <th scope="row"><?php $i++ ?> {{$i}}</th>
-                <td><a href="{{route('profile', ['id'=>$user->id])}}"> <img src="{{url($user->avatar)}}" alt="фото" height="32" width="32"> {{$user->real_name}} {{$user->real_lastname}} ({{$user->name}})</a></td>
+                <td>
+                    <a href="{{route('profile', ['id'=>$user->id])}}">
+                        <img src="{{url($user->avatar)}}"  class="rounded-circle" alt="фото" height="32" width="32">
+                        {{$user->real_name}} {{$user->real_lastname}} ({{$user->name}})
+                    </a>
+                </td>
+                <td>
+                    @if($user->profession=="")
+                        не указана
+                    @else
+                        {{$user->profession}}
+                        @if($user->experience!="")
+                            <br>(Опыт работы {{$user->experience}})
+                        @endif
+                    @endif
+                </td>
+                <td>
+                    @if($user->city=="")
+                        не указан
+                    @else
+                        {{$user->city}}
+                    @endif
+                </td>
                 {{--если количество компаний, в которых авторизованный пользователь является админом больше 0--}}
                 @if(count(Auth::user()->companies->where('admin_id', Auth::user()->id))>0)
                     {{--если пользователь еще не состоит в выбранной компании--}}

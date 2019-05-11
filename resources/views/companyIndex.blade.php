@@ -19,20 +19,39 @@
               <a href="{{ route('tree',['id'=>$company->id]) }}" class="btn btn-sm btn-outline-success"  role="button" > Карта точек</a>
           </div>
         </div>
-      </div>      
-      <div class="container col-md-9 ml-sm-auto col-lg-12 col-xl-12 px-4">
-      <div class="text-center">
-        @if (session('alert'))
-        <div class="alert alert-success mt-4 w-100" role="alert">
-         {{ session('alert') }}
       </div>
-        @endif
-    <img class="d-block mx-auto " src="{{ url($company->logo) }}" alt="" width="72" height="72">
-    <h2>{{ $company->name }}</h2>
-    <p class="lead">{!! $company->description !!}</p>
-  </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+
+            <div class="d-flex ">
+                <div class="pr-5 pl-5 w-75">
+                    @if (session('alert'))
+                        <div class="alert alert-success mt-4 w-100" role="alert">
+                            {{ session('alert') }}
+                        </div>
+                    @endif
+                    <h1 class="display-4"> <img class=" " src="{{ url($company->logo) }}" alt="" width="72" height="72"> {{ $company->name }}</h1>
+                    <p class="lead">{!! $company->description !!}</p>
+                </div>
+                <div class="p-4 mr-5 w-25 border border-primary"><h5 class="text-center">Статистика</h5>
+                    Всего точек: {{count($company->dots)}}<br>
+                    Человек в команде: {{count($company->users)}}<br>
+                    <strong class="text-center">Задачи:</strong>
+                    <strong class="text-primary"> {{count($company->dots_tasks->where('status', 1))}}</strong>
+                    <strong class="text-warning"> {{count($company->dots_tasks->where('status', 2))}}</strong>
+                    <strong class="text-success"> {{count($company->dots_tasks->where('status', 3))}}</strong>
+                    <strong class="text-danger"> {{count($company->dots_tasks->where('status', 4))}}</strong>
+                    <strong class="text-dark">{{count($company->dots_tasks->where('status', 5))}}</strong>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+<div class="container col-md-9 ml-sm-auto col-lg-12 col-xl-12 px-4">
 <div class="row">
-<div class="pt-5 container">
+<div class=" container">
   <div class="row">
     <div class="col-sm">
       <button type="button" class="btn btn-success btn-sm" onClick="addDotFromCompanyIndex({{ $company->id }}, {{ $user->id }}, 0)"  data-toggle="modal" data-target="#mainModal">Добавить точку</button>

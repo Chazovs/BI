@@ -4,7 +4,7 @@
 
 
 <div class="jumbotron">
-  <h1 class="display-4"><img src="{{url($user->avatar)}}" alt="фото" height="64" width="64"> {{$user->real_name}} {{$user->real_lastname}}
+  <h1 class="display-4"><img class="rounded-circle" src="{{url($user->avatar)}}" alt="фото" height="64" width="64"> {{$user->real_name}} {{$user->real_lastname}}
   @if(Auth::user()->id==$user->id)
       (это вы)
   @endif
@@ -30,9 +30,13 @@
   <p>
       <strong>В поисках работы:</strong>
       @if($user->look_for_work=="N")
-          нет
-      @elseif($user->look_for_work!="N")
-          да
+          не ищет работу
+      @elseif($user->look_for_work=="Y")
+          ищет работу на полный день в офисе
+      @elseif($user->look_for_work=="D")
+          ищет работу на полный день удаленно
+      @elseif($user->look_for_work=="U")
+          ищет подработку
       @endif
 
   </p>

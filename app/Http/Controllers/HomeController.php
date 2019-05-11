@@ -181,6 +181,10 @@ User::find($newCompany->admin_id)->companies()->attach($newCompany->id);
 return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert', 'Ваша компания добавлена!Спасибо за участие в проекте!');
 }
 
+
+/*'<strong class="text-primary"> Ж</strong>:{{count($companyModel->dots_tasks->where("status", 1))}} <strong class="text-warning"> Р</strong>:{{count($companyModel->dots_tasks->where(\"status\", 2))}} <strong class=\"text-success\"> С</strong>:{{count($companyModel->dots_tasks->where(\"status\", 3))}} <strong class=\"text-danger\">Ф</strong>:{{count($companyModel->dots_tasks->where(\"status\", 4))}} <strong class=\"text-dark\"> О</strong>:{{count($companyModel->dots_tasks->where(\"status\", 5))}}'*/
+
+
     /**
      * показывает дерево точек компании, принимает айдишник компании, для которой строится дерево.
      * Содержит рекурсивную функцию recursiveDotAdd
@@ -204,9 +208,9 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
             foreach ($allDots->where('parent_id', $parent->id) as $child)
             {
                 if (!isset($dataChild)) {
-                    $dataChild = "{ head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild = "{ head: '<a href=\'".route("dotIndex", ['id'=>$companyModel->id, 'dotId'=>$child->id])."\'>".$child->name."</a>', id: '" . $child->id . "', contents: '<strong class=\"text-primary\">".count($child->dots_tasks->where('status', 1))."</strong> <strong class=\"text-warning\">".count($child->dots_tasks->where('status', 2))."</strong> <strong class=\"text-success\">".count($child->dots_tasks->where('status', 3))."</strong>  <strong class=\"text-danger\">".count($child->dots_tasks->where('status', 4))."</strong>  <strong class=\"text-dark\">".count($child->dots_tasks->where('status', 5))."</strong> '," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }else{
-                    $dataChild =  $dataChild.", { head: '" . $child->name . "', id: '" . $child->id . "', contents: 'загадка'," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild =  $dataChild.", { head: '<a href=\'".route("dotIndex", ['id'=>$companyModel->id, 'dotId'=>$child->id])."\'>".$child->name."</a>', id: '" . $child->id . "', contents: '<strong class=\"text-primary\">".count($child->dots_tasks->where('status', 1))."</strong> <strong class=\"text-warning\">".count($child->dots_tasks->where('status', 2))."</strong> <strong class=\"text-success\">".count($child->dots_tasks->where('status', 3))."</strong>  <strong class=\"text-danger\">".count($child->dots_tasks->where('status', 4))."</strong>  <strong class=\"text-dark\">".count($child->dots_tasks->where('status', 5))."</strong> '," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 }
             }
             if($dataChild!=null){
@@ -219,16 +223,16 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
 
            if ($allData==2) {
                $allData="{
-                            head:'".$dot->name."',
+                            head:'<a href=\'".route("dotIndex", ['id'=>$companyModel->id, 'dotId'=>$dot->id])."\'>".$dot->name."</a>',
                             id: '".$dot->id."',
-                            contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
+                            contents: '<strong class=\"text-primary\">".count($dot->dots_tasks->where('status', 1))."</strong> <strong class=\"text-warning\">".count($dot->dots_tasks->where('status', 2))."</strong> <strong class=\"text-success\">".count($dot->dots_tasks->where('status', 3))."</strong>  <strong class=\"text-danger\">".count($dot->dots_tasks->where('status', 4))."</strong>  <strong class=\"text-dark\">".count($dot->dots_tasks->where('status', 5))."</strong> ', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
                             
                         }";
            } else {
                $allData=$allData.", {
-                            head:'".$dot->name."',
+                            head:'<a href=\'".route("dotIndex", ['id'=>$companyModel->id, 'dotId'=>$dot->id])."\'>".$dot->name."</a>',
                             id: '".$dot->id."',
-                            contents: 'не знаю что', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
+                            contents: '<strong class=\"text-primary\">".count($dot->dots_tasks->where('status', 1))."</strong> <strong class=\"text-warning\">".count($dot->dots_tasks->where('status', 2))."</strong> <strong class=\"text-success\">".count($dot->dots_tasks->where('status', 3))."</strong>  <strong class=\"text-danger\">".count($dot->dots_tasks->where('status', 4))."</strong>  <strong class=\"text-dark\">".count($dot->dots_tasks->where('status', 5))."</strong> ', ".recursiveDotAdd($dot, $allDots, $id, $companyModel)."
                         }";
            }
            }
