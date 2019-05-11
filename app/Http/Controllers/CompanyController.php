@@ -85,8 +85,13 @@ public function __construct()
     ]);
 
 }
-    
 
+    /**
+     * Возвращает главную страницу любой точки
+     * @param $id - айдишник компании
+     * @param $dotId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function dotIndex($id, $dotId)
 {
 
@@ -99,7 +104,6 @@ public function __construct()
 
     if (isset($dot->chart)) {
         $dotChart = $dot->chart;
-
         $dateData = '';
         $valueData = '';
         if ($dotChart->data != "0") {

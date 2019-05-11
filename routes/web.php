@@ -15,7 +15,6 @@ Route::get('/',  ['as' => 'auth.login', 'uses' => 'Auth\LoginController@showLogi
 Route::get('/home',  'HomeController@index');
 Route::get('/registerCompany', 'HomeController@registerCompany')->name('registerCompany');
 Route::POST('/registerCompany/push', 'HomeController@pushRegisterCompany');
-Route::get('/company/{id}/edit', 'IndexController@editCompany')->name('editCompany');
 Route::get('/company/{id}/dot/{dotId}', 'CompanyController@dotIndex')->name('dotIndex');
 Route::get('/profile/{id}/edit/', 'HomeController@editProfile')->name('editProfile');//отдает страницу редактирования профайла
 Route::POST('/profile/{userId}/edit/push', 'HomeController@pushEditProfile')->name('profileEditPush');//вносит новые данные о пользователе в БД
@@ -30,7 +29,8 @@ Route::get('/error', function (){return view("error");})->name('error');
 //роуты на контроллер администратора компании
 Route::get('/company/{id}/user/request', 'CompanyAdminController@userRequest')->name('userRequest'); //показывает запросы на добавление
 Route::POST('/company/{id}/accept/user/request','CompanyAdminController@acceptUserRequest');//принимает запрос на участие в команде компании
-
+Route::get('/company/{id}/edit', 'CompanyAdminController@companyEdit')->name('companyEdit'); //редактируем компанюи(это может только администратор компании сделать)
+Route::POST('/company/{id}/edit/push', 'CompanyAdminController@companyEditPush')->name('companyEditPush'); //редактируем компанюи(это может только администратор компании сделать)
 
 //роуты для аякс и пост запросов из js файлов. в основном из main.js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи
@@ -62,3 +62,5 @@ Route::get('/companies/{id}', 'CompanyController@companyHome')->name('companyHom
 Route::get('/users/all', 'HomeController@usersAll')->name('usersAll');// показывает всех пользователей, зарегистрированных на портале
 Route::get('/my/companies/invitation', 'HomeController@myCompaniesInvitation')->name('myInvitation');// показывает пользователю все компании, которые его пригласили
 Route::get('/company/{companyId}/users', 'HomeController@companyUsers')->name('companyUsers');//показываем всех сотрудников компании
+Route::get('/companies/{companyId}/profile', 'HomeController@companyProfile')->name('companyProfile');//профайл компании для незарегистрированных пользователей
+

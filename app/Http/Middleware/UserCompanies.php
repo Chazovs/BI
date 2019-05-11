@@ -27,7 +27,7 @@ class UserCompanies
     $companies = $postsHasMany->where('id','like',$id)->count();
 
 if ($companies==0) {
-            return redirect()->route('idea', ['id' => $id]);
+            return redirect()->route('companyProfile', ['id' => $id]);
         }
     
         return $next($request);

@@ -162,7 +162,7 @@ $this->validate($request, [
 $reqArray = $request->all();
 if(isset($request['front_image'])){
     $frontImage = Image::make($request->file('front_image'))->heighten(225)->crop(348, 225)->encode('png')->fill(public_path().'/img/main/shadow.png');
-    $frontImagePath=url("/companies/front/");
+    $frontImagePath=public_path()."/companies/front/";
     $frontImage->save($frontImagePath . str_random(20). ".png");
     $reqArray['front_image'] = "/companies/front/".$frontImage->basename;
 }else{
@@ -308,6 +308,19 @@ $user=User::find($userId);
         }
         $user->update($reqArray);
         return back();
+    }
+    public function companyProfile($id){
+        $company=Company::find($id);
+       if($company->site!="") {
+           $site = parse_url($company->site);
+           $siteHost = $site['host'];
+       }else{
+           $siteHost="";
+       }
+        return view('companyProfile')->with([
+            'company'=> $company,
+            'siteHost'=>$siteHost,
+        ]);
     }
 }
 
