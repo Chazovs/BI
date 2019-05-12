@@ -19,7 +19,7 @@
             @if ($dot->parent_id != 0)
             <a href="{{ route('dotIndex',['id'=>$company->id, 'dotId'=>$dot->parent_id]) }}" class="btn btn-sm btn-outline-success" role="button" >Родительская точка</a>
             @endif
-             <a href="" class="btn btn-sm btn-outline-success" role="button" > Редактировать точку</a>
+             <a href="" class="btn btn-sm btn-outline-success" role="button" onclick="editDotModal({{ $dot->id }})" data-toggle="modal" data-target="#mainModal"> Редактировать точку</a>
               <a href="{{ route('tree',['id'=>$company->id]) }}" class="btn btn-sm btn-outline-success"  role="button" > Карта точек</a>
          
           </div>

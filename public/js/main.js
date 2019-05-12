@@ -624,9 +624,81 @@ $('#delToArray').attr('onClick', ' ');
              $('#mainModalLabel').html( data.name );
          }
      });
+}
 
 
+ /**
+  * редактируем точку(функция пока не дописана) 12.05.19
+  * @param dotId
+  */
+function editDotModal(dotId) {
 
+     $.ajax({
+         url : "/get/dot/data",
+         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+         data: {
+             "id": dotId
+         },
+         datatype: 'JSON',
+         type: "POST",
+         success: function( data ) {
+             data= JSON.parse(data);
+//вся эта безумная портянка добавляет окно редактирования точки :)
+             $('#mainModalLabel').html(
+                 '<div class="form-group">'+
+                 '<input type="text" class="form-control w-100" id="newDotName" placeholder="Заголовок" value="'+data.name+'" rows="5" >'+
+                 '</div>'
+             );
+             $('#closeModalButton').attr('onClick', 'reloadPage()');
+             $('#mainModalBody').html(
+                 '<div class="form-group">'+
+                 '<label for="newTaskProblem"><b>Опишите, как работает точка сейчас</b></label>'+
+                 '<textarea type="text" class="form-control" id="newDotDescriptionShort" rows="2">'+
+                 data.description_short+
+                 '</textarea></div>'+
+                 '<div class="form-group">'+
+                 '<label for="newTaskDescription"><b>Как она должна работать</b></label>'+
+                 '<textarea type="text" class="form-control" id="newDotDescriptionFull" rows="3">'+
+                 data.description_full+
+                 '</textarea></div>'+
+                 '<div class="mb-3">'+
+                 '<label for="logo">Выбирите логотип точки</label><br>'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot1.png" alt="1" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(1)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot2.png" alt="2" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(2)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot3.png" alt="3" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(3)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot4.png" alt="4" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(4)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot5.png" alt="5" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(5)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot6.png" alt="6" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(6)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot7.png" alt="7" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(7)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot8.png" alt="8" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(8)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot9.png" alt="9" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(9)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot10.png" alt="10" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(10)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot11.png" alt="11" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(11)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot12.png" alt="12" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(12)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot13.png" alt="13" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(13)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot14.png" alt="14" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(14)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot15.png" alt="15" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(15)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot16.png" alt="16" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(16)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot17.png" alt="17" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(17)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot18.png" alt="18" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(18)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot19.png" alt="19" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(19)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot20.png" alt="20" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(20)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot21.png" alt="21" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(21)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot22.png" alt="22" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(22)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot23.png" alt="23" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(23)">'+
+                 '<img src="'+location.protocol+'//'+location.host+'/img/dotlogo/dot24.png" alt="24" height="40" width="40" type="button" class="btn-outline-dark" onclick="setDotLogo(24)">'+
+                 '</div>'+
+                 '<div class="form-group">'+
+                 '<input type="hidden" id="newDotCompanyId" value="'+ dotId +'">'+
+                 '<input type="hidden" id="newDotlogo" value="">'+
+                 '</div>'
+             );
+             var editor = CKEDITOR.replace( 'newDotDescriptionShort', { height: '100px' });
+             var editor = CKEDITOR.replace( 'newDotDescriptionFull', { height: '100px' } );
+             $('#mainModalFooter').html('<button type="button" href="#" onClick="pushEditDot()" class="btn btn-success" >Редактировать точку</button> ');
+             /*добавляем редактор к полям*/
+         }
+     });
 
 
 

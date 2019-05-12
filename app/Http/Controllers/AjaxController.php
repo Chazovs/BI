@@ -284,4 +284,20 @@ public function getIdeaBody(Request $request){
     echo json_encode($ideaArray);
 }
 
+    /**
+     * Отдает информацию для модального окна редактирования точки
+     * @param Request $request
+     */
+public function getDotData(Request $request){
+    $dotId=$request->input('id');
+    $dot=Dot::find($dotId);
+    $dotArray ["name"] = $dot->name;
+    $dotArray ["logo"] = $dot->logo;
+    $dotArray ["description_full"] = $dot->description_full;
+    $dotArray ["description_short"] = $dot->description_short;
+    $dotArray ["edit_button"] = '<button type="button" onClick="editdot('.$dotId.')" class="btn btn-primary">Редактировать</button>';
+    header("Content-type: application/json; charset=utf-8");
+    echo json_encode($dotArray);
+}
+
 }

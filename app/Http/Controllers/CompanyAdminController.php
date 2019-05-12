@@ -79,7 +79,7 @@ class CompanyAdminController extends Controller
             $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
             $img->save($path . str_random(10) . str_random(10) . ".png");
             $reqArray['logo'] = "companies\logo\\" . $img->basename;
-        }else{$reqArray['logo']=url("/img/default/dot.png");}
+        }else{$reqArray['logo']=url("/img/default/comp.png");}
         if(!isset($request['site'])) {$reqArray['site']="";}
         if(!isset($request['city'])) {$reqArray['city']="";}
         if(!isset($request['slogan'])) {$reqArray['slogan']="";}
