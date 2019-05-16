@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf79876e-62ab-4d2f-9eb9-d19d3f1187eb" name="Default Changelist" comment="коммит пред созданием дерева точек на реакте">
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -268,7 +264,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="34" />
     <option name="y" value="54" />
     <option name="width" value="1400" />
@@ -363,7 +359,7 @@
       <workItem from="1557859995357" duration="5092000" />
       <workItem from="1557896148807" duration="1754000" />
       <workItem from="1557948600858" duration="4986000" />
-      <workItem from="1557983043481" duration="1421000" />
+      <workItem from="1557983043481" duration="1720000" />
     </task>
     <task id="LOCAL-00001" summary="коммит пред созданием дерева точек на реакте">
       <created>1556792981418</created>
@@ -376,7 +372,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199841000" />
+    <option name="totallyTimeSpent" value="200140000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -388,7 +384,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49571183" visible="true" weight="0.21060172" />
       <window_info id="Structure" order="1" sideWeight="0.50428814" side_tool="true" visible="true" weight="0.21060172" />
