@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cf79876e-62ab-4d2f-9eb9-d19d3f1187eb" name="Default Changelist" comment="коммит пред созданием дерева точек на реакте">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/helloworld.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,8 +76,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="das://7e682652-3b4d-4171-833e-b408163111a7/schema/remdance_intersections/table/ideas">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true">
+                <filter text="" />
+              </filtering>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="das://7e682652-3b4d-4171-833e-b408163111a7/schema/remdance_intersections/table/companies">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true">
@@ -264,7 +276,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="34" />
     <option name="y" value="54" />
     <option name="width" value="1400" />
@@ -275,7 +287,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,6 +298,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -360,6 +372,7 @@
       <workItem from="1557896148807" duration="1754000" />
       <workItem from="1557948600858" duration="4986000" />
       <workItem from="1557983043481" duration="1720000" />
+      <workItem from="1558027574189" duration="1296000" />
     </task>
     <task id="LOCAL-00001" summary="коммит пред созданием дерева точек на реакте">
       <created>1556792981418</created>
@@ -372,7 +385,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200140000" />
+    <option name="totallyTimeSpent" value="201436000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -386,8 +399,8 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49571183" visible="true" weight="0.21060172" />
-      <window_info id="Structure" order="1" sideWeight="0.50428814" side_tool="true" visible="true" weight="0.21060172" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49435666" visible="true" weight="0.21346705" />
+      <window_info id="Structure" order="1" sideWeight="0.50564337" side_tool="true" visible="true" weight="0.21346705" />
       <window_info id="Favorites" order="2" sideWeight="0.50067294" side_tool="true" weight="0.3008596" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -399,7 +412,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32974428" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2153432" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.4037685" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.20188425" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32974428" />
@@ -408,7 +421,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.3051576" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.23137535" />
       <window_info anchor="right" id="Remote Host" order="4" weight="0.31088826" />
     </layout>
     <layout-to-restore>
@@ -443,13 +456,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="коммит пред созданием дерева точек на реакте" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/auth/register.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="107" column="26" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -809,6 +815,15 @@
       </provider>
     </entry>
     <entry file="das://7e682652-3b4d-4171-833e-b408163111a7/schema/remdance_intersections/table/ideas">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://7e682652-3b4d-4171-833e-b408163111a7/schema/remdance_intersections/table/companies">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true">

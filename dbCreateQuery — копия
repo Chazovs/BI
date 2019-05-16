@@ -1,0 +1,14 @@
+CREATE TABLE `Users` (
+'d_user_id' INT(11),
+'d_user_name' ,
+'d_user_password' ,
+'d_user_e-mail' ,
+'d_user_lastname' ,
+'d_user_companys' ,
+'d_user_login' ,
+'d_user_permission' ,
+'d_user_company_admin' ,
+'d_user_theme' ,
+'d_user_avatar' ,
+PRIMARY KEY (`d_user_id`)
+);
