@@ -14,7 +14,6 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -170,10 +169,10 @@ if(isset($request['front_image'])){
     $reqArray['front_image']=url("/img/main/".$rundomImage.".png");
 }
 
-$path = public_path()."\companies\logo\\";   
+$path = public_path()."/companies/logo/";
 $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
 $img->save($path . str_random(10) . str_random(10) . ".png");
-$reqArray['logo'] = "companies\logo\\".$img->basename;
+$reqArray['logo'] = "/companies/logo/".$img->basename;
 $newCompany = new Company;
 $newCompany->fill($reqArray);
 $newCompany->save();

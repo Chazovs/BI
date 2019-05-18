@@ -93,7 +93,7 @@
           <p class="card-text">
            Вы можете перевести любую сумму в качестве пожертвования на развитие проекта.
           </p>
-          <a href="https://money.yandex.ru/to/410019450875956" class="btn btn-success">Я поддерживаю!</a>
+          <a href="https://money.yandex.ru/to/410019450875956" target="_blank" class="btn btn-success">Я поддерживаю!</a>
         </div>
       </div>
     </div>
