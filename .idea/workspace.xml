@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf79876e-62ab-4d2f-9eb9-d19d3f1187eb" name="Default Changelist" comment="коммит пред созданием дерева точек на реакте">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/alltasks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allTasks.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,13 +98,18 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="-67">
               <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/allTasks.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -286,9 +291,9 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1358" />
-    <option name="y" value="203" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="9" />
+    <option name="y" value="76" />
     <option name="width" value="1400" />
     <option name="height" value="776" />
   </component>
@@ -297,6 +302,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -304,11 +310,21 @@
               <item name="BI" type="b2602c69:ProjectViewProjectNode" />
               <item name="BI" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="BI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BI" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BI" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -382,7 +398,8 @@
       <workItem from="1557896148807" duration="1754000" />
       <workItem from="1557948600858" duration="4986000" />
       <workItem from="1557983043481" duration="1720000" />
-      <workItem from="1558027574189" duration="6360000" />
+      <workItem from="1558027574189" duration="6929000" />
+      <workItem from="1558190129403" duration="780000" />
     </task>
     <task id="LOCAL-00001" summary="коммит пред созданием дерева точек на реакте">
       <created>1556792981418</created>
@@ -395,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206500000" />
+    <option name="totallyTimeSpent" value="207849000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -407,10 +424,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1432" y="57" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4878049" visible="true" weight="0.22644377" />
-      <window_info id="Structure" order="1" sideWeight="0.5121951" side_tool="true" visible="true" weight="0.22644377" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.810757" visible="true" weight="0.21633238" />
+      <window_info id="Structure" order="1" sideWeight="0.18924303" side_tool="true" visible="true" weight="0.21633238" />
       <window_info id="Favorites" order="2" sideWeight="0.5067568" side_tool="true" weight="0.21346705" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -422,7 +439,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32974428" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.7315876" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3243607" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.20188425" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32974428" />
@@ -431,7 +448,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.24544074" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.23137535" />
       <window_info anchor="right" id="Remote Host" order="4" weight="0.31088826" />
     </layout>
     <layout-to-restore>
@@ -466,13 +483,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="коммит пред созданием дерева точек на реакте" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/treechart.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e5c154c5-2782-4b2b-a207-0334f3b096db/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -837,10 +847,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="-67">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/allTasks.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
