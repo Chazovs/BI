@@ -36,21 +36,21 @@
         </div>
         <div class="mb-3">
           <label for="adress">Электронная почта</label>
-          <input type="email" class="form-control" name="companyEmail" id="companyEmail" required placeholder="you@email.com">
+          <input type="email" class="form-control" name="companyEmail" id="companyEmail" required placeholder="you@email.com" maxlength="100">
           <div class="invalid-feedback">
             Введите пожалуйста корректный адрес электронной почты
           </div>
         </div>
         <div class="mb-3">
           <label for="description">Чем занимается компания? (этот текст увидят все пользователи сайта)</label>
-          <textarea type="text" class="form-control" name="description" id="description" placeholder="" required></textarea> 
+          <textarea type="text" class="form-control" name="description" id="description" placeholder="" maxlength="200" required></textarea>
           <div class="invalid-feedback">
-            Please enter your shipping address.
+            Опишите, чем занимается компания
           </div>
         </div>
             <div class="mb-3">
                 <label for="slogan">Интересный факт или слоган</label>
-                <input type="text" class="form-control" id="slogan" name="slogan" placeholder="Например: Рост в 2019 году 300%" value="">
+                <input type="text" class="form-control" id="slogan" name="slogan" maxlength="100" placeholder="Например: Рост в 2019 году 300%" value="">
                 <div class="invalid-feedback">
                 </div>
             </div>
@@ -69,13 +69,13 @@
        </div>
        <div class="mb-3">
             <label for="site">Сайт (будет указан в карточке)</label>
-            <input type="text" class="form-control" id="site" name="site" placeholder="" value="" required>
+            <input type="text" class="form-control" id="site" name="site" placeholder="" value="" required maxlength="200">
             <div class="invalid-feedback">
          </div>
        </div>
        <div class="mb-3">
             <label for="city">Город (будет указан в карточке)</label>
-            <input type="text" class="form-control" id="city" name="city" placeholder="" value="" required>
+            <input type="text" class="form-control" id="city" name="city" placeholder="" value="" maxlength="100" required>
             <div class="invalid-feedback">
          </div>
        </div>
@@ -93,7 +93,7 @@
           <p class="card-text">
            Вы можете перевести любую сумму в качестве пожертвования на развитие проекта.
           </p>
-          <a href="#!" class="btn btn-success">Я поддерживаю!</a>
+          <a href="https://money.yandex.ru/to/410019450875956" class="btn btn-success">Я поддерживаю!</a>
         </div>
       </div>
     </div>
