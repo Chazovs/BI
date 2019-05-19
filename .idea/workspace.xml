@@ -493,11 +493,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.80792683" visible="true" weight="0.22277936" />
-      <window_info id="Structure" order="1" sideWeight="0.19207317" side_tool="true" visible="true" weight="0.22277936" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.80864197" visible="true" weight="0.22277936" />
+      <window_info id="Structure" order="1" sideWeight="0.19135803" side_tool="true" visible="true" weight="0.22277936" />
       <window_info id="Favorites" order="2" sideWeight="0.5067568" side_tool="true" weight="0.21346705" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -509,7 +508,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32974428" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.11709287" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.34589502" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.20188425" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32974428" />
