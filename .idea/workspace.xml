@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cf79876e-62ab-4d2f-9eb9-d19d3f1187eb" name="Default Changelist" comment="коммит пред созданием дерева точек на реакте">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mainauth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mainauth.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/treechart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/treechart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/registerCompany.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/registerCompany.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="cf79876e-62ab-4d2f-9eb9-d19d3f1187eb" name="Default Changelist" comment="коммит пред созданием дерева точек на реакте" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,9 +321,9 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-15" />
-    <option name="y" value="373" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-128" />
+    <option name="y" value="295" />
     <option name="width" value="1400" />
     <option name="height" value="776" />
   </component>
@@ -468,7 +460,7 @@
       <workItem from="1557983043481" duration="1720000" />
       <workItem from="1558027574189" duration="6929000" />
       <workItem from="1558190129403" duration="4894000" />
-      <workItem from="1558249099555" duration="7799000" />
+      <workItem from="1558249099555" duration="8134000" />
     </task>
     <task id="LOCAL-00001" summary="коммит пред созданием дерева точек на реакте">
       <created>1556792981418</created>
@@ -481,7 +473,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="219762000" />
+    <option name="totallyTimeSpent" value="220097000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -494,10 +486,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.80792683" visible="true" weight="0.22277936" />
-      <window_info id="Structure" order="1" sideWeight="0.19207317" side_tool="true" visible="true" weight="0.22277936" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.80864197" visible="true" weight="0.22277936" />
+      <window_info id="Structure" order="1" sideWeight="0.19135803" side_tool="true" visible="true" weight="0.22277936" />
       <window_info id="Favorites" order="2" sideWeight="0.5067568" side_tool="true" weight="0.21346705" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -509,7 +500,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32974428" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.11709287" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.34589502" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.20188425" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32974428" />
