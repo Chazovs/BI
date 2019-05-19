@@ -362,6 +362,7 @@ function postNewTask() {
     $.post('/push/task/new', {_token : token, name : name, problem : problem, description : description, deadline : deadline, company_id : company_id, author_id : author_id, dot_id : dot_id, responsible_id : responsible_id }, function( result ){
     $('#mainModalBody').html( 'Задача добавлена' + result);
     $('#mainModalLabel').html(' ');
+    $('#mainModalFooter').html(' ');
     });
 }
 

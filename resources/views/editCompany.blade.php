@@ -25,7 +25,7 @@
           <div class="row">
               <div class="col-md-10 mb-3">
                   <div class="custom-file">
-                      <input type="file" class="custom-file-input" name="avatar" id="logo">
+                      <input type="file" class="custom-file-input" name="logo" id="logo">
                       <label class="custom-file-label" for="logo">
                         Логотип
                       </label>

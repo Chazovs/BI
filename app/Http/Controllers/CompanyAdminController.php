@@ -64,16 +64,20 @@ class CompanyAdminController extends Controller
         ]);
 
         $reqArray=$request->all();
-
+$oldFront=Company::find($companyId)->front_image;
         if(isset($request['front_image'])){
             $frontImage = Image::make($request->file('front_image'))->heighten(225)->crop(348, 225)->encode('png')->fill(public_path().'/img/main/shadow.png');
             $frontImagePath=public_path() ."/companies/front/";
             $frontImage->save($frontImagePath . str_random(20). ".png");
             $reqArray['front_image'] = "/companies/front/".$frontImage->basename;
-        }else{
-
+        }elseif($oldFront!=null){
             $reqArray['front_image']=Company::find($companyId)->front_image;
+        }else{
+            $rundomImage=rand ( 1, 10);
+            $reqArray['front_image']=url("/img/main/".$rundomImage.".png");
         }
+
+
         if(isset($request['logo'])) {
             $path = public_path() . "/companies/logo/";
             $img = Image::make($request->file('logo'))->heighten(100)->encode('png');

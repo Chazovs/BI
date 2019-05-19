@@ -161,7 +161,7 @@
             </a>
           </li>
            <li class="nav-item text-center">
-            <a class="btn btn-outline-dark btn-sm w-75" href="https://money.yandex.ru/to/410019450875956">
+            <a class="btn btn-outline-dark btn-sm w-75" href="https://money.yandex.ru/to/410019450875956" target="_blank">
           Поддержать проект
             </a>
           </li>
