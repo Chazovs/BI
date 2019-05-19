@@ -99,8 +99,5 @@
     </div>
 </div>
 </div>
-<script>
-        var editor = CKEDITOR.replace( 'description' );
-</script>
 </main>
 @endsection

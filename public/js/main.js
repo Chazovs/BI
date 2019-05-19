@@ -87,8 +87,9 @@ function postDot() {
     var logo = $('#newDotlogo').val();
     var token = $('meta[name="csrf-token"]').attr('content');
     $.post('/push/dot/new', {_token : token, name : name, parent_id : parent_id, description_short : description_short, description_full : description_full, logo : logo, company_id : company_id, author : userId}, function( result ){
-    $('#mainModalBody').html( 'Задача добавлена' + result);
+    $('#mainModalBody').html( 'Точка добавлена' + result);
     $('#mainModalLabel').html(' ');
+    $('#mainModalFooter').html(' ');
     });
 }
 

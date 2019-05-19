@@ -71,22 +71,25 @@ class CompanyAdminController extends Controller
             $frontImage->save($frontImagePath . str_random(20). ".png");
             $reqArray['front_image'] = "/companies/front/".$frontImage->basename;
         }else{
-            $rundomImage=rand ( 1, 10);
-            $reqArray['front_image']=url("/img/main/".$rundomImage.".png");
+
+            $reqArray['front_image']=Company::find($companyId)->front_image;
         }
         if(isset($request['logo'])) {
-            $path = public_path() . "\companies\logo\\";
+            $path = public_path() . "/companies/logo/";
             $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
             $img->save($path . str_random(10) . str_random(10) . ".png");
-            $reqArray['logo'] = "companies\logo\\" . $img->basename;
-        }else{$reqArray['logo']=url("/img/default/comp.png");}
-        if(!isset($request['site'])) {$reqArray['site']="";}
-        if(!isset($request['city'])) {$reqArray['city']="";}
-        if(!isset($request['slogan'])) {$reqArray['slogan']="";}
-        if(!isset($request['adress'])) {$reqArray['adress']="";}
-        if(!isset($request['phone'])) {$reqArray['phone']="";}
-        if(!isset($request['about'])) {$reqArray['about']="";}
-        if(!isset($request['description'])) {$reqArray['description']="";}
+            $reqArray['logo'] = "/companies/logo/" . $img->basename;
+        }else
+            {
+                $reqArray['logo']=url("/img/default/comp.png");
+            }
+        if(!isset($request['site'])) {$reqArray['site']="не указан";}
+        if(!isset($request['city'])) {$reqArray['city']="не указан";}
+        if(!isset($request['slogan'])) {$reqArray['slogan']=" ";}
+        if(!isset($request['adress'])) {$reqArray['adress']="не указан";}
+        if(!isset($request['phone'])) {$reqArray['phone']="не указан";}
+        if(!isset($request['about'])) {$reqArray['about']=" ";}
+        if(!isset($request['description'])) {$reqArray['description']=" ";}
         $company = Company::find($companyId);
         $company->fill($reqArray);
         $company->update();

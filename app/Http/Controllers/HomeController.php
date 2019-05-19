@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
     $userID = Auth::user()->id;
     $user = User::find($userID);
-    $companies=$user->companies()->paginate(1);
+    $companies=$user->companies()->paginate(12);
     $myC='disabled';
     $allC='';
     $cardButton=false;
@@ -42,7 +42,7 @@ class HomeController extends Controller
         ]);
         
     }
-
+// показывает все компании
  public function all()
     {
         $userID = Auth::user()->id;
@@ -50,7 +50,7 @@ class HomeController extends Controller
         $myC='';//деактивирует кнопку компании
         $allC='disabled';
         $cardButton=true;
-        $companies = Company::paginate(2);
+        $companies = Company::paginate(12);
          return view('home', compact($companies))->with([
             'companies'=> $companies,
             'user'=> $user,
@@ -168,7 +168,6 @@ if(isset($request['front_image'])){
     $rundomImage=rand ( 1, 10);
     $reqArray['front_image']=url("/img/main/".$rundomImage.".png");
 }
-
 $path = public_path()."/companies/logo/";
 $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
 $img->save($path . str_random(10) . str_random(10) . ".png");
@@ -295,6 +294,12 @@ return redirect()->route('companyHome', ['id' => $newCompany->id])->with('alert'
          ]);
     }
 
+    /**
+     * редактирует профайл пользователя
+     * @param Request $request
+     * @param $userId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function pushEditProfile(Request $request, $userId){
 $reqArray=$request->all();
 $user=User::find($userId);
@@ -305,9 +310,16 @@ $user=User::find($userId);
             $avatar->save($avatarPath. str_random(20). ".png");
             $reqArray['avatar'] = "/users/photo/".$avatar->basename;
         }
+       if(!isset($reqArray['hh'])){ $reqArray['hh'] = '';}
+       if(!isset($reqArray['about'])){ $reqArray['about'] = '';}
+       if(!isset($reqArray['profession'])){ $reqArray['profession'] = '';}
+       if(!isset($reqArray['experience'])){ $reqArray['experience'] = '';}
+       if(!isset($reqArray['city'])){ $reqArray['city'] = '';}
         $user->update($reqArray);
-        return back();
+        return redirect()->route("profile", ["id"=>$userId]);
     }
+
+
     public function companyProfile($id){
         $company=Company::find($id);
        if($company->site!="") {

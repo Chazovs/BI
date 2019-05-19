@@ -167,7 +167,7 @@ type="text/javascript" charset="utf-8" ></script>
             </a>
           </li>
            <li class="nav-item text-center">
-            <a class="btn btn-outline-dark btn-sm w-75" href="https://bootstrap-4.ru/docs/4.3.1/examples/dashboard/#">
+            <a class="btn btn-outline-dark btn-sm w-75" href="https://money.yandex.ru/to/410019450875956">
           Поддержать проект
             </a>
           </li>

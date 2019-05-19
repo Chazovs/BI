@@ -145,7 +145,6 @@
             </a>
           </li>
         </ul>
-
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Администрирование</span>
         </h6>
@@ -162,7 +161,7 @@
             </a>
           </li>
            <li class="nav-item text-center">
-            <a class="btn btn-outline-dark btn-sm w-75" href="https://bootstrap-4.ru/docs/4.3.1/examples/dashboard/#">
+            <a class="btn btn-outline-dark btn-sm w-75" href="https://money.yandex.ru/to/410019450875956">
           Поддержать проект
             </a>
           </li>
@@ -171,7 +170,6 @@
     </nav>
 <!-- главный контент -->
 @yield('main')
-
   </div>
  </div>
 
