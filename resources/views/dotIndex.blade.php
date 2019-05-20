@@ -11,7 +11,7 @@
     </div>
   </div> -->
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center  pt-3 pb-2 mb-3 border-bottom">
-        <img src="{{ url($company->logo) }}" class="rounded-circle" alt="" height="40" width="40">
+        <img src="{{ url($dot->logo) }}" class="rounded-circle" alt="" height="40" width="40">
         <h1 class="h3">{{ $dot->name }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
