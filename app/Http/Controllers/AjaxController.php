@@ -73,6 +73,7 @@ $taskModelUpdate = Dot_task::find($taskId)->update($reqArray);
 public function pushNewTask(Request $request)
 {
 $reqArray = $request->all();
+
 $this->validate($request, [
 'name' => 'required',
 'problem' => 'required|max:2000',
@@ -106,27 +107,25 @@ public function getCompanyUsersAndDots(Request $request)
     $companyId=$request->input('companyId');
     $company = Company::find($companyId);
     $users=$company->users()->get();
-
-       $allUsers='';
+    $allUsers='';
     foreach ($users as $user) {
-
         $allUsers=$allUsers.'<option value="'.$user->id.'">'.$user->real_name.' '.$user->real_lastname.'</option>';
-          
     }
     $myArray['allUsers'] = $allUsers;
-
- $companydots=$company->dots()->get();
-
- $allDots='';
- foreach ( $companydots as  $companydot) {
+    $companydots=$company->dots()->get();
+    $allDots='';
+    foreach ( $companydots as  $companydot) {
     $allDots=$allDots.'<option value="'.$companydot->id.'">'.$companydot->name.'</option>';
-}
-  $myArray['allDots'] =$allDots;
-  
+    }
+    $myArray['allDots'] =$allDots;
     header("Content-type: application/json; charset=utf-8");
     echo json_encode($myArray);
 }
 
+    /**
+     * добавляет новую точку с индексной страницы
+     * @param Request $request
+     */
 public function pushNewDotFromIndex(Request $request)
 {
   $reqArray = $request->all();
@@ -299,5 +298,28 @@ public function getDotData(Request $request){
     header("Content-type: application/json; charset=utf-8");
     echo json_encode($dotArray);
 }
+
+
+
+    /**
+     * Возвращает все компании пользователя
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getCompanies(Request $request)
+    {
+        $userId=$request->input('userId');
+        $user = User::find($userId);
+        $companies=$user->companies()->get();
+        $allUCompanies='';
+        foreach ($companies as $company) {
+            $allUCompanies=$allUCompanies.'<option value="'.$company->id.'">'.$company->name.'</option>';
+        }
+        $myArray['allCompanies'] = $allUCompanies;
+        header("Content-type: application/json; charset=utf-8");
+        echo json_encode($myArray);
+    }
+
+
 
 }

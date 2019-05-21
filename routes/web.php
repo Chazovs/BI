@@ -50,7 +50,7 @@ Route::POST('/company/invitation', 'AjaxController@companyInvitation'); //Отп
 Route::POST('/company/invitation/accept', 'AjaxController@companyInvitationAccept'); //принимает приглашение от компании
 Route::POST('/get/idea/body', 'AjaxController@getIdeaBody'); //отдает информацию для модального окна
 Route::POST('/get/dot/data', 'AjaxController@getDotData'); //отдает информацию о точке
-
+Route::POST('/get/companies', 'AjaxController@getCompanies'); //отдает все компании пользователя
 
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки
