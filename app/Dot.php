@@ -11,7 +11,20 @@ class Dot extends Model
         'name', 'parent_id', 'logo', 'description_full', 'description_short', 'author', 'company_id', 'chart_id',
     ];
 
-	//у нескольких точек может быть одна компания
+
+    //у точки можеть быть много детей
+    public function dot()
+    {
+        return $this->belongsTo('App\Dot', 'id', 'parent_id');
+    }
+//у точки может быть много  родителей
+    public function dots()
+    {
+        return $this->hasMany('App\Dot', 'parent_id', 'id');
+    }
+
+
+    //у нескольких точек может быть одна компания
    public function company()
     {
         return $this->belongsTo('App\Сompany');

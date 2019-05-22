@@ -31,6 +31,8 @@ Route::get('/company/{id}/user/request', 'CompanyAdminController@userRequest')->
 Route::POST('/company/{id}/accept/user/request','CompanyAdminController@acceptUserRequest');//принимает запрос на участие в команде компании
 Route::get('/company/{id}/edit', 'CompanyAdminController@companyEdit')->name('companyEdit'); //редактируем компанюи(это может только администратор компании сделать)
 Route::POST('/company/{id}/edit/push', 'CompanyAdminController@companyEditPush')->name('companyEditPush'); //редактируем компанюи(это может только администратор компании сделать)
+Route::POST('/company/{id}/delete/dot', 'CompanyAdminController@deleteDot'); //удаляет точку (доступно только админам)
+
 
 //роуты для аякс и пост запросов из js файлов. в основном из main.js
 Route::POST('/taskContent','AjaxController@taskContent');//получает содержимое задачи
@@ -51,6 +53,7 @@ Route::POST('/company/invitation/accept', 'AjaxController@companyInvitationAccep
 Route::POST('/get/idea/body', 'AjaxController@getIdeaBody'); //отдает информацию для модального окна
 Route::POST('/get/dot/data', 'AjaxController@getDotData'); //отдает информацию о точке
 Route::POST('/get/companies', 'AjaxController@getCompanies'); //отдает все компании пользователя
+
 
 //роут из дерева точек jQuery.jHTree.js
 Route::POST('/push/dot/new/parent','AjaxController@pushDotNewParent');//меняет родителя точки

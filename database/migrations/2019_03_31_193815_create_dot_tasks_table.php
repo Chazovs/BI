@@ -16,7 +16,7 @@ class CreateDotTasksTable extends Migration
         Schema::create('dot_tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dot_id')->unsigned();
-            $table->foreign('dot_id')->references('id')->on('dots');
+            $table->foreign('dot_id')->references('id')->on('dots')->onDelete('cascade');
             $table->integer('responsible_id')->unsigned(); //ответственный
             $table->foreign('responsible_id')->references('id')->on('users');
             $table->integer('company_id')->unsigned();

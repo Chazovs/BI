@@ -811,14 +811,6 @@ function postNewTaskFromAllTasksPage() {
     var description = $('#newTaskDescription').val();
     var deadline = $('#newTaskDeadline').val();
     var author_id = $('#newTaskAuthorId').val();
-    /*console.log(  token,
-        name,
-         problem,
-        description,
-         deadline,
-        company_id,
-        author_id,
-        dot_id, responsible_id);*/
     $.post('/push/task/new', {
         _token: token,
         name: name,
@@ -834,4 +826,18 @@ function postNewTaskFromAllTasksPage() {
         $('#mainModalLabel').html(' ');
         $('#mainModalFooter').html(' ');
     });
+}
+
+//удаляет точки
+function delDot(dotId,companyId) {
+    if (confirm("ВНИМАНИЕ!  Будут удалены все связанные с точной задачи! Вы уверены, что хотите удалить эту точку? Отменить это действие будет невозможно!")) {
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.post('/company/'+companyId+'/delete/dot', {_token: token, id: dotId
+        }, function (result) {
+            alert(result);
+            location.reload();
+        });
+    } else {
+    }
 }
