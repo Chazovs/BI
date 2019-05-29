@@ -11,6 +11,9 @@ use App\Chart;
 use App\User;
 use App\Idea;
 use Auth;
+use Excel;
+use App\Imports\ChartDataImport;
+use Illuminate\Support\Facades\Storage;
 
 class AjaxController extends Controller
 {
@@ -320,6 +323,37 @@ public function getDotData(Request $request){
         echo json_encode($myArray);
     }
 
+public function addDataToChartFromFile(Request $request){
+    dump($request->file('xls'));
+    $xlsTempPath=Storage::disk('public')->put('tempxls/', $request->file('xls'));
+    dump($xlsTempPath);
+    $xlsPath = public_path().'/storage/'.$xlsTempPath;
+    $chartArray = Excel::toArray(new ChartDataImport,  $xlsPath);
+    dump($chartArray);
+    /*$reqArray = $request->all();
+    for ($i=1; isset($reqArray["chartValueDate".$i]) && isset($reqArray["chartValue".$i]); $i++) {
+        $newData[$i] = array(
+            'date' => $reqArray["chartValueDate".$i],
+            'value' => $reqArray["chartValue".$i],
+        );
+    }
+    $Chart=Chart::find($reqArray['chartId']);
 
+//есть ли уже данные у chart
+    if ($Chart->data=="0") {
+        $allData=$newData;
+    }else{
+        $oldData=unserialize($Chart->data);
+
+        $allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) { return $a['date'] <=> $b['date']; }));
+    }
+    usort($allData, function($a, $b) { return strtotime($a["date"]) <=> strtotime($b["date"]); });
+
+    $Chart->data=serialize($allData);
+    $Chart->update();
+    return back();
+    */
+
+}
 
 }

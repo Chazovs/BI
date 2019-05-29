@@ -47,6 +47,9 @@ Route::POST('/change/task/status','AjaxController@changeTaskStatus');//Созд�
 Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает новый график
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
+Route::POST('/add/data/to/chart/from/file','AjaxController@addDataToChartFromFile');//добавляет данные к графику из файла
+
+
 Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequestToCompany');//Отправляет новый запрос от пользователя на добавление в компанию
 Route::POST('/company/invitation', 'AjaxController@companyInvitation'); //Отправляет пользователю приглашение в компанию
 Route::POST('/company/invitation/accept', 'AjaxController@companyInvitationAccept'); //принимает приглашение от компании

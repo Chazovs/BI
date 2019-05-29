@@ -493,6 +493,7 @@ function postNewChart() {
     }, function (result) {
         $('#mainModalBody').html('График добавлен <br>' + result);
         $('#mainModalLabel').html(' ');
+        $('#mainModalFooter').html(' ');
     });
 }
 
@@ -513,6 +514,11 @@ function addChartToDot(chartId, dotId) {
  */
 function addChartData(chartId) {
     var token = $('meta[name="csrf-token"]').attr('content');
+    $('#mainModalLabel').html(
+        '<button onclick="" class="btn btn-link disabled">ввести значения</button>/<button onclick="addChartDataUploadFile('
+        + chartId +
+        ')" class="btn btn-link">загрузить файл</button>'
+    );
     $('#mainModalBody').html(
         '<form class="form-inline" method="POST" action="/add/data/to/chart" >' +
         '  <div id="formAddDataChart">' +
@@ -526,12 +532,35 @@ function addChartData(chartId) {
         '<button type="button" onClick="delDateDataBlock()" id="delToArray" class="btn btn-link">-</button>' +
         '  </div>' +
         '  </div>' +
-        '<input type="hidden" name="_token" id="_token" value="' + token + '"></div>' +
-        '<input type="hidden" name="chartId" id="chartId" value="' + chartId + '"></div>' +
+        '<input type="hidden" name="_token" id="_token" value="' + token + '">' +
+        '<input type="hidden" name="chartId" id="chartId" value="' + chartId + '">' +
         '  <button type="submit" class="btn btn-primary mb-2">Отправить</button>' +
         '</form>'
     );
 }
+
+
+
+/**
+ * публикует кнопку прикрепления к файлу и отправляет файл в скрипт
+ * @param {[type]} chartId [description]
+ */
+function addChartDataUploadFile(chartId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $('#mainModalLabel').html(
+        '<button onclick="addChartData('+chartId+')" class="btn btn-link">ввести значения</button>/<button onclick="" class="btn btn-link disabled">загрузить файл</button>'
+    );
+    $('#mainModalBody').html(
+        '<form class="form-inline" method="POST" action="/add/data/to/chart/from/file" enctype="multipart/form-data">' +
+        '<input type="file" name="xls" id="xls">' +
+        '<input type="hidden" name="_token" id="_token" value="' + token + '">' +
+        '<input type="hidden" name="chartId" id="chartId" value="' + chartId + '">' +
+        '<button type="submit" class="btn btn-primary mb-2">Отправить</brbutton>' +
+        '</form>'
+    );
+}
+
+
 
 /**
  * Добавляет блок дата-значение в форме заполения графиков.
