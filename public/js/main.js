@@ -540,7 +540,6 @@ function addChartData(chartId) {
 }
 
 
-
 /**
  * публикует кнопку прикрепления к файлу и отправляет файл в скрипт
  * @param {[type]} chartId [description]
@@ -548,18 +547,23 @@ function addChartData(chartId) {
 function addChartDataUploadFile(chartId) {
     var token = $('meta[name="csrf-token"]').attr('content');
     $('#mainModalLabel').html(
-        '<button onclick="addChartData('+chartId+')" class="btn btn-link">ввести значения</button>/<button onclick="" class="btn btn-link disabled">загрузить файл</button>'
+        '<button onclick="addChartData(' + chartId + ')" class="btn btn-link">ввести значения</button>/<button onclick="" class="btn btn-link disabled">загрузить файл</button>'
     );
     $('#mainModalBody').html(
-        '<form class="form-inline" method="POST" action="/add/data/to/chart/from/file" enctype="multipart/form-data">' +
+        '<form  method="POST" action="/add/data/to/chart/from/file" enctype="multipart/form-data">' +
+        '<p>'+
+        '<span>Это отчет из Битрикс24 </span>'+
+        '<input type="checkbox" name="fromBitrix24" id="fromBitrix24"> ' +
+        '</p>'+
+        '<p>'+
         '<input type="file" name="xls" id="xls">' +
+        '</p>'+
         '<input type="hidden" name="_token" id="_token" value="' + token + '">' +
         '<input type="hidden" name="chartId" id="chartId" value="' + chartId + '">' +
         '<button type="submit" class="btn btn-primary mb-2">Отправить</brbutton>' +
         '</form>'
     );
 }
-
 
 
 /**
@@ -858,11 +862,12 @@ function postNewTaskFromAllTasksPage() {
 }
 
 //удаляет точки
-function delDot(dotId,companyId) {
+function delDot(dotId, companyId) {
     if (confirm("ВНИМАНИЕ!  Будут удалены все связанные с точной задачи! Вы уверены, что хотите удалить эту точку? Отменить это действие будет невозможно!")) {
 
         var token = $('meta[name="csrf-token"]').attr('content');
-        $.post('/company/'+companyId+'/delete/dot', {_token: token, id: dotId
+        $.post('/company/' + companyId + '/delete/dot', {
+            _token: token, id: dotId
         }, function (result) {
             alert(result);
             location.reload();

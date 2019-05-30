@@ -14,6 +14,7 @@ use Auth;
 use Excel;
 use App\Imports\ChartDataImport;
 use Illuminate\Support\Facades\Storage;
+use Sunra\PhpSimple\HtmlDomParser;//парсит dom
 
 class AjaxController extends Controller
 {
@@ -324,13 +325,32 @@ public function getDotData(Request $request){
     }
 
 public function addDataToChartFromFile(Request $request){
-    dump($request->file('xls'));
-    $xlsTempPath=Storage::disk('public')->put('tempxls/', $request->file('xls'));
-    dump($xlsTempPath);
-    $xlsPath = public_path().'/storage/'.$xlsTempPath;
-    $chartArray = Excel::toArray(new ChartDataImport,  $xlsPath);
-    dump($chartArray);
-    /*$reqArray = $request->all();
+    $reqArray = $request->all();
+    $xlsTempPath = Storage::disk('public')->put('tempxls/', $request->file('xls'));
+    $xlsPath = public_path() . '/storage/' . $xlsTempPath;
+    //проверяем, стоит ли галочка, что файл из Битрикс24
+    if (isset($reqArray['fromBitrix24']) && $reqArray['fromBitrix24'] == "on") {
+        $object = file_get_contents($xlsPath);
+        $document = HtmlDomParser::str_get_html($object);
+        $i=0;
+        foreach ($document->find('tr') as $trTag) {
+        $ii=0;
+            foreach ($trTag->find('td') as $tdTag) {
+                $chartArray[$i][$ii]=$tdTag->innertext();
+                $ii++;
+        };
+            $i++;
+        };
+        dump($chartArray);
+    } else {
+        $chartArray = Excel::toArray(new ChartDataImport, $xlsPath);
+        dump($chartArray);
+    }
+
+
+/*
+    dump($reqArray);*/
+    /*
     for ($i=1; isset($reqArray["chartValueDate".$i]) && isset($reqArray["chartValue".$i]); $i++) {
         $newData[$i] = array(
             'date' => $reqArray["chartValueDate".$i],
