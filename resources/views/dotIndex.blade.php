@@ -68,6 +68,9 @@
                                         onclick="addChartData({{ $dotChart->id }})" data-toggle="modal"
                                         data-target="#mainModal">Добавить данные
                                 </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        onclick="delChartData({{ $dotChart->id }})" title="очистить данные">X
+                                </button>
 
                             @endif
 

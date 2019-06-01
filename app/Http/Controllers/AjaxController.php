@@ -14,6 +14,7 @@ use Auth;
 use Excel;
 use App\Imports\ChartDataImport;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Foreach_;
 use Sunra\PhpSimple\HtmlDomParser;//парсит dom
 
 class AjaxController extends Controller
@@ -324,56 +325,82 @@ public function getDotData(Request $request){
         echo json_encode($myArray);
     }
 
-public function addDataToChartFromFile(Request $request){
-    $reqArray = $request->all();
-    $xlsTempPath = Storage::disk('public')->put('tempxls/', $request->file('xls'));
-    $xlsPath = public_path() . '/storage/' . $xlsTempPath;
-    //проверяем, стоит ли галочка, что файл из Битрикс24
-    if (isset($reqArray['fromBitrix24']) && $reqArray['fromBitrix24'] == "on") {
-        $object = file_get_contents($xlsPath);
-        $document = HtmlDomParser::str_get_html($object);
-        $i=0;
-        foreach ($document->find('tr') as $trTag) {
-        $ii=0;
-            foreach ($trTag->find('td') as $tdTag) {
-                $chartArray[$i][$ii]=$tdTag->innertext();
-                $ii++;
-        };
-            $i++;
-        };
-        dump($chartArray);
-    } else {
-        $chartArray = Excel::toArray(new ChartDataImport, $xlsPath);
-        dump($chartArray);
+    public function addDataToChartFromFile(Request $request)
+    {
+        $reqArray = $request->all();
+        $Chart = Chart::find($reqArray['chartId']);
+        $xlsTempPath = Storage::disk('public')->put('tempxls', $request->file('xls'));
+        $xlsPath = public_path() . '/storage/' . $xlsTempPath;
+        //проверяем, стоит ли галочка, что файл из Битрикс24
+        if (isset($reqArray['fromBitrix24']) && $reqArray['fromBitrix24'] == "on") {
+            $object = file_get_contents($xlsPath);
+            $document = HtmlDomParser::str_get_html($object);
+            //создаем двумерный массив из значений файла
+            $i = 0;
+            foreach ($document->find('tr') as $trTag) {
+                $ii = 0;
+                foreach ($trTag->find('td') as $tdTag) {
+                    //первый индекс - дата, второй значение, а если индексов больше, то возрващаем ошибку
+                    if ($ii == 0) {
+                        $chartArray[$i]["date"] = $tdTag->innertext();
+                    } elseif ($ii == 1) {
+                        $chartArray[$i]["value"] = str_replace(' ', '', $tdTag->innertext());
+                    } elseif ($ii > 1) {
+                        return "Загружаемый файл неправльно подготовлен. Ознакомьтесь с инструкцией прежде чем попытаться еще раз.";
+                    }
+                    $ii++;
+                };
+                $i++;
+            };
+        } else {
+            //если файл не из Б24, а просто массив
+            $fileArray = Excel::toArray(new ChartDataImport, $xlsPath);
+            $Chart->y_name=$fileArray[0][0][1];
+            unset($fileArray[0][0]);
+            $Array2d=$fileArray[0];
+            $i=0;
+            foreach ($Array2d as $col){
+                $ii=0;
+                foreach ($col as $row){
+
+                    if ($ii == 0) {
+                        $chartArray[$i]["date"] = $row;
+                    } elseif ($ii == 1) {
+                        $chartArray[$i]["value"] = $row;
+                    } elseif ($ii > 1) {
+                        return "Загружаемый файл неправльно подготовлен. Ознакомьтесь с инструкцией прежде чем попытаться еще раз.";
+                    }
+                    $ii++;
+                };
+                $i++;
+            };
+        }
+        //удаляем фай после парсинга -  не получается пока
+        /*Storage::delete($xlsPath);*/
+        $newData = $chartArray;
+        //есть ли уже данные у chart
+        if ($Chart->data == "0") {
+            $allData = $newData;
+        } else {
+            $oldData = unserialize($Chart->data);
+            $allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) {
+                return $a['date'] <=> $b['date'];
+            }));
+        }
+        usort($allData, function ($a, $b) {
+            return strtotime($a["date"]) <=> strtotime($b["date"]);
+        });
+
+        $Chart->data = serialize($allData);
+        $Chart->update();
+        return back();
     }
 
-
-/*
-    dump($reqArray);*/
-    /*
-    for ($i=1; isset($reqArray["chartValueDate".$i]) && isset($reqArray["chartValue".$i]); $i++) {
-        $newData[$i] = array(
-            'date' => $reqArray["chartValueDate".$i],
-            'value' => $reqArray["chartValue".$i],
-        );
+    public function delChartData(Request $request){
+        $reqArray = $request->all();
+        $Chart = Chart::find($reqArray['chart_id']);
+        $Chart->data = '0';
+        $Chart->update();
     }
-    $Chart=Chart::find($reqArray['chartId']);
-
-//есть ли уже данные у chart
-    if ($Chart->data=="0") {
-        $allData=$newData;
-    }else{
-        $oldData=unserialize($Chart->data);
-
-        $allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) { return $a['date'] <=> $b['date']; }));
-    }
-    usort($allData, function($a, $b) { return strtotime($a["date"]) <=> strtotime($b["date"]); });
-
-    $Chart->data=serialize($allData);
-    $Chart->update();
-    return back();
-    */
-
-}
 
 }

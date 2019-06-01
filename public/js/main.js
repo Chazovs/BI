@@ -539,7 +539,6 @@ function addChartData(chartId) {
     );
 }
 
-
 /**
  * публикует кнопку прикрепления к файлу и отправляет файл в скрипт
  * @param {[type]} chartId [description]
@@ -552,16 +551,19 @@ function addChartDataUploadFile(chartId) {
     $('#mainModalBody').html(
         '<form  method="POST" action="/add/data/to/chart/from/file" enctype="multipart/form-data">' +
         '<p>'+
-        '<span>Это отчет из Битрикс24 </span>'+
         '<input type="checkbox" name="fromBitrix24" id="fromBitrix24"> ' +
+        '<span>Это отчет из Битрикс24 </span>'+
         '</p>'+
         '<p>'+
         '<input type="file" name="xls" id="xls">' +
         '</p>'+
         '<input type="hidden" name="_token" id="_token" value="' + token + '">' +
         '<input type="hidden" name="chartId" id="chartId" value="' + chartId + '">' +
-        '<button type="submit" class="btn btn-primary mb-2">Отправить</brbutton>' +
-        '</form>'
+        '<button type="submit" class="btn btn-primary mb-2">Отправить</button>' +
+        '</form>'+
+        '<p>Шаблоны для заполнения: <a href="' + location.protocol + '//' + location.host + '/demodatachart/demo.xls">XLS</a>, <a href="' + location.protocol + '//' + location.host + '/demodatachart/demo.ods">ODS</a> </p>'+
+        '<p><strong>Обратите внимание</strong>, если вы подготавливаете файл самостоятельно (а не загружаете из Битрикс24), то в колонке с датами все ячейки должны иметь тип "Текст"</p>'+
+        '<p>Инструкция: <a href="' + location.protocol + '//' + location.host + '/howTo/bitrix24">как экспортировать данные из Битрикс24</a></p>'
     );
 }
 
@@ -599,6 +601,22 @@ function delDateDataBlock() {
         $('#delToArray').attr('onClick', ' ');
     }
 }
+
+/**
+ * удаляет все значения из диаграммы
+ * @param chartId
+ */
+function delChartData(chartId) {
+    if (confirm("ВНИМАНИЕ! Вы собираетесь удалить все данные из этого графика. Эту операцию нельзя будет отменить")) {
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.post('/del/chart/data', {_token: token, chart_id: chartId}, function () {
+            location.reload();
+        });
+    }else {
+
+    }
+}
+
 
 /**
  * отправляет запрос на добавление нового пользователя в компанию

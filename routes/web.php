@@ -26,6 +26,11 @@ Route::get('/company/{id}/tree', 'HomeController@tree')->name('tree'); //пок�
 //недостаточно прав
 Route::get('/error', function (){return view("error");})->name('error');
 
+//как импортировать битрикс24 отчеты
+Route::get('/howTo/bitrix24', function (){return view("bitrix24");})->name('bitrix24');
+
+
+
 //роуты на контроллер администратора компании
 Route::get('/company/{id}/user/request', 'CompanyAdminController@userRequest')->name('userRequest'); //показывает запросы на добавление
 Route::POST('/company/{id}/accept/user/request','CompanyAdminController@acceptUserRequest');//принимает запрос на участие в команде компании
@@ -48,6 +53,8 @@ Route::POST('/push/chart/new','AjaxController@pushChartNew');//Создает н
 Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закрепляет график за точкой
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
 Route::POST('/add/data/to/chart/from/file','AjaxController@addDataToChartFromFile');//добавляет данные к графику из файла
+Route::POST('/del/chart/data','AjaxController@delChartData');//добавляет данные к графику из файла
+
 
 
 Route::POST('/add/new/user/request/to/company','AjaxController@addNewUserRequestToCompany');//Отправляет новый запрос от пользователя на добавление в компанию
