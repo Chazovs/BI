@@ -71,9 +71,7 @@
                                 <button type="button" class="btn btn-sm btn-outline-secondary"
                                         onclick="delChartData({{ $dotChart->id }})" title="очистить данные">X
                                 </button>
-
                             @endif
-
                         </div>
                     </div>
 

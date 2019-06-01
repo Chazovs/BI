@@ -893,3 +893,42 @@ function delDot(dotId, companyId) {
     } else {
     }
 }
+
+/**
+ * добавляет данные для главного графика компании
+ */
+function addCompanyChartData(companyId) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $('#mainModalLabel').html(
+        'ввести значения'
+    );
+    $('#mainModalBody').html(
+        '<form class="form-inline" method="POST" action="/add/data/to/company/chart" >' +
+        '  <div id="formAddDataChart">' +
+        '  <div class="datachart input-group mb-2 mr-sm-2" >' +
+        '    <div class="input-group-prepend">' +
+        '      <div class="input-group-text">дата</div>' +
+        '    </div>' +
+        '    <input type="date" required name="chartValueDate1" class="form-control" id="chartValueDate1">' +
+        '    <input type="text" required name="chartValue1"  pattern="^[ 0-9]+$" class="form-control" id="chartValue1" placeholder="Значение">' +
+        '<button type="button" onClick="addDateDataBlock(1)" id="submitToArray" class="btn btn-link">+</button> ' +
+        '<button type="button" onClick="delDateDataBlock()" id="delToArray" class="btn btn-link">-</button>' +
+        '  </div>' +
+        '  </div>' +
+        '<input type="hidden" name="_token" id="_token" value="' + token + '">' +
+        '<input type="hidden" name="companyId" id="companyId" value="' + companyId + '">' +
+        '  <button type="submit" class="btn btn-primary mb-2">Отправить</button>' +
+        '</form>'
+    );
+}
+
+function delCompanyChartData(companyId) {
+    if (confirm("ВНИМАНИЕ! Вы собираетесь удалить все данные из этого графика. Эту операцию нельзя будет отменить")) {
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.post('/del/chart/company/data', {_token: token, company_id: companyId}, function () {
+            location.reload();
+        });
+    }else {
+
+    }
+}

@@ -54,6 +54,8 @@ Route::POST('/add/chart/to/dot','AjaxController@addСhartToDot');//закреп�
 Route::POST('/add/data/to/chart','AjaxController@addDataToChart');//добавляет данные к графику
 Route::POST('/add/data/to/chart/from/file','AjaxController@addDataToChartFromFile');//добавляет данные к графику из файла
 Route::POST('/del/chart/data','AjaxController@delChartData');//добавляет данные к графику из файла
+Route::POST('/add/data/to/company/chart','AjaxController@addDataDoCompanyChart');//добавляет данные к графику компании
+Route::POST('/del/chart/company/data','AjaxController@delChartCompanyData');//очищает график диаграммы
 
 
 

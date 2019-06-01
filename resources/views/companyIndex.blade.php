@@ -52,6 +52,18 @@
                         <h1 class="display-4"><img class=" " src="{{ url($company->logo) }}" alt="" width="72"
                                                    height="72"> {{ $company->name }}</h1>
                         <p class="lead">{!! $company->description !!}</p>
+                            <canvas class=" w-100 chartjs-render-monitor" id="myChart" width="338" height="100" style="display: block; width: 338px; height: 100px;"></canvas>
+                            @if ($company->chart_data!=null)
+                                <button type="button" class="btn btn-sm btn-outline-success"
+                                        onclick="addCompanyChartData({{ $company->id }})" data-toggle="modal"
+                                        data-target="#mainModal">Добавить данные
+                                </button>
+                                @if ($company->chart_data!='0')
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            onclick="delCompanyChartData({{ $company->id }})" title="очистить данные">X
+                                    </button>
+                                @endif
+                            @endif
                     </div>
                     <div class="p-4 mr-5 w-25 border border-primary"><h5 class="text-center">Статистика</h5>
                         Всего точек: {{count($company->dots)}}<br>
@@ -454,5 +466,85 @@
                 </tbody>
             </table>
         </div>
+
+
+        <script src="{{ asset('js/feather.min.js') }}"></script>
+        <script src="{{ asset('js/Chart.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
+        <!-- рыба для создания диаграмм -->
+        @if ($company->chart_data!=null)
+            <script>
+                /* globals Chart:false, feather:false */
+                (function () {
+                    'use strict'
+                    feather.replace()
+                    // Graphs
+                    var ctx = document.getElementById('myChart')
+                    // eslint-disable-next-line no-unused-vars
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: [
+
+                                {!! $dateData !!}
+                            ],
+                            datasets: [{
+                                fill: false,
+                                data: [
+                                    {{ $valueData }}
+                                ],
+
+                                backgroundColor: 'transparent',
+                                borderColor: '#007bff',
+                                borderWidth: 2,
+                                pointBackgroundColor: '#007bff'
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                zoom: {
+                                    pan: {
+                                        enabled: true,
+                                        mode: 'xy' // is panning about the y axis neccessary for bar charts?
+                                    },
+                                    zoom: {
+                                        enabled: true,
+                                        mode: 'xy',
+                                        sensitivity: 3
+                                    }
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false
+                                    },
+                                    scaleLabel: {
+                                        display: false,
+                                        labelString: ''
+                                    }
+                                }]
+                            },
+
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Доход компании (руб.)'
+                            }
+                        }
+                    })
+                }());
+            </script>
+        @else
+            <script>
+                window.onload = function () {
+                    $('#myChart').replaceWith('<div class="alert alert-secondary align-self-center mt-4" role="alert">Ошибка загрузки графика</div>');
+                };
+            </script>
+        @endif
+
+
     </main>
 @endsection

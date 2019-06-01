@@ -403,4 +403,41 @@ public function getDotData(Request $request){
         $Chart->update();
     }
 
+    /**
+     * добавляет данные к главную графику компании
+     */
+    public function addDataDoCompanyChart(Request $request)
+    {
+
+        $reqArray = $request->all();
+        for ($i=1; isset($reqArray["chartValueDate".$i]) && isset($reqArray["chartValue".$i]); $i++) {
+            $newData[$i] = array(
+                'date' => $reqArray["chartValueDate".$i],
+                'value' => $reqArray["chartValue".$i],
+            );
+        }
+        $company=Company::find($reqArray['companyId']);
+
+//есть ли уже данные у chart
+        if ($company->chart_data=="0") {
+            $allData=$newData;
+        }else{
+            $oldData=unserialize($company->chart_data);
+            /*$allData=array_replace($oldData, $newData);*/
+            $allData = array_merge($newData, array_udiff($oldData, $newData, function ($a, $b) { return $a['date'] <=> $b['date']; }));
+        }
+        usort($allData, function($a, $b) { return strtotime($a["date"]) <=> strtotime($b["date"]); });
+
+        $company->chart_data=serialize($allData);
+        $company->update();
+        return back();
+    }
+
+    public function delChartCompanyData(Request $request){
+        $reqArray = $request->all();
+        $company = Company::find($reqArray['company_id']);
+        $company->chart_data = '0';
+        $company->update();
+    }
+
 }

@@ -68,10 +68,14 @@ public function __construct()
   ['author_id', '=', $userID],
   ['company_id', '=', $id],
     ])->get();
-
+    $company=Company::find($id);
+    if($company->chart_data==0){
+        $dateData='';
+        $valueData='';
+    }
     //проверяем: есть ли компании с $ID, в которых зарегистрирован пользователь.
 
-    $company=Company::find($id);
+
     $mainDots=$company->dots->where('parent_id','=', '0');
     return view('companyIndex', compact($company))->with([
         'company'=>$company,
@@ -82,6 +86,8 @@ public function __construct()
         'tasks_status4'=>$tasks_status4,
         'tasks_status5'=>$tasks_status5,
         'user'=>$user,
+        'valueData'=>$valueData,
+        'dateData'=>$dateData,
     ]);
 
 }
