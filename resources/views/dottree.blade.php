@@ -13,11 +13,12 @@
                         '                  <strong class="text-warning"> {{count($companyModel->dots_tasks->where("status", 2))}}</strong>' +
                         '                   <strong class="text-success">{{count($companyModel->dots_tasks->where("status", 3))}} </strong>' +
                         '                    <strong class="text-danger">{{count($companyModel->dots_tasks->where("status", 4))}}</strong> ' +
-                        '                   <strong class="text-dark">{{count($companyModel->dots_tasks->where("status", 5))}}</strong>',
+                        '                   <strong class="text-dark">{{count($companyModel->dots_tasks->where("status", 5))}}</strong>'+
+                        '                   {!! $arrowCompanyGlobal !!}'+
+                        '                   {!! $arrowCompanyTactic !!}'
+                    ,
                     children: [
                      {!! $allData !!}
-
-
                     ]
 
                 }];

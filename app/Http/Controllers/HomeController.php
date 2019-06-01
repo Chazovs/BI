@@ -11,6 +11,7 @@ use App\Company;
 use Auth;
 use App\User;
 use DB;
+use DateTime;
 
 class HomeController extends Controller
 {
@@ -121,6 +122,8 @@ class HomeController extends Controller
             ['status', '=', '5'],
             ['author_id', '=', $userID],
         ])->get();
+        $nowMdel =new DateTime('now');
+        $now=$nowMdel->format('Y-m-d');
 
         return view('allTasks')->with([
             'user' => $user,
@@ -130,6 +133,7 @@ class HomeController extends Controller
             'tasks_status3' => $tasks_status3,
             'tasks_status4' => $tasks_status4,
             'tasks_status5' => $tasks_status5,
+            'now'=>$now,
         ]);
     }
 
@@ -209,7 +213,7 @@ class HomeController extends Controller
             //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
             foreach ($allDots->where('parent_id', $parent->id) as $child) {
                 //если за точкой вообще закреплен график
-                if ($child->chart_id != '0') {
+                if ($child->chart_id != '0' && isset($child->chart->id)) {
                     $Chart = Chart::find($child->chart->id);
                 //если в графике есть информация
                     if ($Chart->data != '0') {
@@ -219,12 +223,16 @@ class HomeController extends Controller
                         //последнее значение
                         $endDataArray = end($dataArray);
                         $endData = $endDataArray['value'];
-                        //считаем среднее значение
+                            //считаем среднее значение
                         $summZnachen=0;
-                        foreach ($dataArray as $znachenArray) {
-                            $summZnachen=$summZnachen+$znachenArray['value'];
+                        if(count($dataArray)>2){
+                            foreach ($dataArray as $znachenArray) {
+                                $summZnachen=$summZnachen+$znachenArray['value'];
+                            }
+                            $sredZnachen=($summZnachen-$endDataArray['value'])/(count($dataArray)-1);
+                        }elseif (count($dataArray)==2 || count($dataArray)==1){
+                            $sredZnachen=$dataArray[0]['value'];
                         }
-                        $sredZnachen=($summZnachen-$endDataArray['value'])/count($dataArray);
                         //повышение или понижение считается успехом?
                         if ($Chart->up_or_down == 'up') {
                             $up = 'success';
@@ -244,7 +252,6 @@ class HomeController extends Controller
                             $percent = round($endData / ($sredZnachen / 100)) - 100;
                             $arrow = '<br>Сред. <span class="text-' . $up . '">↑' . $percent . '% </span>';
                         }
-
                         //если у массива вообще есть предпоследнее значение
                         if (count($dataArray) - 2 >= 0) {
                             $preendDataArray = $dataArray[count($dataArray) - 2]['value'];
@@ -260,14 +267,18 @@ class HomeController extends Controller
                             $percent2 = round($endData / ($preendDataArray / 100)) - 100;
                             $arrow2 = ' <br>Посл. <span class="text-' . $up . '">↑' . $percent2 . '% </span>';
                         }
-                        };
-                    } else {
-                        $arrow2 = '';
+                        }
+                        else {
+                            $arrow = '';
+                            $arrow2 = '';
+                        }
+                    }else {
                         $arrow = '';
+                        $arrow2 = '';
                     }
                 } else {
                     $arrow = '';
-                    $arrow2 = '';
+                     $arrow2 = '';
                 }
                 if (!isset($dataChild)) {
                     $dataChild = "{ head: '<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $child->id]) . "\'>" . $child->name . "</a>', id: '" . $child->id . "', contents: '<strong class=\"text-primary\">" . count($child->dots_tasks->where('status', 1)) . "</strong> <strong class=\"text-warning\">" . count($child->dots_tasks->where('status', 2)) . "</strong> <strong class=\"text-success\">" . count($child->dots_tasks->where('status', 3)) . "</strong>  <strong class=\"text-danger\">" . count($child->dots_tasks->where('status', 4)) . "</strong>  <strong class=\"text-dark\">" . count($child->dots_tasks->where('status', 5)) . "</strong>" . $arrow.$arrow2 . " '," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
@@ -283,9 +294,8 @@ class HomeController extends Controller
         // пока в коллекции есть точки, у которых нет отцовскиx точек
         foreach ($allDots->where('parent_id', 0) as $dot) {
             //если за точкой вообще закреплен график
-            if ($dot->chart_id != '0') {
+            if ($dot->chart_id != '0' && isset($dot->chart->id)) {
                 $Chart = Chart::find($dot->chart->id);
-
                 if ($Chart->data != '0') {
                     $dataArray = unserialize($Chart->data);
                     $startDataArray = $dataArray[0]['value'];
@@ -293,12 +303,15 @@ class HomeController extends Controller
                     $endData = $endDataArray['value'];
                     //считаем среднее значение
                     $summZnachen=0;
-                    foreach ($dataArray as $znachenArray) {
-                        $summZnachen=$summZnachen+$znachenArray['value'];
+
+                    if(count($dataArray)>2){
+                        foreach ($dataArray as $znachenArray) {
+                            $summZnachen=$summZnachen+$znachenArray['value'];
+                        }
+                        $sredZnachen=($summZnachen-$endDataArray['value'])/(count($dataArray)-1);
+                    }elseif (count($dataArray)==2 || count($dataArray)==1){
+                      $sredZnachen=$dataArray[0]['value'];
                     }
-                    $sredZnachen=($summZnachen-$endDataArray['value'])/count($dataArray);
-
-
                     //повышение или понижение считается успехом?
                     if ($Chart->up_or_down == 'up') {
                         $up = 'success';
@@ -320,7 +333,6 @@ class HomeController extends Controller
                     //если вообще есть предпоследнее
                     if (count($dataArray) - 2 >= 0) {
                         $preendDataArray = $dataArray[count($dataArray) - 2]['value'];
-
                     //считаем проценты сравнивая последний и предпоследний
                     if ($preendDataArray > $endData) {
                         //если первое значание массива больше последнего
@@ -357,9 +369,68 @@ class HomeController extends Controller
                         }";
             }
         }
+
+        //вот сюда мы напишем анализ главного графика компании
+        /*return $companyModel->chart_data;*/
+
+
+        if ($companyModel->chart_data != '0') {
+            $dataCompanyArray = unserialize($companyModel->chart_data);
+            $startDataArray = $dataCompanyArray[0]['value'];
+            $endDataArray = end($dataCompanyArray);
+            $endCompanyData = $endDataArray['value'];
+            //считаем среднее значение
+            $summCompanyZnachen = 0;
+
+
+            if (count($dataCompanyArray) > 2) {
+                foreach ($dataCompanyArray as $znachenArray) {
+                    $summCompanyZnachen = $summCompanyZnachen + $znachenArray['value'];
+
+                }
+
+                $sredZnachenCompany = ($summCompanyZnachen - $endDataArray['value']) / (count($dataCompanyArray)-1);
+            } elseif (count($dataCompanyArray) == 2 || count($dataCompanyArray) == 1) {
+                $sredZnachenCompany = $dataCompanyArray[0]['value'];
+            }
+
+            /*return $sredZnachenCompany;*/
+            if ($sredZnachenCompany > $endCompanyData) {
+                //если первое значание массива больше последнего
+                $percent = 100 - round($endCompanyData / ($sredZnachenCompany / 100));
+                $arrowCompanyGlobal = '<br>Сред. <span class="text-danger">↓' . $percent . '% </span>';
+            } elseif ($sredZnachenCompany == $endCompanyData) {
+                $arrowCompanyGlobal = '<br>Сред. <span class="text-dark">=</span>';
+            } elseif ($sredZnachenCompany < $endCompanyData) {
+                $percent = round($endCompanyData / ($sredZnachenCompany / 100)) - 100;
+                $arrowCompanyGlobal = '<br>Сред. <span class="text-success">↑' . $percent . '% </span>';
+            };
+            //если вообще есть предпоследнее
+            if (count($dataCompanyArray) - 2 >= 0) {
+                $preendDataArray = $dataCompanyArray[count($dataCompanyArray) - 2]['value'];
+                //считаем проценты сравнивая последний и предпоследний
+                if ($preendDataArray > $endData) {
+                    //если первое значание массива больше последнего
+                    $percent3 = 100 - round($endCompanyData / ($preendDataArray / 100));
+                    $arrowCompanyTactic = ' <br>Посл. <span class="text-danger">↓' . $percent3 . '% </span>';
+                } elseif ($preendDataArray == $endCompanyData) {
+                    $arrowCompanyTactic = ' <br>Посл. <span class="text-dark">=</span>';
+                } elseif ($preendDataArray < $endCompanyData) {
+                    $percent3 = round($endCompanyData / ($preendDataArray / 100)) - 100;
+                    $arrowCompanyTactic = ' <br>Посл. <span class="text-success">↑' . $percent3 . '% </span>';
+                }
+            };
+        } else {
+            $arrowCompanyGlobal = '';
+            $arrowCompanyTactic = '';
+        }
+        //конец анализа графика компании
+
         return view('dottree')->with([
             'companyModel' => $companyModel,
             'allData' => $allData,
+            'arrowCompanyTactic'=>$arrowCompanyTactic,
+            'arrowCompanyGlobal'=>$arrowCompanyGlobal,
         ]);
     }
 

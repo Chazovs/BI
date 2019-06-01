@@ -49,10 +49,16 @@
                         @if (count($tasks_status1) > 0)
                             @foreach($tasks_status1 as $task1)
                                 <div class="card  bg-light mb-2 d-inline-block w-100" id="task{{ $task1->id }}">
-                                    <div class="toast-header"><strong class="mr-auto"><a href="#"
+                                    <div class="toast-header">
+
+                                        <strong class="mr-auto"><a href="#"
                                                                                          onclick="showTask({{ $task1->id }})"
                                                                                          data-toggle="modal"
-                                                                                         data-target="#mainModal">{{ $task1->name }}</a></strong>
+                                                                                         data-target="#mainModal"
+                                                                                         class="">
+                                                {{ $task1->name }}
+                                            </a>
+                                        </strong>
                                         <a href="#" onclick="editTask({{ $task1->id }})" data-toggle="modal"
                                            data-target="#mainModal">
                                             <small class="text-secondary"> (ред.)<!--  &#9998; --> </small>
@@ -69,13 +75,15 @@
                                             <span
                                                 class="font-weight-bold">Компания:</span> {{ $company->find($task1->company_id)->name }}
                                             <br>
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task1->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task1->deadline < $now)
+                                                text-danger @endif">{{ $task1->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task1->author_id)->real_name }} {{ $user->find($task1->author_id)->real_lastname }}
                                             <br>
                                             <span
                                                 class="font-weight-bold">Ответственный:</span> {{ $user->find($task1->responsible_id)->real_name }} {{ $user->find($task1->responsible_id)->real_lastname }}
+
                                         </p>
                                     </div>
                                     <div class="btn-group w-100">
@@ -132,7 +140,8 @@
                                             <span
                                                 class="font-weight-bold">Компания:</span> {{ $company->find($task2->company_id)->name }}
                                             <br>
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task2->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task2->deadline < $now)
+                                                text-danger @endif">{{ $task2->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task2->author_id)->real_name }} {{ $user->find($task2->author_id)->real_lastname }}
@@ -195,7 +204,8 @@
                                             <span
                                                 class="font-weight-bold">Компания:</span> {{ $company->find($task3->company_id)->name }}
                                             <br>
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task3->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task3->deadline < $now)
+                                                text-danger @endif">{{ $task3->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task3->author_id)->real_name }} {{ $user->find($task3->author_id)->real_lastname }}
@@ -257,7 +267,8 @@
                                             <span
                                                 class="font-weight-bold">Компания:</span> {{ $company->find($task4->company_id)->name }}
                                             <br>
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task4->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task4->deadline < $now)
+                                                text-danger @endif">{{ $task4->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task4->author_id)->real_name }} {{ $user->find($task4->author_id)->real_lastname }}
@@ -324,7 +335,8 @@
                                             <span
                                                 class="font-weight-bold">Компания:</span> {{ $company->find($task5->company_id)->name }}
                                             <br>
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task5->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task5->deadline < $now)
+                                                text-danger @endif">{{ $task5->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task5->author_id)->real_name }} {{ $user->find($task5->author_id)->real_lastname }}

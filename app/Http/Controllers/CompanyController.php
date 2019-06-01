@@ -68,14 +68,35 @@ public function __construct()
   ['author_id', '=', $userID],
   ['company_id', '=', $id],
     ])->get();
-    $company=Company::find($id);
-    if($company->chart_data==0){
+  $company=Company::find($id);
+    if($company->chart_data=="0"){
         $dateData='';
         $valueData='';
+    }elseif(isset($company->chart_data)) {
+        $dateData = '';
+        $valueData = '';
+            $chartData = unserialize($company->chart_data);
+            foreach ($chartData as $date) {
+                if ($dateData == '') {
+                    $dateData = '"' . $date['date'] . '"';
+                } else {
+                    $dateData = $dateData . ', "' . $date['date'] . '"';
+                }
+            }
+            foreach ($chartData as $value) {
+                if ($valueData == '') {
+                    $valueData = $value['value'];
+                } else {
+                    $valueData = $valueData . ', ' . $value['value'];
+                }
+            }
+            substr($dateData, 2);
+    }
+    else{
+        $dateData="";
+        $valueData="";
     }
     //проверяем: есть ли компании с $ID, в которых зарегистрирован пользователь.
-
-
     $mainDots=$company->dots->where('parent_id','=', '0');
     return view('companyIndex', compact($company))->with([
         'company'=>$company,
