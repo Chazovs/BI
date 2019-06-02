@@ -9,6 +9,7 @@ use App\User;
 use App\Dot;
 use App\Dot_task;
 use DB;
+use DateTime;
 
 class CompanyController extends Controller
 {
@@ -96,6 +97,8 @@ public function __construct()
         $dateData="";
         $valueData="";
     }
+    $nowMdel =new DateTime('now');
+    $now=$nowMdel->format('Y-m-d');
     //проверяем: есть ли компании с $ID, в которых зарегистрирован пользователь.
     $mainDots=$company->dots->where('parent_id','=', '0');
     return view('companyIndex', compact($company))->with([
@@ -109,6 +112,7 @@ public function __construct()
         'user'=>$user,
         'valueData'=>$valueData,
         'dateData'=>$dateData,
+        'now'=>$now,
     ]);
 
 }
@@ -158,9 +162,6 @@ public function __construct()
      $valueData="";
      $dotChart="";
     }
-  
-    
-
 //выбираем задачи по статусам
     $tasks_status1=DB::table('dot_tasks')->where([
   ['status', '=', '1'],
@@ -187,7 +188,8 @@ public function __construct()
   ['dot_id', '=', $dotId],
   ['company_id', '=', $id],
 ])->get();
-
+        $nowMdel =new DateTime('now');
+        $now=$nowMdel->format('Y-m-d');
     return view('dotIndex', compact($company, $dot))->with([
         'company'=>$company,
         'dot'=>$dot,
@@ -202,6 +204,7 @@ public function __construct()
         'valueData' =>$valueData,
         'companyCharts'=>$companyCharts,
         'dotChart'=>$dotChart,
+        'now'=>$now,
          ]);
     
 }

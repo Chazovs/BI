@@ -90,26 +90,28 @@ class CompanyAdminController extends Controller
         } else {
             $reqArray['logo'] = url("/img/default/comp.png");
         }
-        if (!isset($request['site'])) {
-            $reqArray['site'] = "не указан";
+        if ($request['site']==null) {
+            $reqArray['site'] = "";
         }
-        if (!isset($request['city'])) {
+        if ($request['city']==null) {
             $reqArray['city'] = "не указан";
         }
-        if (!isset($request['slogan'])) {
+        if ($request['slogan']==null) {
             $reqArray['slogan'] = " ";
         }
-        if (!isset($request['adress'])) {
+        if ($request['adress']==null) {
             $reqArray['adress'] = "не указан";
         }
-        if (!isset($request['phone'])) {
+        if ($request['phone']==null) {
             $reqArray['phone'] = "не указан";
         }
-        if (!isset($request['about'])) {
-            $reqArray['about'] = " ";
+        if ($request['about']==null) {
+            $reqArray['about'] = "нет описания";
         }
+
+
         if (!isset($request['description'])) {
-            $reqArray['description'] = " ";
+            $reqArray['description'] = "нет описания";
         }
         $company = Company::find($companyId);
         $company->fill($reqArray);

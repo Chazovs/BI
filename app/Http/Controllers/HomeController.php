@@ -200,6 +200,9 @@ class HomeController extends Controller
     {
         $companyModel = Company::find($id);
         $allDots = $companyModel->dots;
+        $nowMdel =new DateTime('now');
+        $now=$nowMdel->format('Y-m-d');
+
         //вызывает рекурсию, создающую дерево точек
         /**
          * @param $child -содержит модель отцовской точки
@@ -209,6 +212,8 @@ class HomeController extends Controller
          */
         function recursiveDotAdd($parent, $allDots, $id, $companyModel)
         {
+            $nowMdel =new DateTime('now');
+            $now=$nowMdel->format('Y-m-d');
             $dataChild = null;
             //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
             foreach ($allDots->where('parent_id', $parent->id) as $child) {
@@ -281,9 +286,40 @@ class HomeController extends Controller
                      $arrow2 = '';
                 }
                 if (!isset($dataChild)) {
-                    $dataChild = "{ head: '<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $child->id]) . "\'>" . $child->name . "</a>', id: '" . $child->id . "', contents: '<strong class=\"text-primary\">" . count($child->dots_tasks->where('status', 1)) . "</strong> <strong class=\"text-warning\">" . count($child->dots_tasks->where('status', 2)) . "</strong> <strong class=\"text-success\">" . count($child->dots_tasks->where('status', 3)) . "</strong>  <strong class=\"text-danger\">" . count($child->dots_tasks->where('status', 4)) . "</strong>  <strong class=\"text-dark\">" . count($child->dots_tasks->where('status', 5)) . "</strong>" . $arrow.$arrow2 . " '," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild = "{ head: '<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $child->id]) . "\'>" . $child->name . "</a>', id: '" . $child->id . "',
+                        contents: '<strong class=\"text-primary\">" .
+                        count($child->dots_tasks->where('status', 1)) .
+                        "</strong> <strong class=\"text-warning\">" .
+                        count($child->dots_tasks->where('status', 2)) .
+                        "</strong> <strong class=\"text-success\">" .
+                        count($child->dots_tasks->where('status', 3)) .
+                        "</strong>  <strong class=\"text-danger\">" .
+                        count($child->dots_tasks->where('status', 4)) .
+                        "</strong>  <strong class=\"text-dark\">" .
+                        count($child->dots_tasks->where('status', 5)) .
+                        "</strong> <br>Дэдлайн: <strong class=\"text-dark\">" .
+                        count($child->dots_tasks->where('deadline', '<', $now)) .
+                        "</strong>" .
+                        $arrow.$arrow2 .
+                        " '," .
+                        recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
                 } else {
-                    $dataChild = $dataChild . ", { head: '<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $child->id]) . "\'>" . $child->name . "</a>', id: '" . $child->id . "', contents: '<strong class=\"text-primary\">" . count($child->dots_tasks->where('status', 1)) . "</strong> <strong class=\"text-warning\">" . count($child->dots_tasks->where('status', 2)) . "</strong> <strong class=\"text-success\">" . count($child->dots_tasks->where('status', 3)) . "</strong>  <strong class=\"text-danger\">" . count($child->dots_tasks->where('status', 4)) . "</strong>  <strong class=\"text-dark\">" . count($child->dots_tasks->where('status', 5)) . "</strong>" . $arrow.$arrow2 . " '," . recursiveDotAdd($child, $allDots, $id, $companyModel) . " }";
+                    $dataChild = $dataChild . ", { head: '<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $child->id]) . "\'>" . $child->name . "</a>', id: '" . $child->id . "',
+ contents: '<strong class=\"text-primary\">" .
+                        count($child->dots_tasks->where('status', 1)) .
+                        "</strong> <strong class=\"text-warning\">" .
+                        count($child->dots_tasks->where('status', 2)) .
+                        "</strong> <strong class=\"text-success\">" .
+                        count($child->dots_tasks->where('status', 3)) .
+                        "</strong>  <strong class=\"text-danger\">" .
+                        count($child->dots_tasks->where('status', 4)) .
+                        "</strong>  <strong class=\"text-dark\">" .
+                        count($child->dots_tasks->where('status', 5)) .
+                        "</strong> <br>Дэдлайн: <strong class=\"text-dark\">" .
+                        count($child->dots_tasks->where('deadline', '<', $now)) .
+                        "</strong>" . $arrow.$arrow2 . " '," .
+                        recursiveDotAdd($child, $allDots, $id, $companyModel) .
+                        " }";
                 }
             }
             if ($dataChild != null) {
@@ -358,22 +394,48 @@ class HomeController extends Controller
                 $allData = "{
                             head:'<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $dot->id]) . "\'>" . $dot->name . "</a>',
                             id: '" . $dot->id . "',
-                            contents: '<strong class=\"text-primary\">" . count($dot->dots_tasks->where('status', 1)) . "</strong> <strong class=\"text-warning\">" . count($dot->dots_tasks->where('status', 2)) . "</strong> <strong class=\"text-success\">" . count($dot->dots_tasks->where('status', 3)) . "</strong>  <strong class=\"text-danger\">" . count($dot->dots_tasks->where('status', 4)) . "</strong>  <strong class=\"text-dark\">" . count($dot->dots_tasks->where('status', 5)) . "</strong>" . $arrow. $arrow2 . " ', " . recursiveDotAdd($dot, $allDots, $id, $companyModel) . "
-                            
+                            contents: '<strong class=\"text-primary\">" .
+                    count($dot->dots_tasks->where('status', 1)) .
+                    "</strong> <strong class=\"text-warning\">" .
+                    count($dot->dots_tasks->where('status', 2)) .
+                    "</strong> <strong class=\"text-success\">" .
+                    count($dot->dots_tasks->where('status', 3)) .
+                    "</strong>  <strong class=\"text-danger\">" .
+                    count($dot->dots_tasks->where('status', 4)) .
+                    "</strong>  <strong class=\"text-dark\">" .
+                    count($dot->dots_tasks->where('status', 5)) .
+                    "</strong> <br>Дэдлайн: <strong class=\"text-dark\">" .
+                    count($dot->dots_tasks->where('deadline', '<', $now)) .
+                    "</strong>" .
+                    $arrow. $arrow2 .
+                    " ', " .
+                    recursiveDotAdd($dot, $allDots, $id, $companyModel) . "
                         }";
             } else {
                 $allData = $allData . ", {
                             head:'<a href=\'" . route("dotIndex", ['id' => $companyModel->id, 'dotId' => $dot->id]) . "\'>" . $dot->name . "</a>',
                             id: '" . $dot->id . "',
-                            contents: '<strong class=\"text-primary\">" . count($dot->dots_tasks->where('status', 1)) . "</strong> <strong class=\"text-warning\">" . count($dot->dots_tasks->where('status', 2)) . "</strong> <strong class=\"text-success\">" . count($dot->dots_tasks->where('status', 3)) . "</strong>  <strong class=\"text-danger\">" . count($dot->dots_tasks->where('status', 4)) . "</strong>  <strong class=\"text-dark\">" . count($dot->dots_tasks->where('status', 5)) . "</strong>" . $arrow. $arrow2 . " ', " . recursiveDotAdd($dot, $allDots, $id, $companyModel) . "
+                            contents: '<strong class=\"text-primary\">" .
+                    count($dot->dots_tasks->where('status', 1)) .
+                    "</strong> <strong class=\"text-warning\">" .
+                    count($dot->dots_tasks->where('status', 2)) .
+                    "</strong> <strong class=\"text-success\">" .
+                    count($dot->dots_tasks->where('status', 3)) .
+                    "</strong>  <strong class=\"text-danger\">" .
+                    count($dot->dots_tasks->where('status', 4)) .
+                    "</strong>  <strong class=\"text-dark\">" .
+                    count($dot->dots_tasks->where('status', 5)) .
+                    "</strong> <br>Дэдлайн: <strong class=\"text-dark\">" .
+                    count($dot->dots_tasks->where('deadline', '<', $now)) .
+                    "</strong>" . $arrow. $arrow2 .
+                    " ', " .
+                    recursiveDotAdd($dot, $allDots, $id, $companyModel) . "
                         }";
             }
         }
 
         //вот сюда мы напишем анализ главного графика компании
         /*return $companyModel->chart_data;*/
-
-
         if ($companyModel->chart_data != '0') {
             $dataCompanyArray = unserialize($companyModel->chart_data);
             $startDataArray = $dataCompanyArray[0]['value'];
@@ -381,19 +443,15 @@ class HomeController extends Controller
             $endCompanyData = $endDataArray['value'];
             //считаем среднее значение
             $summCompanyZnachen = 0;
-
-
             if (count($dataCompanyArray) > 2) {
                 foreach ($dataCompanyArray as $znachenArray) {
                     $summCompanyZnachen = $summCompanyZnachen + $znachenArray['value'];
 
                 }
-
                 $sredZnachenCompany = ($summCompanyZnachen - $endDataArray['value']) / (count($dataCompanyArray)-1);
             } elseif (count($dataCompanyArray) == 2 || count($dataCompanyArray) == 1) {
                 $sredZnachenCompany = $dataCompanyArray[0]['value'];
             }
-
             /*return $sredZnachenCompany;*/
             if ($sredZnachenCompany > $endCompanyData) {
                 //если первое значание массива больше последнего
@@ -431,6 +489,7 @@ class HomeController extends Controller
             'allData' => $allData,
             'arrowCompanyTactic'=>$arrowCompanyTactic,
             'arrowCompanyGlobal'=>$arrowCompanyGlobal,
+            'now'=>$now,
         ]);
     }
 
@@ -533,7 +592,12 @@ class HomeController extends Controller
         $company = Company::find($id);
         if ($company->site != "") {
             $site = parse_url($company->site);
-            $siteHost = $site['host'];
+            if(isset($site['host'])){
+                $siteHost = $site['host'];
+            }else{
+                $siteHost='';
+            }
+
         } else {
             $siteHost = "";
         }

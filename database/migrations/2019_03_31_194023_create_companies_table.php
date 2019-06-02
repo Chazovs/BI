@@ -21,7 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('about', 6000)->default('');
             $table->string('email', 100)->default('');
             $table->string('slogan')->default('');
-            $table->string('chart_data')->default('0');
+            $table->longText('chart_data')->default('0');
             $table->string('city')->default('');
             $table->string('logo')->default('');
             $table->string('front_image')->default('/img/main/9.png');

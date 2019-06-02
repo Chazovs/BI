@@ -179,7 +179,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task1->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task1->deadline < $now)
+                                                text-danger @endif">{{ $task1->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task1->author_id)->real_name }} {{ $user->find($task1->author_id)->real_lastname }}
@@ -239,7 +240,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task2->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task2->deadline < $now)
+                                                text-danger @endif">{{ $task2->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task2->author_id)->real_name }} {{ $user->find($task2->author_id)->real_lastname }}
@@ -299,7 +301,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task3->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task3->deadline < $now)
+                                                text-danger @endif">{{ $task3->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task3->author_id)->real_name }} {{ $user->find($task3->author_id)->real_lastname }}
@@ -358,7 +361,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task4->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task4->deadline < $now)
+                                                text-danger @endif">{{ $task4->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task4->author_id)->real_name }} {{ $user->find($task4->author_id)->real_lastname }}
@@ -422,7 +426,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <span class="font-weight-bold">Крайний срок:</span> {{ $task5->deadline }}
+                                            <span class="font-weight-bold">Крайний срок:</span> <span class="@if($task5->deadline < $now)
+                                                text-danger @endif">{{ $task5->deadline }}</span>
                                             <br>
                                             <span
                                                 class="font-weight-bold">Постановщик:</span> {{ $user->find($task5->author_id)->real_name }} {{ $user->find($task5->author_id)->real_lastname }}

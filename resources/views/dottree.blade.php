@@ -7,13 +7,14 @@
          <script type="text/javascript">
             $(function () {
                 var jsonStructureObject = [{
-                    head: '{{$companyModel->name}}',
+                    head: '<a href="{{route("companyHome", ['id' => $companyModel->id])}}">{{$companyModel->name}}</a>',
                     id: 'company',
                     contents: '<strong class="text-primary">{{count($companyModel->dots_tasks->where("status", 1))}} </strong>' +
                         '                  <strong class="text-warning"> {{count($companyModel->dots_tasks->where("status", 2))}}</strong>' +
                         '                   <strong class="text-success">{{count($companyModel->dots_tasks->where("status", 3))}} </strong>' +
                         '                    <strong class="text-danger">{{count($companyModel->dots_tasks->where("status", 4))}}</strong> ' +
                         '                   <strong class="text-dark">{{count($companyModel->dots_tasks->where("status", 5))}}</strong>'+
+                        '                   <br>Дедлайн: <strong class="text-dark">{{count($companyModel->dots_tasks->where("deadline", '<', $now))}}</strong>'+
                         '                   {!! $arrowCompanyGlobal !!}'+
                         '                   {!! $arrowCompanyTactic !!}'
                     ,
