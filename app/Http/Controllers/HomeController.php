@@ -179,6 +179,7 @@ class HomeController extends Controller
         $img = Image::make($request->file('logo'))->heighten(100)->encode('png');
         $img->save($path . str_random(10) . str_random(10) . ".png");
         $reqArray['logo'] = "/companies/logo/" . $img->basename;
+        $reqArray['chart_data']="0";
         $newCompany = new Company;
         $newCompany->fill($reqArray);
         $newCompany->save();
@@ -436,7 +437,7 @@ class HomeController extends Controller
 
         //вот сюда мы напишем анализ главного графика компании
         /*return $companyModel->chart_data;*/
-        if ($companyModel->chart_data != '0') {
+        if ($companyModel->chart_data != '' && $companyModel->chart_data != '0') {
             $dataCompanyArray = unserialize($companyModel->chart_data);
             $startDataArray = $dataCompanyArray[0]['value'];
             $endDataArray = end($dataCompanyArray);
