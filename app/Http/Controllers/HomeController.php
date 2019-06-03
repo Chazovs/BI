@@ -480,8 +480,8 @@ class HomeController extends Controller
                 }
             };
         } else {
-            $arrowCompanyGlobal = '';
-            $arrowCompanyTactic = '';
+            $arrowCompanyGlobal = ' ';
+            $arrowCompanyTactic = ' ';
         }
         //конец анализа графика компании
 
