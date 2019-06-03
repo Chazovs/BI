@@ -478,6 +478,8 @@ class HomeController extends Controller
                     $percent3 = round($endCompanyData / ($preendDataArray / 100)) - 100;
                     $arrowCompanyTactic = ' <br>Посл. <span class="text-success">↑' . $percent3 . '% </span>';
                 }
+            }else{
+                $arrowCompanyTactic = ' ';
             };
         } else {
             $arrowCompanyGlobal = ' ';
