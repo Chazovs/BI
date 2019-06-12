@@ -13,7 +13,8 @@ yarn-error.log
 # мои правила: 
 # игнорим всю папку со скриптами кроме файла с моими скриптами
 /public/js
-!/publick/js/main.js
+!/public/js/main.js
+!/public/js/orgChart/
 public/companies/logo/0N2f8nL2T7ZnFsqLX2Qp.png
 public/companies/logo/1I7Mo7b3KdL1y5hMdVNv.png
 public/companies/logo/5Jn9OavZbO5HKz5I9qKO.png

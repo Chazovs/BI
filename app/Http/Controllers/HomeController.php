@@ -216,6 +216,7 @@ class HomeController extends Controller
             $nowMdel =new DateTime('now');
             $now=$nowMdel->format('Y-m-d');
             $dataChild = null;
+
             //перебираем все точки, в которых в качестве родительской точки указана точка для которой запущена функция
             foreach ($allDots->where('parent_id', $parent->id) as $child) {
                 //если за точкой вообще закреплен график
@@ -323,14 +324,18 @@ class HomeController extends Controller
                         " }";
                 }
             }
+
             if ($dataChild != null) {
                 return ("children: [" . $dataChild . "]");
             }
         }
+
         $allData = 2;
         // пока в коллекции есть точки, у которых нет отцовскиx точек
+
         foreach ($allDots->where('parent_id', 0) as $dot) {
             //если за точкой вообще закреплен график
+
             if ($dot->chart_id != '0' && isset($dot->chart->id)) {
                 $Chart = Chart::find($dot->chart->id);
                 if ($Chart->data != '0') {
@@ -338,6 +343,7 @@ class HomeController extends Controller
                     $startDataArray = $dataArray[0]['value'];
                     $endDataArray = end($dataArray);
                     $endData = $endDataArray['value'];
+
                     //считаем среднее значение
                     $summZnachen=0;
 
@@ -454,19 +460,24 @@ class HomeController extends Controller
                 $sredZnachenCompany = $dataCompanyArray[0]['value'];
             }
             /*return $sredZnachenCompany;*/
-            if ($sredZnachenCompany > $endCompanyData) {
+
+            if ($sredZnachenCompany > $endCompanyData && count($dataCompanyArray)>1) {
                 //если первое значание массива больше последнего
                 $percent = 100 - round($endCompanyData / ($sredZnachenCompany / 100));
                 $arrowCompanyGlobal = '<br>Сред. <span class="text-danger">↓' . $percent . '% </span>';
-            } elseif ($sredZnachenCompany == $endCompanyData) {
+            } elseif ($sredZnachenCompany == $endCompanyData && count($dataCompanyArray)>1) {
                 $arrowCompanyGlobal = '<br>Сред. <span class="text-dark">=</span>';
-            } elseif ($sredZnachenCompany < $endCompanyData) {
+            } elseif ($sredZnachenCompany < $endCompanyData && count($dataCompanyArray)>1) {
                 $percent = round($endCompanyData / ($sredZnachenCompany / 100)) - 100;
                 $arrowCompanyGlobal = '<br>Сред. <span class="text-success">↑' . $percent . '% </span>';
+            }else{
+                $arrowCompanyGlobal='';
             };
+
             //если вообще есть предпоследнее
             if (count($dataCompanyArray) - 2 >= 0) {
                 $preendDataArray = $dataCompanyArray[count($dataCompanyArray) - 2]['value'];
+                $endData=$dataCompanyArray[count($dataCompanyArray) - 1]['value'];
                 //считаем проценты сравнивая последний и предпоследний
                 if ($preendDataArray > $endData) {
                     //если первое значание массива больше последнего
