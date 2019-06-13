@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="97ec495a-5409-4537-812f-6f206cfb59d9" name="remdance.myjino.ru" url="http://pocas.ru">
-        <fileTransfer host="pocas.ru" port="22" rootFolder="/home/users/r/remdance" accessType="SFTP">
+      <webServer id="97ec495a-5409-4537-812f-6f206cfb59d9" name="remdance.myjino.ru" url="http://cofro.ru">
+        <fileTransfer host="cofro.ru" port="22" rootFolder="/home/users/r/remdance" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

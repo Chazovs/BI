@@ -332,6 +332,7 @@ class HomeController extends Controller
 
         $allData = 2;
         // пока в коллекции есть точки, у которых нет отцовскиx точек
+        //СЧИТАЕМ ГЛАВНЫЕ ТОЧКИ
 
         foreach ($allDots->where('parent_id', 0) as $dot) {
             //если за точкой вообще закреплен график
@@ -387,7 +388,9 @@ class HomeController extends Controller
                         $percent2 = round($endData / ($preendDataArray / 100)) - 100;
                         $arrow2 = ' <br>Посл. <span class="text-' . $up . '">↑' . $percent2 . '% </span>';
                     }
-                    };
+                    }else {
+
+                        $arrow2 = '';}
                 } else {
                     $arrow = '';
                     $arrow2 = '';
